@@ -1,7 +1,7 @@
 //Home page
 
 const Home = () => {
-    return <h1>2Gether</h1>;
+    return <h1>2Gether "practic"</h1>;
   };
   
   export default Home;
