@@ -1,8 +1,16 @@
 //Start of the User Feed page
 
 const UserFeed = () => {
-    return <h1>UserFeed Coming Soon...</h1>;
+  return (
+  <div>
+     <h1>UserFeed Coming Soon... </h1>;
+    <p>Confirm Location: </p>
+  </div>
+  );
+  
   };
+
+  
   
   export default UserFeed;
   
