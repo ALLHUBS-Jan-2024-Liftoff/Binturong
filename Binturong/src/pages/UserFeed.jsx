@@ -1,8 +1,10 @@
 //Start of the User Feed page
 
+import PostForm from "../Components/Post"
+
 const UserFeed = () => {
-    return <h1>UserFeed Coming Soon...</h1>;
-  };
-  
+
+ return(<PostForm />);
+}
+
   export default UserFeed;
-  
