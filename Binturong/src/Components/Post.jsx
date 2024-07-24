@@ -23,6 +23,7 @@ function PostForm() {
                     <label for ="geotagging">Turn on Geotagging?</label>
                     <label for ="postfile">Upload files</label>
                     <input type ="file" id="postfile" name="postfile"></input>
+                    <input type ="submit"></input>
                 </form>
             </div>
             )} 
