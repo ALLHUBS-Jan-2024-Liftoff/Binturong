@@ -1,10 +1,11 @@
 //Home page
 import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 
 const Home = (props) => {
     const {loggedIn, username} = props
-    const navigate = useNavigate()
+    const navigate = Route()
 
     const onButtonClick = () => {
         //Button function will be added soon
