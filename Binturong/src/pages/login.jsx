@@ -10,7 +10,21 @@ const Login = (props) => {
     const navigate = useNavigate()
 
     const onButtonClick = () => {
-        //feature to be added soon
+        //start of authentication
+        if ('' === username) {
+            setUsernameError('Please enter your username')
+            return
+            }
+
+        if ('' === password) {
+            setPasswordError('Please enter a password')
+            return
+            }
+
+        if (password.length <7) {
+            setPasswordError('The password must be 8 characters or longer')
+            return
+            }
     }
 
 
