@@ -11,6 +11,12 @@ const Login = (props) => {
 
     const onButtonClick = () => {
         //start of authentication
+
+        //will set initial error values to an empty one
+        setUsernameError('')
+        setPasswordError('')
+
+        //will check if the user entered values into both username and password fields
         if ('' === username) {
             setUsernameError('Please enter your username')
             return
@@ -29,6 +35,7 @@ const Login = (props) => {
 
 
     return (
+        //labeled div containers for CSS changes
         <div>
             <div className = {'loginHeading'}>
                 <div>Login</div>
@@ -41,7 +48,7 @@ const Login = (props) => {
                     onChange = {(ev) => setUsername(ev.target.value)}
                     className = {'usernameBox'}
                 />
-                <label className = "errorLabel">{emailError}</label>
+                <label className = "errorLabel">{usernameError}</label>
             </div>
             <br />
             <div className = {'inputPass'}>
