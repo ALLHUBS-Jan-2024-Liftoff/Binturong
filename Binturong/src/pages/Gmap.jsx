@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMaps from '../components/GoogleMaps';
 
-function Map() {
+function Gmap() {
   return (
     <div>
       <GoogleMaps />
@@ -9,4 +9,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default Gmap;
