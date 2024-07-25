@@ -20,7 +20,7 @@ const Home = (props) => {
                     className = {'loginButton'}
                     type = "button"
                     onClick = {onButtonClick}
-                    value = {logginIn ? 'Log out' : 'Log in'}
+                    value = {loggedIn ? 'Log out' : 'Log in'}
                 />
                 {loggedIn ? <div>Your username is {userName}</div> : <div />}
             </div>
