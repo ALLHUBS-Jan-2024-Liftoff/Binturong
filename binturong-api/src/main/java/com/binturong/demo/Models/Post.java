@@ -1,4 +1,4 @@
-package model;
+package com.binturong.demo.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +15,7 @@ public class Post extends AbstractEntity {
 
 
     @NotNull
-    @Size(max = 500, message= "Post Limit 500 characters.")
+    @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
 
 

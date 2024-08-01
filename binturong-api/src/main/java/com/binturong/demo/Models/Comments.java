@@ -1,4 +1,4 @@
-package model;
+package com.binturong.demo.Models;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
