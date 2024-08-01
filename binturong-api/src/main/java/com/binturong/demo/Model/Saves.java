@@ -1,4 +1,4 @@
-package com.binturong.demo.Models;
+package com.binturong.demo.Model;
 
 public class Saves extends AbstractEntity{
 }
