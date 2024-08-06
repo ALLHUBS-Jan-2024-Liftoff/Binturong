@@ -1,4 +1,4 @@
-package com.binturong.demo.Model;
+package com.binturong.demo.models;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

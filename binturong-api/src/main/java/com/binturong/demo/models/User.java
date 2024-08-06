@@ -1,4 +1,4 @@
-package com.binturong.demo.Model;
+package com.binturong.demo.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
