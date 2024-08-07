@@ -10,7 +10,7 @@ const center = {
   lng: 150.644
 };
 
-function GoogleMaps() {
+function GoogleMaps({ onLocationSelect}) {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -55,15 +55,29 @@ function GoogleMaps() {
         zoom: 8,
       });
 
-      const markerOptions = {
-        position: center,
-        map,
-      };
+      map.addListener('click', (e) => {
+        const clickedLocation = {
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng()
+        };
 
-      const marker = new window.google.maps.Marker(markerOptions);
-      markerRef.current = marker;
-    }
-  }, [isScriptLoaded]);
+        if(markerRef.current){
+            markerRef.current.setPosition(clickedLocation);
+        } else{
+            const markerOptions = {
+                position:  clickedLocation,
+                map,
+            };
+
+            const marker = new window.google.maps.Marker(markerOptions);
+            markerRef.current = marker;
+        }
+
+        onLocationSelect(clickedLocation);
+            });
+        }
+      }, [isScriptLoaded, onLocationSelect]);
+
 
   return (
     <div ref={mapRef} style={containerStyle}>
