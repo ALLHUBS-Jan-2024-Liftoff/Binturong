@@ -1,6 +1,6 @@
 package com.binturong.demo.service;
 
-import com.binturong.demo.models.Post;
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
