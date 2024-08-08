@@ -1,39 +1,66 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
+import axios from 'axios';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 
-const Login = (props) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [usernameError, setUsernameError] = userState('');
-    const [passwordError, setPasswordError] = useState('');
-
+const Login = () => {
+    const [form, setForm] = useState({ username: '', password: '' });
+    const [error, setError] = useState('');
     const navigate = useNavigate()
 
-    const onButtonClick = () => {
-        //start of authentication
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm ({ ...form, [name]: value });
+    };
 
-        //will set initial error values to an empty one
-        setUsernameError('')
-        setPasswordError('')
+    const validateForm = () => {
+        let valid = true;
+        let newErrors = {usernameError: ''}, passwordError: ''}
 
         //will check if the user entered values into both username and password fields
-        if ('' === username) {
-            setUsernameError('Please enter your username')
-            return
+        if (form.username === '') {
+            newErrors.usernameError = 'Please enter username';
+            valid = false;
             }
 
-        if ('' === password) {
-            setPasswordError('Please enter a password')
-            return
+        if (form.password === '') {
+            newErrors.passwordError = 'Please enter a password';
+            valid = false;
+            } else if (form.password.length < 8 ) {
+                newErrors.passwordError = 'Password must be 8 characters or longer';
+                valid = false;
             }
 
         if (password.length <7) {
             setPasswordError('The password must be 8 characters or longer')
             return
-            }
-    }
 
+        setErrors(newErrors);
+        return valid;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
+
+        //authentication controller to be set up to work with this code
+        try {
+            const response = away axios.post('http//localhost:8080/auth/login', form, {
+                 headers: { 'Content-Type': 'application/json' },
+                 withCredentials: true
+            });
+            console.log('Login successful', response.data);
+            navigate('/restricted');
+        } catch (error) {
+            if (error.response) {
+                setError (error.response.data);
+            } else {
+                setError ('An error occurred');
+            }
+        }
+    };
 
     return (
         //labeled div containers for CSS changes

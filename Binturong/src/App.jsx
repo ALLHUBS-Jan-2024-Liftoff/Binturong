@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
 import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import NoPage from "./pages/NoPage.jsx";
 
@@ -17,7 +18,8 @@ export default function App() {
           <Route path="userProfile" element={<UserProfile />} />
           <Route path="userFeed" element={<UserFeed />} />
           <Route path="userSavedFeed" element={<UserSavedFeed />} />
-          <Route path="Login" element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element = {<Register />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
