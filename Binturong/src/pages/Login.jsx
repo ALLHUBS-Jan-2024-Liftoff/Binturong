@@ -13,31 +13,32 @@ const Login = () => {
         setForm ({ ...form, [name]: value });
     };
 
-    const validateForm = () => {
-        let valid = true;
-        let newErrors = {usernameError: ''}, passwordError: ''}
-
-        //will check if the user entered values into both username and password fields
-        if (form.username === '') {
-            newErrors.usernameError = 'Please enter username';
-            valid = false;
-            }
-
-        if (form.password === '') {
-            newErrors.passwordError = 'Please enter a password';
-            valid = false;
-            } else if (form.password.length < 8 ) {
-                newErrors.passwordError = 'Password must be 8 characters or longer';
-                valid = false;
-            }
-
-        if (password.length <7) {
-            setPasswordError('The password must be 8 characters or longer')
-            return
-
-        setErrors(newErrors);
-        return valid;
-    };
+// This part might be redundant after implementing the LoginFormDTO keeping around just in case.
+//     const validateForm = () => {
+//         let valid = true;
+//         let newErrors = {usernameError: ''}, passwordError: ''}
+//
+//         //will check if the user entered values into both username and password fields
+//         if (form.username === '') {
+//             newErrors.usernameError = 'Please enter username';
+//             valid = false;
+//             }
+//
+//         if (form.password === '') {
+//             newErrors.passwordError = 'Please enter a password';
+//             valid = false;
+//             } else if (form.password.length < 8 ) {
+//                 newErrors.passwordError = 'Password must be 8 characters or longer';
+//                 valid = false;
+//             }
+//
+//         if (password.length <7) {
+//             setPasswordError('The password must be 8 characters or longer')
+//             return
+//
+//         setErrors(newErrors);
+//         return valid;
+//     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -69,29 +70,29 @@ const Login = () => {
                 <div>Login</div>
             </div>
             <br />
-            <div className = {'inputUser'}>
-                <input
-                    value = {username}
-                    placeholder = "Enter your username here"
-                    onChange = {(ev) => setUsername(ev.target.value)}
-                    className = {'usernameBox'}
-                />
-                <label className = "errorLabel">{usernameError}</label>
-            </div>
+            <form onSubmit = {handleSubmit}>
+                <div className = {'inputUser'}>
+                    <input
+                        type = "text"
+                        name = "username"
+                        placeholder = "Username"
+                        value = {form.username}
+                        onChange = {handleChange}
+                    />
+                </div>
             <br />
-            <div className = {'inputPass'}>
-                <input
-                    value = {password}
-                    placeholder = "Enter your password here"
-                    onChange = {(ev) => setPassword(ev.target.value)}
-                    className = {'passwordBox'}
-                />
-                <label className = "errorLabel">{passwordError}</label>
-            </div>
+                <div className = {'inputPass'}>
+                    <input
+                        type = "password"
+                        name = "password"
+                        placeholder = "Password"
+                        value = {form.password}
+                        onChange = {handleChange}
+                    />
+                </div>
+                <button type = "submit" className = "loginBtn">Login</button>
+            </form>
             <br />
-            <div>
-                <input type = "button" onClick = {onButtonClick} value = {'Log in'} />
-            </div>
         </div>
       );
   };
