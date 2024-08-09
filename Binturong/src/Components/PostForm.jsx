@@ -1,84 +1,99 @@
 
-
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 function PostForm() {
 
+
+    //sets states and gives starting variables
+    const [text, setText] = useState('')
+    const [geoTag, setGeoTag] = useState('')
+    const [file, setFile] = useState('')
+    const [title, setTitle] = useState('')
+
+
+    //Submits Posts to SQL Database
+    function savePost(e) {
+        e.preventDefault();
+        alert("Posted");
+
+        const post = { text, geoTag, file, title };
+        console.log(post)
+        fetch("http://localhost:8080/userfeed", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(post)
+
+        }).then(() => {
+            //Reloads Window when fetch is finished
+            window.location.reload();
+
+        })
+
+    }
+
     //setting state of the form to be hidden when PostForm first loads.
-    const [showForm,setShowForm] = useState(false);
-    const [geotagging, setGeotagging] = useState(false);
-        const [text, setText] = useState('');
+
 
     function displayForm() {
         //Function sets form to visible
         setShowForm(!showForm);
     }
 
-    function handleGeotaggingChange(e) {
-            setGeotagging(e.target.checked);
-        }
-
-        function handleTextChange(e) {
-            setText(e.target.value);
-        }
-
-        function handleSubmit(e) {
-                e.preventDefault();
-                const postData = {
-                    text,
-                    location: geotagging ? location : null, // Only include location if geotagging is enabled
-                    file: e.target.postfile.files[0], // This will hold the uploaded file
-                };
-                onPost(postData);
-                // Clear the form after submission
-                setShowForm(false);
-                setText('');
-                setGeotagging(false);
-       }
-
-    return(
+//         <!-- On change sets values to there temp variables so they can be sent up in a JSON format -->
+    return (    
         <div>
-             <button onClick={displayForm}>Post+</button>
-        
-             {showForm &&(
-            <div>
-                <form id="post-form" onSubmit={handleSubmit}>
-                    <textarea id="posttextbox"
-                              name= "posttext"
-                              rows= "5"
-                              cols="50"
-                              value={text}
-                              onChange={handleTextChange}
-                              placeholder="Text Goes here"
-                              />
-                              <br/>
+            <button onClick={displayForm}>Post+</button>
 
-                    <label htmlFor ="geotagging">
-                        Turn on Geotagging?
-                        <br/>
-                        <input
-                        type="checkbox"
-                        id="geotagging"
-                        name ="geotagging"
-                        value="GeoTagging?"
-                        onChange={handleGeotaggingChange}
-                        />
-                        </label><br/>
-                    <label htmlFor ="postfile">
-                        Upload files
+            {showForm && (
+                <div>
+                    
+                    <form id="post-form">
 
-                         <input type ="file" id="postfile" name="postfile"/>
+                        
+                        <label for="title">Title</label>
+                        <input type="text"
+                            id="title"
+                            name="title"
+                            value={title}
+                            onChange={(e) => { setTitle(e.target.value) }}
+                        ></input><br />
 
-                         </label>
-                         <br/>
-                    <button type ="submit">Post</button>
-                </form>
-            </div>
-            )} 
-        </div> 
-            
-        
-    );
+                        <textarea id="posttextbox"
+                            name="posttext"
+                            value={text}
+                            rows="5" cols="50"
+                            onChange={(e) => { setText(e.target.value) }}>
+                            Text Goes here
+                        </textarea><br />
+
+                        <label for="geotagging">Turn on Geotagging?<br />
+                            <input type="checkbox"
+                                id="geotagging"
+                                name="geotagging"
+                                value={geoTag}
+                                onChange={(e) => { setGeoTag(e.target.value) }} />
+
+                        </label>
+                        <br />
+
+                        <label for="postfile">Upload files
+                            <input type="file"
+                                id="postfile"
+                                name="postfile"
+                                value={file}
+                                onChange={(e) => { setFile(e.target.value) }}>
+                            </input>
+                        </label>
+
+                        <button onClick={savePost}>Post</button>
+                    </form>
+                </div>
+            )}
+        </div>
+
+
+    )
+
 }
 
 
