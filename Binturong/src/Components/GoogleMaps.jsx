@@ -5,12 +5,7 @@ const containerStyle = {
   height: '100vh'
 };
 
-const center = {
-  lat: -34.397,
-  lng: 150.644
-};
-
-function GoogleMaps({ onLocationSelect}) {
+function GoogleMaps({ initialLocation, onLocationSelect }) {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -51,33 +46,40 @@ function GoogleMaps({ onLocationSelect}) {
   useEffect(() => {
     if (isScriptLoaded && mapRef.current) {
       const map = new window.google.maps.Map(mapRef.current, {
-        center,
+        center: initialLocation || { lat: -34.397, lng: 150.644 }, // Use initialLocation if provided
         zoom: 8,
       });
 
+      if (initialLocation) {
+        const marker = new window.google.maps.Marker({
+          position: initialLocation,
+          map,
+        });
+        markerRef.current = marker;
+      }
+
       map.addListener('click', (e) => {
         const clickedLocation = {
-            lat: e.latLng.lat(),
-            lng: e.latLng.lng()
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
         };
 
-        if(markerRef.current){
-            markerRef.current.setPosition(clickedLocation);
-        } else{
-            const markerOptions = {
-                position:  clickedLocation,
-                map,
-            };
+        if (markerRef.current) {
+          markerRef.current.setPosition(clickedLocation);
+        } else {
+          const markerOptions = {
+            position: clickedLocation,
+            map,
+          };
 
-            const marker = new window.google.maps.Marker(markerOptions);
-            markerRef.current = marker;
+          const marker = new window.google.maps.Marker(markerOptions);
+          markerRef.current = marker;
         }
 
         onLocationSelect(clickedLocation);
-            });
-        }
-      }, [isScriptLoaded, onLocationSelect]);
-
+      });
+    }
+  }, [isScriptLoaded, initialLocation, onLocationSelect]);
 
   return (
     <div ref={mapRef} style={containerStyle}>
