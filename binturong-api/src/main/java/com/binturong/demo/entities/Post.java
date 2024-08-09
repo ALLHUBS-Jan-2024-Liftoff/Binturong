@@ -1,4 +1,4 @@
-package models;
+package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
@@ -14,9 +14,12 @@ public class Post extends AbstractEntity {
     private String title;
 
 
-    @NotNull
-    @Size(max = 500, message= "Post Limit 500 characters.")
+    @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
+
+    private String geoTag;
+
+    private String File;
 
 
 
@@ -34,6 +37,22 @@ public class Post extends AbstractEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getGeoTag() {
+        return geoTag;
+    }
+
+    public void setGeoTag(String geoTag) {
+        this.geoTag = geoTag;
+    }
+
+    public String getFile() {
+        return File;
+    }
+
+    public void setFile(String file) {
+        File = file;
     }
 
     @Override

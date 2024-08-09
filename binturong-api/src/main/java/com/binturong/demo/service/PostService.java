@@ -1,6 +1,6 @@
 package com.binturong.demo.service;
 
-import com.binturong.demo.models.Post;
+import com.binturong.demo.entities.Post;
 
 import java.util.List;
 
