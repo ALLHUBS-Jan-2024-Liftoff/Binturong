@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 public class User extends AbstractEntity {
 
     @NotNull
-    @Size(min=3,max=25,message="Username must be between 3 and 25 characters")
+    @Size (min = 4, max = 18, message = "Invalid username. Username must contain 4 to 18 characters.")
     private String username;
 
     @NotNull
