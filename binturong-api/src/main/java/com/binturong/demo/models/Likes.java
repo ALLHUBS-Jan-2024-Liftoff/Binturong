@@ -1,4 +1,4 @@
-package com.binturong.demo.models;
+package models;
 
 public class Likes {
 }
