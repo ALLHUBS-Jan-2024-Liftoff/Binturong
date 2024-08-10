@@ -17,7 +17,7 @@ useEffect(()=>{
 },[])
 
 
-// Maps out Posts needs Reworking for formating later but functional
+// Maps out Posts needs Reworking for formatting later but functional
 return(
     <div>
 

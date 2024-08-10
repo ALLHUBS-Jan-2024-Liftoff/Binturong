@@ -9,6 +9,7 @@ function PostForm() {
     const [geoTag, setGeoTag] = useState('')
     const [file, setFile] = useState('')
     const [title, setTitle] = useState('')
+    const [showForm, setShowForm] = useState(false)
 
 
     //Submits Posts to SQL Database
