@@ -57,7 +57,7 @@ public class UserAuthController {
                 response = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body(responseBody);
-                User newUser = new Uer(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getName(), "basic");
+                User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getName(), registerFormDTO.getEmail(), "basic");
                 setUserInSession(request.getSession(), newUser);
                 userRepository.save(newUser);
             } else if (existingUser != null) {
