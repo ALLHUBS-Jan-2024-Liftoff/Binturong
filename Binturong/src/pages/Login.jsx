@@ -24,9 +24,9 @@ function Login ({ setAuthenticated }) {
                 {
                     username,
                     password,
-                }
+                },
                 {
-                    withCredentials: true
+                    withCredentials: true,
                 }
             );
             setAuthenticated (true);

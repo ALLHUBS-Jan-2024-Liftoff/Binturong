@@ -17,24 +17,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <nav>
-        {!authenticated ? (
-            <>
-                <Link to = "/login">Login</Link>
-                <Link to = "/register">Register</Link>
-            </>
-        ) : (
-            <>
-                <Link to = "/userProfile">User Profile</Link>
-                <Link to = "/userSettings">Settings</Link>
-                <Link to = "/userFeed">User Feed</Link>
-                <Link to = "/logout">Logout</Link>
-            </>
-        )}
-      </nav>
       <Routes>
-          <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route path = "/" element = {<Layout authenticated = {authenticated} />}>
+          <Route index element = {<Home />} />
 
           {/* Routes when Not Logged In */}
             <Route path = "login" element = {<Login setAuthenticated = {setAuthenticated} />} />
@@ -58,5 +43,6 @@ export default function App() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+// Not needed?
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);
