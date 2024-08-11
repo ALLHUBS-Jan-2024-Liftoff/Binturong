@@ -43,14 +43,14 @@ export default function App() {
          {/* Routes when Logged In */}
          {authenticated ? (
            <>
-            <Route path="userProfile" element={<UserProfile />} />
-            <Route path="userSettings" element={<UserSettings />} />
-            <Route path="userFeed" element={<UserFeed />} />
-            <Route path="userSavedFeed" element={<UserSavedFeed />} />
-            <Route path="logout" element={<Logout setAuthenticated = {setAuthenticated} />} />
+            <Route path = "userProfile" element = {<UserProfile />} />
+            <Route path = "userSettings" element = {<UserSettings />} />
+            <Route path = "userFeed" element = {<UserFeed />} />
+            <Route path = "userSavedFeed" element = {<UserSavedFeed />} />
+            <Route path = "logout" element = {<Logout setAuthenticated = {setAuthenticated} />} />
            </>
            ) : (
-            <Route path="*" element={<Navigate to = "/login" replace />} />
+            <Route path="*" element = {<Navigate to = "/login" replace />} />
           )}
         </Route>
       </Routes>

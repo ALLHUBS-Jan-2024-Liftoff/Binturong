@@ -42,7 +42,7 @@ function Login ({ setAuthenticated }) {
             <div className = {'loginHeading'}>
                 <div>Login</div>
             </div>
-            <form onSubmit = {handleSubmit}>
+            <form onSubmit = {handleLogin}>
                 <div className = {'inputUser'}>
                     <input
                         type = "text"
