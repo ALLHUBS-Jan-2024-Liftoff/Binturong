@@ -12,32 +12,36 @@ import NoPage from "./pages/NoPage.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState (false);
+  const [authenticated, setAuthenticated] = useState(false);
 
-    return (
+console.log("Authenticated:", authenticated);
+
+  return (
     <BrowserRouter>
-        <Layout authenticated = {authenticated}
-                setAuthenticated = {setAuthenticated} />
       <Routes>
-          <Route path = "/" element = {<Home />} />
-
-          {/* Routes when Not Logged In */}
-          {!authenticated ? (
-              <>
-                <Route path = "login" element = {<Login setAuthenticated = {setAuthenticated} />} />
-                <Route path = "register" element = {<Register />} />
-                <Route path = "*" element = {<Navigate to = "/login" replace />} />
-              </>
-          ) : (
-              <>
-              {/* Routes when Logged In */}
-                <Route path = "userProfile" element = {<UserProfile />} />
-                <Route path = "userSettings" element = {<UserSettings />} />
-                <Route path = "userFeed" element = {<UserFeed />} />
-                <Route path = "userSavedFeed" element = {<UserSavedFeed />} />
-              </>
-          )}
+        {/* Routes when Not Logged In */}
+        {!authenticated ? (
+          <>
+            <Route path="/" element={<Home authenticated={authenticated} />} />
+            <Route path="login" element={<Login setAuthenticated={setAuthenticated} />} />
+            <Route path="register" element={<Register />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </>
+        ) : (
+          <>
+            {/* Routes when Logged In */}
+            <Route path="/" element={<Layout authenticated={authenticated} setAuthenticated={setAuthenticated} />}>
+              <Route index element={<Home authenticated={authenticated} />}/>
+              <Route path="userProfile" element={<UserProfile />} />
+              <Route path="userSettings" element={<UserSettings />} />
+              <Route path="userFeed" element={<UserFeed />} />
+              <Route path="userSavedFeed" element={<UserSavedFeed />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
 }
+

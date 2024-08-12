@@ -1,17 +1,23 @@
 import React from "react";
 import axios from "axios";
 
-function Logout ({ setAuthenticated }) {
+function Logout({ setAuthenticated }) {
 
     const handleLogout = async () => {
         try {
-            await axios.get("http://localhost:8080/user/logout",
-            {
+            console.log("Sending logout request...");
+            const response = await axios.get("http://localhost:8080/user/logout", {
                 withCredentials: true,
             });
-            setAuthenticated (false);
+            console.log("Logout response:", response);
+            if (response.status === 200) {
+                setAuthenticated(false);
+                console.log("User logged out successfully");
+            } else {
+                console.error("Logout failed with status:", response.status);
+            }
         } catch (error) {
-            console.error ("Logout failed", error);
+            console.error("Logout failed", error);
         }
     };
 

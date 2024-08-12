@@ -114,9 +114,18 @@ public class UserAuthController {
         return response;
     }
 
-    @GetMapping ("/logout")
-    public String logout (HttpServletRequest request) {
-        request.getSession().invalidate();
-        return "redirect:/login";
+    @GetMapping("/logout")
+    public ResponseEntity<Map> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "User successfully logged out!");
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("Access-Control-Allow-Origin", "http://localhost:5173")
+                .header("Access-Control-Allow-Credentials", "true")
+                .body(responseBody);
     }
+
 }

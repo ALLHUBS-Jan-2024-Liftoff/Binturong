@@ -23,7 +23,7 @@ function Login ({ setAuthenticated }) {
 
             if (username === hardCodedUsername && password === hardCodedPassword) {
                 setAuthenticated(true);
-                navigate('/userprofile'); // Redirect to user profile or any other page
+                navigate('/home'); // Redirect to user profile or any other page
             } else {
                 setError('Invalid username or password');
             }

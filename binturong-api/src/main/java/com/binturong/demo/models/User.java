@@ -1,5 +1,6 @@
 package com.binturong.demo.models;
 
+import com.binturong.demo.entities.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-public class User extends models.AbstractEntity {
+public class User extends AbstractEntity {
 
     @NotNull
     @Size (min = 4, max = 18, message = "Invalid username. Username must contain 4 to 18 characters.")
@@ -67,4 +68,5 @@ public class User extends models.AbstractEntity {
     public void setRole(String role) {
         this.role = role;
     }
+
 }
