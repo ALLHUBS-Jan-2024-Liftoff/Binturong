@@ -32,13 +32,12 @@ function PostForm() {
     }
 
     //setting state of the form to be hidden when PostForm first loads.
-
+    const [showForm, setShowForm] = useState(false);
 
     function displayForm() {
         //Function sets form to visible
         setShowForm(!showForm);
     }
-
 //         <!-- On change sets values to there temp variables so they can be sent up in a JSON format -->
     return (    
         <div>
@@ -93,7 +92,6 @@ function PostForm() {
 
 
     )
-
 }
 
 
