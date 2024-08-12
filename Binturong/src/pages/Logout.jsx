@@ -15,7 +15,7 @@ function Logout ({ setAuthenticated }) {
         }
     };
 
-    return <button onClick={handleLogout} >Logout</button>;
+    return <button onClick={handleLogout}>Logout</button>;
 }
 
 export default Logout;
