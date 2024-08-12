@@ -14,27 +14,39 @@ function Login ({ setAuthenticated }) {
         setForm ({ ...form, [name]: value });
     };
 
+    //Hard coded user/pass to test to see if the login feature works and switches over to the logged in state
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        //authentication controller to be set up to work with this code
-        try {
-            const response = await axios.post (
-                'http//localhost:8080/user/login',
-                {
-                    username,
-                    password,
-                },
-                {
-                    withCredentials: true,
-                }
-            );
-            setAuthenticated (true);
-            setMessage (response.data.message);
-            } catch (error) {
-              setMessage (error.response?.data?.message || "Login failed");
+        const hardCodedUsername = 'testuser';
+        const hardCodedPassword = 'password123';
+
+            if (username === hardCodedUsername && password === hardCodedPassword) {
+                setAuthenticated(true);
+                navigate('/userprofile'); // Redirect to user profile or any other page
+            } else {
+                setError('Invalid username or password');
             }
-        };
+    };
+
+        //authentication controller to be set up to work with this code
+//         try {
+//             const response = await axios.post (
+//                 'http//localhost:8080/user/login',
+//                 {
+//                     username,
+//                     password,
+//                 },
+//                 {
+//                     withCredentials: true,
+//                 }
+//             );
+//             setAuthenticated (true);
+//             setMessage (response.data.message);
+//             } catch (error) {
+//               setMessage (error.response?.data?.message || "Login failed");
+//             }
+//         };
 
     return (
         //labeled div containers for CSS changes

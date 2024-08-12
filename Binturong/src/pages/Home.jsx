@@ -1,10 +1,10 @@
-//Home page
+{/*}Home page*/}
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 const Home = () => (
-        //setting up some div containers for CSS changes
+        /*setting up some div containers for CSS changes*/
         <div>
             <div className = {'appTitle'}>
                 <h1>Welcome to 2GETHER!</h1>

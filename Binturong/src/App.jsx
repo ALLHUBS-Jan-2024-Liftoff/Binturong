@@ -6,7 +6,7 @@ import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
 import Login from "./pages/Login.jsx";
-import Logout from "./pages/Logout.jsx";
+//import Logout from "./pages/Logout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import NoPage from "./pages/NoPage.jsx";
@@ -14,6 +14,20 @@ import UserSettings from "./pages/UserSettings.jsx";
 
 export default function App() {
   const [authenticated, setAuthenticated] = useState (false);
+
+       // Trying to hard code the logout component to see if that works better
+       const handleLogout = async () => {
+          try {
+              await axios.get("http://localhost:8080/user/logout",
+              {
+                  withCredentials: true,
+              });
+              setAuthenticated (false);
+          } catch (error) {
+              console.error ("Logout failed", error);
+          }
+      };
+
 
   return (
     <BrowserRouter>
@@ -35,7 +49,7 @@ export default function App() {
             <Route path = "logout" element = {<Logout setAuthenticated = {setAuthenticated} />} />
            </>
            ) : (
-            <Route path="*" element = {<Navigate to = "/login" replace />} />
+            <Route path = "*" element = {<Navigate to = "/login" replace />} />
           )}
         </Route>
       </Routes>

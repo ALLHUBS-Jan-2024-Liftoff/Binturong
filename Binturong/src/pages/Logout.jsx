@@ -11,11 +11,11 @@ function Logout ({ setAuthenticated }) {
             });
             setAuthenticated (false);
         } catch (error) {
-            console.error ("Logout failed");
+            console.error ("Logout failed", error);
         }
     };
 
-    return <button onClick = {handleLogout} >Logout</button>;
+    return <button onClick={handleLogout} >Logout</button>;
 }
 
 export default Logout;
