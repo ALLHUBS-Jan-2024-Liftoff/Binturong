@@ -1,9 +1,10 @@
-package com.binturong.demo.service;
+package com.binturong.demo.services;
 
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
