@@ -1,7 +1,7 @@
 package com.binturong.demo.controllers;
 
 
-import com.binturong.demo.service.PostService;
+import com.binturong.demo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.binturong.demo.entities.Post;
