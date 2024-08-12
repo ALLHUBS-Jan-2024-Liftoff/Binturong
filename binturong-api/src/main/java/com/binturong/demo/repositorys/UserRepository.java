@@ -1,8 +1,10 @@
 package com.binturong.demo.repositorys;
 
-import com.binturong.demo.models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.binturong.demo.entities.User;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository <User, Integer> {
-    User findByUsername (String username);
+@Repository
+public interface UserRepository {
+
+    User findByUsername(String username);
 }
