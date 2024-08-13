@@ -25,6 +25,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	implementation 'mysql:mysql-connector-java:8.0.28'
 	implementation 'org.springframework.security:spring-security-crypto:5.6.4'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

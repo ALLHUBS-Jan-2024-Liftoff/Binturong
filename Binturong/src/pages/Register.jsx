@@ -14,7 +14,7 @@ function Register() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8080/user/register",
+                "http://localhost:8080/login/register",
                 {
                   username,
                   password,
@@ -54,7 +54,7 @@ function Register() {
                     placeholder = "Password"
                    />
                </div>
-                <button type = "submit" className = "loginBtn">Login</button>
+                <button type = "submit" className = "registerBtn">Register</button>
                </form>
                {message && <p> {message} </p>}
         </div>

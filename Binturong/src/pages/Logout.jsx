@@ -6,7 +6,8 @@ function Logout({ setAuthenticated }) {
     const handleLogout = async () => {
         try {
             console.log("Sending logout request...");
-            const response = await axios.get("http://localhost:8080/login/logout", {
+            const response = await
+            axios.get("http://localhost:8080/login/logout", {
                 withCredentials: true,
             });
             console.log("Logout response:", response);
@@ -21,7 +22,7 @@ function Logout({ setAuthenticated }) {
         }
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
+    return <button onClick = {handleLogout} >Logout</button>;
 }
 
 export default Logout;
