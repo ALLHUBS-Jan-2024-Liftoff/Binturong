@@ -113,7 +113,7 @@ public class UserAuthController {
         return response;
     }
 
-    @GetMapping("/login/logout")
+    @GetMapping("/logout")
     public ResponseEntity<Map> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {

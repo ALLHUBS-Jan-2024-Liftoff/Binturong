@@ -25,7 +25,7 @@ function Login ({ setAuthenticated }) {
                 setAuthenticated(true);
                 navigate('/home'); // Redirect to user profile or any other page
             } else {
-                setError('Invalid username or password');
+                setError('Invalid username or password', setError);
             }
     };
 
