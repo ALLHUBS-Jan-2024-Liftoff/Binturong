@@ -27,7 +27,7 @@ public class WebAppConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
+                .allowedHeaders("Content-Type", "Authorization", "Access-Control-Allow-Headers")
                 .allowCredentials(true);
     }
 }
