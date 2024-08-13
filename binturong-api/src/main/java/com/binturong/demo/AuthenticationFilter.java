@@ -1,7 +1,7 @@
 package com.binturong.demo;
 
 import com.binturong.demo.controllers.UserAuthController;
-import com.binturong.demo.models.User;
+import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -21,7 +21,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Autowired
     UserAuthController userAuthController;
 
-    private static final List <String> whitelist = Arrays.asList("/user/login", "/user/register", "/user/logout");
+    private static final List <String> whitelist = Arrays.asList("/login", "/register", "/logout");
 
     private static boolean isWhiteListed(String path) {
         for (String pathRoot: whitelist) {
@@ -36,8 +36,8 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle (HttpServletRequest request,
                               HttpServletResponse response,
-                              Object handler) throws IOException {
-
+                              Object handler) throws
+            IOException {
 
         // Sign in not needed for whitelisted pages
         if (isWhiteListed(request.getRequestURI())) {

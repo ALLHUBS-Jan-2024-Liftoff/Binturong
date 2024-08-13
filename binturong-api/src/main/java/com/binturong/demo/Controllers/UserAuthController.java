@@ -1,12 +1,11 @@
 package com.binturong.demo.controllers;
 
-import com.binturong.demo.models.User;
+import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.models.dto.LoginFormDTO;
 import com.binturong.demo.models.dto.RegisterFormDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping ("user")
+@RequestMapping ("/login")
 public class UserAuthController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class UserAuthController {
 
     //handles checking for the user ID and then retrieving it that userID is found.
     public User getUserFromSession(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute(userSessionKey);
+        Long userId = (Long) session.getAttribute(userSessionKey);
         if (userId == null) {
             return null;
         }
@@ -46,7 +45,7 @@ public class UserAuthController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping(value = "/login/register")
     public ResponseEntity<Map> processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
@@ -85,7 +84,7 @@ public class UserAuthController {
         return response;
     }
 
-    @PostMapping ("/login")
+    @PostMapping ("")
     public ResponseEntity<Map> processLoginForm (@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
@@ -114,7 +113,7 @@ public class UserAuthController {
         return response;
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/login/logout")
     public ResponseEntity<Map> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {

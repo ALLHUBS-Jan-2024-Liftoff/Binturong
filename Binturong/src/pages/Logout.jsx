@@ -6,7 +6,7 @@ function Logout({ setAuthenticated }) {
     const handleLogout = async () => {
         try {
             console.log("Sending logout request...");
-            const response = await axios.get("http://localhost:8080/user/logout", {
+            const response = await axios.get("http://localhost:8080/login/logout", {
                 withCredentials: true,
             });
             console.log("Logout response:", response);
