@@ -9,6 +9,7 @@ function PostForm() {
     const [geoTag, setGeoTag] = useState('')
     const [file, setFile] = useState('')
     const [title, setTitle] = useState('')
+    const [showForm, setShowForm] = useState(false)
 
 
     //Submits Posts to SQL Database
@@ -32,7 +33,7 @@ function PostForm() {
     }
 
     //setting state of the form to be hidden when PostForm first loads.
-    const [showForm, setShowForm] = useState(false);
+    //const [showForm, setShowForm] = useState(false);
 
     function displayForm() {
         //Function sets form to visible
