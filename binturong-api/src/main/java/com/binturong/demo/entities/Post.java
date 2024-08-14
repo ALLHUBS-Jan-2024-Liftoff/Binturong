@@ -3,6 +3,8 @@ package com.binturong.demo.entities;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import javax.swing.text.StyledEditorKit;
 import java.util.Objects;
 
 @Entity
@@ -17,9 +19,15 @@ public class Post extends AbstractEntity {
     @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
 
-    private String geoTag;
+    private Boolean geoTag;
 
-    private String File;
+    private String file;
+
+    private int userId;
+
+    public void setUserId(User user){
+        this.userId= user.getId();
+    }
 
 
 
@@ -39,20 +47,20 @@ public class Post extends AbstractEntity {
         this.text = text;
     }
 
-    public String getGeoTag() {
+    public Boolean getGeoTag() {
         return geoTag;
     }
 
-    public void setGeoTag(String geoTag) {
+    public void setGeoTag(Boolean geoTag) {
         this.geoTag = geoTag;
     }
 
     public String getFile() {
-        return File;
+        return file;
     }
 
     public void setFile(String file) {
-        File = file;
+        file = file;
     }
 
     @Override
