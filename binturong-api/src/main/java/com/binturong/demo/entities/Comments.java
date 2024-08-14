@@ -1,8 +1,11 @@
 package com.binturong.demo.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+
+@Entity
 public class Comments extends AbstractEntity {
 
     @NotNull
