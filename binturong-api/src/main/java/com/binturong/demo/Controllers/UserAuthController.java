@@ -5,6 +5,7 @@ import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.models.dto.LoginFormDTO;
 import com.binturong.demo.models.dto.RegisterFormDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping ("user")
+@RequestMapping ("/user")
 public class UserAuthController {
 
     @Autowired
@@ -113,10 +114,11 @@ public class UserAuthController {
         return response;
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request,
+                                    HttpServletResponse response) {
         request.getSession().invalidate();
-        return "redirect:/login";
+        return ResponseEntity.ok().build();
     }
 
 }

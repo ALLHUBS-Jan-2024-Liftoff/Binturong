@@ -17,7 +17,7 @@ function Layout({ authenticated, setAuthenticated }) {
                         <li><Link to="/userSettings">Settings</Link></li>
                         <li><Link to="/userFeed">Feed</Link></li>
                         <li><Link to="/userSavedFeed">Saved Feed</Link></li>
-                        <li><Logout setAuthenticated={setAuthenticated} /></li>
+                        <li><Logout /></li>
                     </ul>
                 </nav>
             )}
