@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping ("/login")
+@RequestMapping ("user")
 public class UserAuthController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class UserAuthController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @PostMapping(value = "/login/register")
+    @PostMapping(value = "/register")
     public ResponseEntity<Map> processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
@@ -84,7 +84,7 @@ public class UserAuthController {
         return response;
     }
 
-    @PostMapping ("")
+    @PostMapping ("/login")
     public ResponseEntity<Map> processLoginForm (@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
@@ -114,17 +114,9 @@ public class UserAuthController {
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<Map> logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "User successfully logged out!");
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("Access-Control-Allow-Origin", "http://localhost:5173")
-                .header("Access-Control-Allow-Credentials", "true")
-                .body(responseBody);
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/login";
     }
 
 }

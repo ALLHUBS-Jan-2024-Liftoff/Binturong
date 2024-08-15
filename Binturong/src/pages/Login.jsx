@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 function Login ({ setAuthenticated }) {
@@ -25,34 +24,34 @@ function Login ({ setAuthenticated }) {
                 setAuthenticated(true);
                 navigate('/home'); // Redirect to user profile or any other page
             } else {
-                setError('Invalid username or password', setError);
+                console.log("Login Failed");
             }
-    };
+//     };
 
         //authentication controller to be set up to work with this code
-//         try {
-//             const response = await axios.post (
-//                 'http//localhost:8080/user/login',
-//                 {
-//                     username,
-//                     password,
-//                 },
-//                 {
-//                     withCredentials: true,
-//                 }
-//             );
-//             setAuthenticated (true);
-//             setMessage (response.data.message);
-//             } catch (error) {
-//               setMessage (error.response?.data?.message || "Login failed");
-//             }
-//         };
+        try {
+            const response = await axios.post (
+                'http//localhost:8080/user/login',
+                {
+                    username,
+                    password,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
+            setAuthenticated (true);
+            setMessage (response.data.message);
+            } catch (error) {
+              setMessage (error.response?.data?.message || "Login failed");
+            }
+        };
 
     return (
         //labeled div containers for CSS changes
         <div>
             <div className = {'loginHeading'}>
-                <div>Login</div>
+                <h3>Login</h3>
             </div>
             <form onSubmit = {handleLogin}>
                 <div className = {'inputUser'}>
@@ -80,4 +79,3 @@ function Login ({ setAuthenticated }) {
   }
 
   export default Login;
-  

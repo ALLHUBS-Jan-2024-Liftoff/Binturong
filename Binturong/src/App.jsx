@@ -6,10 +6,12 @@ import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
 import Login from "./pages/Login.jsx";
+import Logout from "./pages/Logout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import NoPage from "./pages/NoPage.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
+import "./App.css";
 
 export default function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -23,8 +25,8 @@ console.log("Authenticated:", authenticated);
         {!authenticated ? (
           <>
             <Route path="/" element={<Home authenticated={authenticated} />} />
-            <Route path="login" element={<Login setAuthenticated={setAuthenticated} />} />
-            <Route path="register" element={<Register />} />
+            <Route path="/login" element={<Login setAuthenticated={setAuthenticated} />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </>
         ) : (
@@ -32,10 +34,11 @@ console.log("Authenticated:", authenticated);
             {/* Routes when Logged In */}
             <Route path="/" element={<Layout authenticated={authenticated} setAuthenticated={setAuthenticated} />}>
               <Route index element={<Home authenticated={authenticated} />}/>
-              <Route path="userProfile" element={<UserProfile />} />
-              <Route path="userSettings" element={<UserSettings />} />
-              <Route path="userFeed" element={<UserFeed />} />
-              <Route path="userSavedFeed" element={<UserSavedFeed />} />
+              <Route path="/userProfile" element={<UserProfile />} />
+              <Route path="/userSettings" element={<UserSettings />} />
+              <Route path="/userFeed" element={<UserFeed />} />
+              <Route path="/userSavedFeed" element={<UserSavedFeed />} />
+              <Route path="/user/logout" element={<Logout setAuthenticated={setAuthenticated} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </>
