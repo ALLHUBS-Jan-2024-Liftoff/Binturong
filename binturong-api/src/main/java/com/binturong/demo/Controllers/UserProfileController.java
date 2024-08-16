@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/userprofile")
+@CrossOrigin
 public class UserProfileController {
 
     @Autowired
@@ -25,10 +26,19 @@ public class UserProfileController {
         return "Posted";
     }
 
-//    @GetMapping("/getuserposts")
-//    public List<Post> LoadUsersPosts(){
-//        return ;
-//    }
+    @GetMapping("/getAllUsersPosts")
+    public List<Post> postFeed(){
+        return postService.getAllPosts();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id){
+       if(!postRepository.existsById(id)){
+           return "Error something went wrong";
+       }
+       postRepository.deleteById(id);
+        return "Post Deleted";
+    }
 
 
 }

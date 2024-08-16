@@ -19,7 +19,7 @@ public class Post extends AbstractEntity {
     @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
 
-    private Boolean geoTag;
+    private String geoTag;
 
     private String file;
 
@@ -47,11 +47,11 @@ public class Post extends AbstractEntity {
         this.text = text;
     }
 
-    public Boolean getGeoTag() {
+    public String  getGeoTag() {
         return geoTag;
     }
 
-    public void setGeoTag(Boolean geoTag) {
+    public void setGeoTag(String geoTag) {
         this.geoTag = geoTag;
     }
 
