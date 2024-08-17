@@ -31,7 +31,7 @@ function Login ({ setAuthenticated }) {
         //authentication controller to be set up to work with this code
         try {
             const response = await axios.post (
-                'http//localhost:8080/user/login',
+                "http://localhost:8080/user/login",
                 {
                     username,
                     password,

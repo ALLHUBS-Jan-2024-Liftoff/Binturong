@@ -1,9 +1,9 @@
 //}Home page
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ authenticated }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -20,23 +20,32 @@ const Home = () => {
         }
       };
 
-
-
-
-
     return (
-        <div>
-              <h1>2Gether</h1>
-              <SearchBar
+           <div>
+            <div className = {'appTitle'}>
+                <h1>Welcome to 2GETHER!</h1>
+                <SearchBar
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 handleSearch={handleSearch}
-              />
-              <SearchResults results={searchResults} />
+                />
+                <SearchResults results={searchResults} />
             </div>
+                {authenticated ? (
+                    <div>
+                        <h2>Welcome Back!</h2>
+                        <p>Test Text Test Text Test Text</p>
+                    </div>
+                ) : (
+                    <div>
+                        <p>Please log in below or if you haven't joined take a moment to register!</p>
+                        <Link to = "/login">Login</Link> | <Link to = "/register">Register</Link>
+                    </div>
+                )}
+            </div>
+)};
 
-    );
-  };
+
   const SearchBar = ({ searchTerm, setSearchTerm, handleSearch }) => {
     return (
       <div>
@@ -68,25 +77,5 @@ const Home = () => {
     );
   };
 
-const Home = ({ authenticated }) => (
-        //setting up some div containers for CSS changes
-        <div>
-            <div className = {'appTitle'}>
-                <h1>Welcome to 2GETHER!</h1>
-            </div>
-            {authenticated ? (
-                <div>
-                    <h2>Welcome Back!</h2>
-                    <p>Test Text Test Text Test Text</p>
-                </div>
-                ) : (
-                     <div>
-                         <p>Please log in below or if you haven't joined take a moment to register!</p>
-                         <Link to = "/login">Login</Link> | <Link to = "/register">Register</Link>
-                     </div>
-                     )}
-        </div>
-  );
-
-  export default Home;
+export default Home;
   

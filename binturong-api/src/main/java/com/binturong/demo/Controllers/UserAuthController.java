@@ -32,7 +32,7 @@ public class UserAuthController {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(Math.toIntExact(userId));
 
         if (user.isEmpty()) {
             return null;
