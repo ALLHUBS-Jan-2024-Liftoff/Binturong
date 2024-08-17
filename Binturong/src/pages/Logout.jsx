@@ -10,12 +10,12 @@ const Logout = () => {
   const handleLogout = async () => {
       console.log('Logout button clicked');
     try {
-      await axios.post('http://localhost:8080/user/logout', {},
-      { withCredentials: true }).then(response => {
+      await axios.get("http://localhost:8080/user/logout",
+      {
+          withCredentials: true,
+      });
       console.log('Logout response:', response);
       setIsAuthenticated(false);
-      navigate('/');
-      });
     } catch (error) {
       console.error('Logout failed', error);
     }

@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping ("/user")
+@RequestMapping ("user")
 public class UserAuthController {
 
     @Autowired
@@ -57,7 +57,7 @@ public class UserAuthController {
                 response = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body(responseBody);
-                User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getName(), registerFormDTO.getEmail(), "basic");
+                User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(), "basic");
                 setUserInSession(request.getSession(), newUser);
                 userRepository.save(newUser);
             } else if (existingUser != null) {
@@ -85,40 +85,44 @@ public class UserAuthController {
         return response;
     }
 
-    @PostMapping ("/login")
-    public ResponseEntity<Map> processLoginForm (@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
+    @PostMapping("/login")
+    public ResponseEntity<Map> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
-        Map <String, String> responseBody = new HashMap<>();
+        Map<String, String> responseBody = new HashMap<>();
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
         String password = loginFormDTO.getPassword();
         if (theUser == null) {
-            responseBody.put ("message", "Username does not exist.");
+            responseBody.put("message", "Username does not exist");
             response = ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(responseBody);
-        } else if (!theUser.isMatchingPassword(password)) {
-            responseBody.put ("message", "Password does not match.");
+        }else if (!theUser.isMatchingPassword(password)) {
+            responseBody.put("message", "Password does not match");
             response = ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(responseBody);
         } else {
             setUserInSession(request.getSession(), theUser);
-            responseBody.put ("message", "User successfully logged in!");
-            responseBody.put ("username", theUser.getUsername());
-            responseBody.put ("userRole", theUser.getRole());
+            responseBody.put("message", "User successfully logged in.");
+            responseBody.put("username", theUser.getUsername());
+            responseBody.put("userRole", theUser.getRole());
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(responseBody);
         }
-        return response;
+        return  response;
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request,
-                                    HttpServletResponse response) {
-        request.getSession().invalidate();
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+        // Invalidate the user's session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        // Redirect to the login page
+        return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/login").build();
     }
 
 }

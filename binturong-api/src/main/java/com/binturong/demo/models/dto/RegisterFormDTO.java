@@ -7,19 +7,7 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    private String name;
-
-    @NotNull
-    @NotBlank
     private String email;
-
-    public @NotNull @NotBlank String getName() {
-        return name;
-    }
-
-    public void setName(@NotNull @NotBlank String name) {
-        this.name = name;
-    }
 
     public @NotNull @NotBlank String getEmail() {
         return email;

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
-function Login ({ setAuthenticated }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+function Login () {
+    const { setIsAuthenticated } = useContext(AuthContext);
+    const [form, setForm] = useState({ username: "", password: "" });
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
@@ -20,9 +21,9 @@ function Login ({ setAuthenticated }) {
         const hardCodedUsername = 'testuser';
         const hardCodedPassword = 'password123';
 
-            if (username === hardCodedUsername && password === hardCodedPassword) {
-                setAuthenticated(true);
-                navigate('/home'); // Redirect to user profile or any other page
+            if (form.username === hardCodedUsername && form.password === hardCodedPassword) {
+                setIsAuthenticated(true);
+                navigate('/userProfile'); // Redirect to user profile or any other page
             } else {
                 console.log("Login Failed");
             }
@@ -33,8 +34,8 @@ function Login ({ setAuthenticated }) {
             const response = await axios.post (
                 "http://localhost:8080/user/login",
                 {
-                    username,
-                    password,
+                    username: form.username,
+                    password: form.password,
                 },
                 {
                     withCredentials: true,
@@ -57,8 +58,9 @@ function Login ({ setAuthenticated }) {
                 <div className = {'inputUser'}>
                     <input
                         type = "text"
-                        value = {username}
-                        onChange = {(e) => setUsername (e.target.value)}
+                        name = "username"
+                        value = {form.username}
+                        onChange = {handleChange}
                         placeholder = "Username"
                     />
                 </div>
@@ -66,8 +68,9 @@ function Login ({ setAuthenticated }) {
                 <div className = {'inputPass'}>
                     <input
                         type = "password"
-                        value = {password}
-                        onChange = {(e) => setPassword (e.target.value)}
+                        name = "password"
+                        value = {form.password}
+                        onChange = {handleChange}
                         placeholder = "Password"
                     />
                 </div>

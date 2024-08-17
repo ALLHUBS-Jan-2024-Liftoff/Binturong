@@ -1,9 +1,11 @@
 //}Home page
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
-const Home = ({ authenticated }) => {
+const Home = () => {
+    const { isAuthenticated } = useContext(AuthContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -31,7 +33,7 @@ const Home = ({ authenticated }) => {
                 />
                 <SearchResults results={searchResults} />
             </div>
-                {authenticated ? (
+                {isAuthenticated ? (
                     <div>
                         <h2>Welcome Back!</h2>
                         <p>Test Text Test Text Test Text</p>
