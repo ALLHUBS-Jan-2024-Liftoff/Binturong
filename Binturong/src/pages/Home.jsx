@@ -1,6 +1,8 @@
 //Home page
 import React, {useState} from 'react';
 
+
+
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
