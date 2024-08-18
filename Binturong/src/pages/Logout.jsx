@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import axios from 'axios';
 
 const Logout = () => {
   const { setIsAuthenticated } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleLogout = async () => {
       console.log('Logout button clicked');
@@ -14,7 +12,6 @@ const Logout = () => {
       {
           withCredentials: true,
       });
-      console.log('Logout response:', response);
       setIsAuthenticated(false);
     } catch (error) {
       console.error('Logout failed', error);

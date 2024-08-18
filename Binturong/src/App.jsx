@@ -11,6 +11,7 @@ import Logout from "./pages/Logout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import NoPage from "./pages/NoPage.jsx";
+import Map from "./pages/Map.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
 import "./App.css";
 
@@ -36,6 +37,7 @@ function AppRoutes() {
             <Route path="/userSettings" element={<UserSettings />} />
             <Route path="/userFeed" element={<UserFeed />} />
             <Route path="/userSavedFeed" element={<UserSavedFeed />} />
+            <Route path="/map" element={<Map />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

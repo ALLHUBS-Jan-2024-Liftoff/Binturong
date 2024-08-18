@@ -19,6 +19,7 @@ function Layout() {
                         <li><Link to="/userSettings">Settings</Link></li>
                         <li><Link to="/userFeed">Feed</Link></li>
                         <li><Link to="/userSavedFeed">Saved Feed</Link></li>
+                        <li><Link to="/map">Map</Link></li>
                         <li><Logout /></li>
                     </ul>
                 </nav>

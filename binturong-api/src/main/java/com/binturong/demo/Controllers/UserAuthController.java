@@ -5,7 +5,6 @@ import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.models.dto.LoginFormDTO;
 import com.binturong.demo.models.dto.RegisterFormDTO;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -27,12 +26,12 @@ public class UserAuthController {
 
     //handles checking for the user ID and then retrieving it that userID is found.
     public User getUserFromSession(HttpSession session) {
-        Long userId = (Long) session.getAttribute(userSessionKey);
+        Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(Math.toIntExact(userId));
+        Optional<User> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
             return null;
@@ -46,8 +45,8 @@ public class UserAuthController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<Map> processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
+    @PostMapping(value= "/register")
+    public ResponseEntity processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
         try {
@@ -86,7 +85,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
+    public ResponseEntity processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
@@ -111,18 +110,17 @@ public class UserAuthController {
                     .status(HttpStatus.CREATED)
                     .body(responseBody);
         }
-        return  response;
+
+        // Add logging
+        System.out.println("Login attempt: " + loginFormDTO.getUsername());
+        System.out.println("Login response: " + responseBody.get("message"));
+
+        return response;
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
-        // Invalidate the user's session
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        // Redirect to the login page
-        return ResponseEntity.status(HttpStatus.FOUND).header("Location", "/login").build();
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/login";
     }
-
 }
