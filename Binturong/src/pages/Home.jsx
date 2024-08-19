@@ -1,18 +1,14 @@
 //}Home page
-import React, { useState, useContext } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from './AuthContext';
 
 const Home = () => {
-    const { isAuthenticated } = useContext(AuthContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
     const handleSearch = async () => {
         try {
         //where should this fetch from
-
 
           const response = await fetch(`/api/search?keyword=${searchTerm}`);
           const results = await response.json();
@@ -23,7 +19,6 @@ const Home = () => {
       };
 
     return (
-           <div>
             <div className = {'appTitle'}>
                 <h1>Welcome to 2GETHER!</h1>
                 <SearchBar
@@ -32,18 +27,6 @@ const Home = () => {
                 handleSearch={handleSearch}
                 />
                 <SearchResults results={searchResults} />
-            </div>
-                {isAuthenticated ? (
-                    <div>
-                        <h2>Welcome Back!</h2>
-                        <p>Test Text Test Text Test Text</p>
-                    </div>
-                ) : (
-                    <div>
-                        <p>Please log in below or if you haven't joined take a moment to register!</p>
-                        <Link to = "/login">Login</Link> | <Link to = "/register">Register</Link>
-                    </div>
-                )}
             </div>
 )};
 

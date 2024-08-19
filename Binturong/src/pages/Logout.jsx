@@ -1,26 +1,20 @@
-import React, { useContext } from 'react';
-import { AuthContext } from './AuthContext';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
-const Logout = () => {
-  const { setIsAuthenticated } = useContext(AuthContext);
-
+function Logout({ setAuthenticated }) {
   const handleLogout = async () => {
-      console.log('Logout button clicked');
     try {
       await axios.get("http://localhost:8080/user/logout",
-      {
+        {
           withCredentials: true,
-      });
-      setIsAuthenticated(false);
+        });
+      setAuthenticated(false);
     } catch (error) {
-      console.error('Logout failed', error);
+      console.error("Logout failed");
     }
   };
 
-  return (
-    <button onClick={handleLogout}>Logout</button>
-  );
-};
+  return <button onClick={handleLogout}>Logout</button>;
+}
 
 export default Logout;

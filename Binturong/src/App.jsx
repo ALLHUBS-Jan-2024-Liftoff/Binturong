@@ -1,8 +1,6 @@
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import React, { useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, AuthContext } from './pages/AuthContext';
-import Layout from "./pages/Layout.jsx";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
@@ -15,45 +13,59 @@ import Map from "./pages/Map.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
 import "./App.css";
 
-function AppRoutes() {
-  const { isAuthenticated } = useContext(AuthContext);
-
-  return (
-    <Routes>
-      {/* Routes when Not Logged In */}
-      {!isAuthenticated ? (
-        <>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </>
-      ) : (
-        <>
-          {/* Routes when Logged In */}
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/userProfile" element={<UserProfile />} />
-            <Route path="/userSettings" element={<UserSettings />} />
-            <Route path="/userFeed" element={<UserFeed />} />
-            <Route path="/userSavedFeed" element={<UserSavedFeed />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </>
-      )}
-    </Routes>
-  );
-}
-
 export default function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+            <nav>
+                {!authenticated ? (
+                    <>
+                        {/*Displayed when not logged in*/}
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                    </>
+                ) : (
+                    <>
+                        {/*Displayed when logged in*/}
+                        <Link to="/">Home</Link>
+                        <Link to="/userProfile">Profile</Link>
+                        <Link to="/userSettings">Settings</Link>
+                        <Link to="/userFeed">Feed</Link>
+                        <Link to="/userSavedFeed">Saved Feed</Link>
+                        <Link to="/map">Map</Link>
+                        <Logout setAuthenticated={setAuthenticated} />
+                    </>
+                )}
+            </nav>
+
+            <div className="App">
+                <header className="App-header">
+                    <Routes>
+                        {/*Public Routes*/}
+                        <Route path="/login" element={<Login setAuthenticated={setAuthenticated} />} />
+                        <Route path="/register" element={<Register />} />
+
+                        {/*Default Routes*/}
+                        <Route path="/" element={<Home />} />
+
+                        {/*Private Routes*/}
+                        {authenticated ? (
+                            <>
+                                <Route path="/userProfile" element={<UserProfile />} />
+                                <Route path="/userSettings" element={<UserSettings />} />
+                                <Route path="/userFeed" element={<UserFeed />} />
+                                <Route path="/userSavedFeed" element={<UserSavedFeed />} />
+                                <Route path="/map" element={<Map />} />
+                                <Route path="*" element={<Navigate to="/" replace />} />
+                            </>
+                        ) : (
+                            <Route path="*" element={<Navigate to="/" replace />} />
+                        )}
+                    </Routes>
+                </header>
+            </div>
+    </BrowserRouter>
   );
 }
 

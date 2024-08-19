@@ -15,8 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:5174", allowCredentials = "true")
 @RestController
-@RequestMapping ("user")
+@RequestMapping ("/user")
 public class UserAuthController {
 
     @Autowired

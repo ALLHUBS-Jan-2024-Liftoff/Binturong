@@ -1,17 +1,13 @@
 // Handles the Layout for the Navbar
 import React, { useContext} from "react";
 import { Outlet, Link } from "react-router-dom";
-import { AuthContext } from './AuthContext';
 import Logout from "./Logout.jsx";
 
-function Layout() {
-    const { isAuthenticated } = useContext(AuthContext);
-
-    console.log("Layout rendered. Authenticated:", isAuthenticated);
+function Layout({ authenticated, setAuthenticated }) {
 
     return (
         <div>
-            {isAuthenticated && (
+            {authenticated && (
                 <nav>
                     <ul>
                         <li><Link to="/">Home</Link></li>

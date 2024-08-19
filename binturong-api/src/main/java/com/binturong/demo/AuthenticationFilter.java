@@ -23,7 +23,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
 
     private static final List<String> whitelist = Arrays.asList("/user/login", "/user/register", "/user/logout");
 
-    private static boolean isWhiteListed(String path) {
+    private static boolean isWhitelisted(String path) {
         for (String pathRoot: whitelist) {
             if (path.startsWith(pathRoot)) {
                 return true;
@@ -40,8 +40,8 @@ public class AuthenticationFilter implements HandlerInterceptor {
             IOException {
 
         // Sign in not needed for whitelisted pages
-        if (isWhiteListed(request.getRequestURI())) {
-            // true = request may proceed
+        if (isWhitelisted(request.getRequestURI())) {
+            // returning true indicates that the request may proceed
             return true;
         }
 
