@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:5174", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true", maxAge = 3600)
 @RestController
 @RequestMapping ("/user")
 public class UserAuthController {
@@ -111,10 +111,6 @@ public class UserAuthController {
                     .status(HttpStatus.CREATED)
                     .body(responseBody);
         }
-
-        // Add logging
-        System.out.println("Login attempt: " + loginFormDTO.getUsername());
-        System.out.println("Login response: " + responseBody.get("message"));
 
         return response;
     }

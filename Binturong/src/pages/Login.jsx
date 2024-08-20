@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Login({ setAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -12,8 +14,8 @@ function Login({ setAuthenticated }) {
       const response = await axios.post(
         "http://localhost:8080/user/login",
         {
-          username,
-          password,
+          username: username,
+          password: password,
         },
         {
           withCredentials: true,
@@ -21,6 +23,7 @@ function Login({ setAuthenticated }) {
       );
       setAuthenticated(true);
       setMessage(response.data.message);
+      navigate('/');
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
     }

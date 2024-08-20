@@ -7,7 +7,9 @@ function Logout({ setAuthenticated }) {
       await axios.get("http://localhost:8080/user/logout",
         {
           withCredentials: true,
-        });
+        }).then(function (response) {
+                          console.log(response)
+                      })
       setAuthenticated(false);
     } catch (error) {
       console.error("Logout failed");

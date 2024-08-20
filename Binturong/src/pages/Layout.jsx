@@ -6,22 +6,29 @@ import Logout from "./Logout.jsx";
 function Layout({ authenticated, setAuthenticated }) {
 
     return (
-        <div>
-            {authenticated && (
-                <nav>
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/userProfile">Profile</Link></li>
-                        <li><Link to="/userSettings">Settings</Link></li>
-                        <li><Link to="/userFeed">Feed</Link></li>
-                        <li><Link to="/userSavedFeed">Saved Feed</Link></li>
-                        <li><Link to="/map">Map</Link></li>
-                        <li><Logout /></li>
-                    </ul>
-                </nav>
-            )}
+        <>
+            <nav>
+                {!authenticated ? (
+                    <>
+                    {/*Displayed when not logged in*/}
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Register</Link>
+                    </>
+                ) : (
+                    <>
+                    {/*Displayed when logged in*/}
+                    <Link to="/">Home</Link>
+                    <Link to="/userProfile">Profile</Link>
+                    <Link to="/userSettings">Settings</Link>
+                    <Link to="/userFeed">Feed</Link>
+                    <Link to="/userSavedFeed">Saved Feed</Link>
+                    <Link to="/map">Map</Link>
+                    <Logout setAuthenticated={setAuthenticated} />
+                    </>
+                )}
+            </nav>
             <Outlet />
-        </div>
+         </>
     );
 }
 
