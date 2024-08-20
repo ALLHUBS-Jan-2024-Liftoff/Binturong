@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
@@ -22,28 +22,29 @@ export default function App() {
             <div className="App">
                 <header className="App-header">
                     <Routes>
-                        {/*Public Routes*/}
-                        <Route path="/login" element={<Login setAuthenticated={setAuthenticated} />} />
-                        <Route path="/register" element={<Register />} />
 
-                        {/*Default Routes*/}
-                        <Route path="/" element={<Home />} />
+                         {/* Routes when Not Logged In */}
+                         {!authenticated ? (
+                             <>
+                             <Route path="/" element={<Home authenticated={authenticated} />} />
+                             <Route path="login" element={<Login setAuthenticated={setAuthenticated} />} />
+                             <Route path="register" element={<Register />} />
+                             <Route path="*" element={<Navigate to="/login" replace />} />
+                             </>
+                         ) : (
+                             <>
 
-                        {/*Private Routes*/}
-                        {authenticated ? (
-                            <>
-                                <Route path="/" element={<Layout />}>
-                                <Route path="/userProfile" element={<UserProfile />} />
-                                <Route path="/userSettings" element={<UserSettings />} />
-                                <Route path="/userFeed" element={<UserFeed />} />
-                                <Route path="/userSavedFeed" element={<UserSavedFeed />} />
-                                <Route path="/map" element={<Map />} />
-                                <Route path="/logout" element={<Logout setAuthenticated={setAuthenticated} />} />
-                                </Route>
-                            </>
-                        ) : (
-                            <Route path="*" element={<Navigate to="/" replace />} />
-                        )}
+                             {/* Routes when Logged In */}
+                             <Route path="/" element={<Layout authenticated={authenticated} setAuthenticated={setAuthenticated} />}>
+                             <Route index element={<Home authenticated={authenticated} />}/>
+                             <Route path="userProfile" element={<UserProfile />} />
+                             <Route path="userSettings" element={<UserSettings />} />
+                             <Route path="userFeed" element={<UserFeed />} />
+                             <Route path="userSavedFeed" element={<UserSavedFeed />} />
+                             <Route path="*" element={<Navigate to="/" replace />} />
+                             </Route>
+                             </>
+                         )}
                     </Routes>
                 </header>
             </div>
