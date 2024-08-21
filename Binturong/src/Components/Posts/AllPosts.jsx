@@ -2,7 +2,7 @@ import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualPost } from "./IndividualPost";
 
 
-export const AllPosts = ({ posts, viewComments, comments }) => {
+export const AllPosts = ({ posts, viewComments, comments, deletePost }) => {
   return (
 
     <table className="table table-hover">
@@ -17,15 +17,15 @@ export const AllPosts = ({ posts, viewComments, comments }) => {
       </thead>
       <tbody>
         {posts.map((post) => (
-          <div>
-            <IndividualPost key={post.id} post={post} viewComments={viewComments} />
-            <div>
+          <>
+            <IndividualPost key={post.id} post={post} viewComments={viewComments} deletePost={deletePost} />
+            <>
               {comments.map((comment) => (
                 <IndividualComment key={comment.id} comment={comment} />
               ))}
 
-            </div>
-          </div>
+</>
+</>
         ))}
       </tbody>
     </table>

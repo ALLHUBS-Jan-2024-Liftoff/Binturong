@@ -1,5 +1,8 @@
 import React from "react"
-export const IndividualPost = ({post,deletePost,viewComments}) => {
+import {Dropdown} from "react-bootstrap"
+
+
+export const IndividualPost = ({post,deletePost,viewComments,savePost}) => {
  return(
 <tr key={post.id}>
 
@@ -9,10 +12,18 @@ export const IndividualPost = ({post,deletePost,viewComments}) => {
       <td> Geotag:{post.geoTag}  </td>
       <td>File:{post.file} </td>
       <td>
-      <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
-      </td>
-      <td>
-            <button onClick ={()=>viewComments(post.id)}>View Comments</button>
+      <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Dropdown Button
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
+        <Dropdown.Item onClick ={()=>viewComments(post.id)}>View Comments</Dropdown.Item>
+        <Dropdown.Item onClick ={() =>savePost(post.id)}>Save Post</Dropdown.Item>
+        <Dropdown.Item onClick ="" > Close x</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
       </td>
       </tr>
 )}
