@@ -1,7 +1,13 @@
 //Start of the Users Saved Feed page
 
+import { UserSavedPostsFeed } from "../Components/Saves/UserSavedPostsFeed";
+
 const UserSavedFeed = () => {
-    return <h1>UserSavedFeed coming Soon</h1>;
+    return (
+      <>
+      <UserSavedPostsFeed />
+      </>
+    );
   };
   
   export default UserSavedFeed;
