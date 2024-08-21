@@ -2,22 +2,41 @@ package com.binturong.demo.entities;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Likes extends AbstractEntity{
 
-    private int userId;
+    @ManyToOne
+    private Post post;
 
-    private int postId;
+    @ManyToOne
+    private User user;
 
-    public void setPostid(Post post){
-        this.postId=post.getId();
+    @ManyToOne
+    private Comments comment;
+
+    public Post getPost() {
+        return post;
     }
 
-    public void setUserId(User user){
-        this.userId= user.getId();
+    public void setPost(Post post) {
+        this.post = post;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public Comments getComment() {
+        return comment;
+    }
+
+    public void setComment(Comments comment) {
+        this.comment = comment;
+    }
 }

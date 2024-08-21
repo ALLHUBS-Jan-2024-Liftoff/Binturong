@@ -1,19 +1,32 @@
 package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Saves extends AbstractEntity{
 
-    private int userId;
+    @ManyToOne
+    private User user;
 
-    private int postId;
+    @OneToOne
+    private Post post;
 
-    public void setUserId(User user){
-        this.userId= user.getId();
+    public User getUser() {
+        return user;
     }
-    public void setPostid(Post post){
-        this.postId=post.getId();
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

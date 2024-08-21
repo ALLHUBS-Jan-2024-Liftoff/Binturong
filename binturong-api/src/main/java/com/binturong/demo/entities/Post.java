@@ -1,6 +1,7 @@
 package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,13 +24,8 @@ public class Post extends AbstractEntity {
 
     private String file;
 
-    private int userId;
-
-    public void setUserId(User user){
-        this.userId= user.getId();
-    }
-
-
+    @ManyToOne
+    private User user;
 
     public String getTitle() {
         return title;
@@ -61,6 +57,14 @@ public class Post extends AbstractEntity {
 
     public void setFile(String file) {
         file = file;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
