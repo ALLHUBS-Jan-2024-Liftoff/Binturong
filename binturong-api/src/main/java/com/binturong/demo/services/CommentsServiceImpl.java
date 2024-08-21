@@ -1,6 +1,7 @@
 package com.binturong.demo.services;
 
 import com.binturong.demo.entities.Comments;
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.CommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,5 @@ public class CommentsServiceImpl implements CommentService {
     public Comments saveComments(Comments comments){return commentsRepository.save(comments); }
 
     @Override
-    public List<Comments> getPostComments(User user) {return commentsRepository.findAllById(user.getId()); }
+    public List<Comments> getPostComments(Post post) {return commentsRepository.findAllById(post.getId()); }
 }

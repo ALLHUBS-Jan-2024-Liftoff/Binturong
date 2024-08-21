@@ -19,8 +19,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @Autowired
-    private CommentService commentService;
+
 
 
 
@@ -41,22 +40,7 @@ public class PostController {
         return postService.getAllPosts();
     }
 
-    @GetMapping("/viewcomments")
-    public List<Comments> viewComments(@RequestParam Integer postId) {
-        return null;
-    }
 
-    @PostMapping("/addcomment")
-    public String addComment(@RequestParam Post postId, @RequestParam String text, @RequestParam String file){
-        Comments newComment = new Comments();
-        newComment.setCommentText(text);
-        newComment.setFile(file);
-        newComment.setPost(postId);
-
-        return null;
-
-
-    }
 
 
     }
