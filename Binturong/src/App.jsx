@@ -6,6 +6,7 @@ import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
 import Login from "./pages/Login.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
+import Map from "./pages/Map.jsx";
 import NoPage from "./pages/NoPage.jsx";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="userfeed" element={<UserFeed />} />
           <Route path="usersavedfeed" element={<UserSavedFeed />} />
           <Route path="login" element={<Login />} />
+          <Route path="map" element={<Map />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
