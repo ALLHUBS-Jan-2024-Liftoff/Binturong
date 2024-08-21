@@ -1,7 +1,13 @@
 //Start of the User Profile page
 
+import { LoadUserPostUserProfile } from "../Components/Posts/LoadUserPostUserProfile";
+
 const UserProfile = () => {
-    return <h1>User Profile</h1>;
+    return (
+      <>
+      <LoadUserPostUserProfile/>
+      </>
+    );
   };
   
   export default UserProfile;

@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
 
-function PostForm({addPost}) {
-
+export const AddPostForm =({addPost}) => {
 
     //sets states and gives starting variables
     const [text, setText] = useState('')
@@ -14,52 +12,23 @@ function PostForm({addPost}) {
     //Submits Posts to SQL Database
     const savePost =(e) => {
 if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
-
         e.preventDefault();
-
 
         addPost(title,text,geoTag,file)
         setTitle('');
         setText('');
         setGeoTag('');
         setFile('');
-        // const post = { text, geoTag, file, title };
-        // console.log(post)
-        // fetch("http://localhost:8080/userfeed", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(post)
-
-        // }).then(() => {
-        //     //Reloads Window when fetch is finished
-        //     window.location.reload();
-
-        // })
-
+        
     }
     else{
         alert("title must be between 3 and 50 characters and text 255 max.");
     }
 }
 
-    //setting state of the form to be hidden when PostForm first loads.
-    const [showForm, setShowForm] = useState(false);
-
-    function displayForm() {
-        //Function sets form to visible
-        setShowForm(!showForm);
-    }
-//         <!-- On change sets values to there temp variables so they can be sent up in a JSON format -->
     return (    
-        <div>
-            <button onClick={displayForm}>Post+</button>
-
-            {showForm && (
                 <div>
-                    
-                    <form id="post-form">
-
-                        
+                    <form id="post-form"> 
                         <label for="title">Title</label>
                         <input type="text"
                             id="title"
@@ -98,12 +67,6 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
 
                         <button onClick={savePost}>Post</button>
                     </form>
-                </div>
-            )}
-        </div>
-
-
+                    </div>
     )
 }
-
-export default PostForm;
