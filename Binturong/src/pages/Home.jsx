@@ -1,16 +1,17 @@
-//}Home page
-import React, { useState } from 'react';
+//Home page
+import React, {useState} from 'react';
+import Search from '../Components/Search.jsx';
+import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
 
 const Home = ({ authenticated }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-    const handleSearch = async () => {
-        try {
-        //where should this fetch from
 
-          const response = await fetch(`/api/search?keyword=${searchTerm}`);
+    const handleSearch = async (keyword) => {
+        try {
+          const response = await fetch(`http://localhost:8080/search?keyword=${keyword}`);
           const results = await response.json();
           setSearchResults(results);
         } catch (error) {
@@ -28,6 +29,7 @@ const Home = ({ authenticated }) => {
                 handleSearch={handleSearch}
                 />
                 <SearchResults results={searchResults} />
+
             </div>
             {authenticated ? (
                 <div>
@@ -77,4 +79,3 @@ const Home = ({ authenticated }) => {
   };
 
 export default Home;
-  
