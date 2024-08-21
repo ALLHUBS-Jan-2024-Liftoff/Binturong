@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import Search from '../Components/Search.jsx';
 import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
+import "../App.css";
 
 const Home = ({ authenticated }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -20,24 +21,22 @@ const Home = ({ authenticated }) => {
       };
 
     return (
-        <div>
-            <div className = {'appTitle'}>
-                <h1>Welcome to 2GETHER!</h1>
-                <SearchBar
+        <div className = "appTitle">
+            <h1>Welcome to 2GETHER!</h1>
+            <SearchBar
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 handleSearch={handleSearch}
-                />
-                <SearchResults results={searchResults} />
+            />
+            <SearchResults results={searchResults} />
 
-            </div>
             {authenticated ? (
-                <div>
+                <div className = "homeText">
                     <h2>Welcome Back!</h2>
                     <p>Test Text Test Text Test Text</p>
                 </div>
             ) : (
-                <div>
+                <div className = "homeText">
                     <p>Please log in below or if you haven't joined take a moment to register!</p>
                     <Link to = "/login">Login</Link> | <Link to = "/register">Register</Link>
                 </div>

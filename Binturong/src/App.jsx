@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import useLocalStorage from "use-local-storage";
 import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
@@ -12,15 +13,19 @@ import UserProfile from "./pages/UserProfile.jsx";
 import NoPage from "./pages/NoPage.jsx";
 import Map from "./pages/Map.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
+import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
 
 export default function App() {
   const [authenticated, setAuthenticated] = useState(false);
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
   return (
     <BrowserRouter>
-            <div className="App">
+            <div className="App" data-theme = {isDark ? "dark" : "light"}>
                 <header className="App-header">
+                    <DrkToggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
                     <Routes>
 
                          {/* Routes when Not Logged In */}
