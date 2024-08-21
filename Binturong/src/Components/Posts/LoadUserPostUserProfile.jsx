@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { addPost, deletePost, GetUserPostsFetch, updatePostFetch } from "../Services/postService";
 import { AddPostForm } from "./AddPostForm";
 import { UserPosts } from "./UserPosts";
+import { ViewComments } from "../Services/commentService";
 
 export const LoadUserPostUserProfile = () => {
     const [showPostForm, setShowPostForm] = useState(false);
@@ -42,6 +43,9 @@ export const LoadUserPostUserProfile = () => {
             })
 
     }
+    const handleViewComments= (postId) => {
+        ViewComments(postId)
+    }
 
     
                 return(
@@ -50,7 +54,7 @@ export const LoadUserPostUserProfile = () => {
                         {showPostForm ? "Close Post" : "Post+"}
                     </button>
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-                    <UserPosts posts={posts} deletePost ={handleDeletePost}/>
+                    <UserPosts posts={posts} deletePost ={handleDeletePost} viewComments={handleViewComments}/>
                     
                         </div>
                 )
