@@ -4,21 +4,24 @@ import postOptionsDropdown from './PostDropDownMenu';
 import postDropDownMenu from './PostDropDownMenu';
 
 function LoadPost(){
+    const [posts,setPosts] = useState([])
 
 // Gets Array ready for posts
-const [posts,setPosts] = useState([])
 
-useEffect(()=>{
-    //Calls from SQL and Backend for all posts by id
+const fetchAllPosts = () =>{ 
     fetch("http://localhost:8080/userfeed/getAll")
     .then(res=>res.json())
     .then((result)=>{
         setPosts(result);
     }
     )
+
+}
+
+useEffect(()=>{
+    fetchAllPosts();
+    //Calls from SQL and Backend for all posts by id
 },[])
-
-
 
 
 // Maps out Posts needs Reworking for formating later but functional
@@ -38,16 +41,7 @@ return(
       <p>File:{post.file} </p>
     
     
-      <div class="dropdown">
-        
-        
-  <button onclick={"postDropDownMenu()"} class="dropbtn">options</button>
-  <div id="postDropdown" class="dropdown-content">
-  <a href="edit#">Edit</a>
-    <a href="delete#">Delete</a>
- 
-  </div>
-  </div>
+     
 </div> 
     
 
