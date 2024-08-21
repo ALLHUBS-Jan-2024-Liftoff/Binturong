@@ -29,6 +29,8 @@ export const IndividualUserPost = ({post, deletePost}) => {
          <td>File:{post.file} </td>
          <td>
          <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
+        </td>
+        <td>
           <button onClick={()=> setShowUpdateForm(!showUpdateForm)}>
                         {showUpdateForm ? "Close Post" : "Edit Post+"}
                     </button>
