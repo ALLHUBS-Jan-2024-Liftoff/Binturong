@@ -5,7 +5,7 @@ import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
 import "../App.css";
 
-const Home = ({ authenticated }) => {
+const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -38,7 +38,7 @@ const Home = ({ authenticated }) => {
             ) : (
                 <div className = "homeText">
                     <p>Please log in below or if you haven't joined take a moment to register!</p>
-                    <Link to = "/login">Login</Link> | <Link to = "/register">Register</Link>
+                    <button onClick={openLoginDialog}>Login</button> | <button onClick={openRegisterDialog}>Register</button>
                 </div>
             )}
         </div>

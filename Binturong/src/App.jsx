@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
 import Home from "./pages/Home.jsx";
 import UserFeed from "./pages/UserFeed.jsx";
 import UserSavedFeed from "./pages/UserSavedFeed.jsx";
 import Login from "./pages/Login.jsx";
-import Logout from "./pages/Logout.jsx";
 import Layout from "./pages/Layout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
@@ -17,11 +15,23 @@ import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(() => {
+    const [authenticated, setAuthenticated] = useState(() => {
       return JSON.parse(localStorage.getItem("authenticated")) || false;
     });
+
+    //For Dark Mode
     const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
+    //Login and Register Dialog Pop ups
+    const [showLoginDialog, setShowLoginDialog] = useState(false);
+    const [showRegisterDialog, setShowRegisterDialog] = useState(false);
+
+    const openLoginDialog = () => setShowLoginDialog(true);
+    const closeLoginDialog = () => setShowLoginDialog(false);
+    const openRegisterDialog = () => setShowRegisterDialog(true);
+    const closeRegisterDialog = () => setShowRegisterDialog(false);
+
 
     useEffect(() => {
         localStorage.setItem("authenticated", JSON.stringify(authenticated));
@@ -37,9 +47,9 @@ export default function App() {
                          {/* Routes when Not Logged In */}
                          {!authenticated ? (
                              <>
-                             <Route path="/" element={<Home authenticated={authenticated} />} />
-                             <Route path="login" element={<Login setAuthenticated={setAuthenticated} />} />
-                             <Route path="register" element={<Register />} />
+                             <Route path="/" element={<Home authenticated={authenticated}
+                             openLoginDialog={openLoginDialog} openRegisterDialog={openRegisterDialog}
+                             />} />
                              <Route path="*" element={<Navigate to="/login" replace />} />
                              </>
                          ) : (
@@ -58,6 +68,8 @@ export default function App() {
                              </>
                          )}
                     </Routes>
+                        {showLoginDialog && <Login setAuthenticated={setAuthenticated} closeDialog={closeLoginDialog} />}
+                        {showRegisterDialog && <Register closeDialog={closeRegisterDialog} openLoginDialog={openLoginDialog} />}
                 </header>
             </div>
     </BrowserRouter>
