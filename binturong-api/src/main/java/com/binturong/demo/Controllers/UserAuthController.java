@@ -89,7 +89,7 @@ public class UserAuthController {
     public ResponseEntity processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
-        Map<String, String> responseBody = new HashMap<>();
+        Map<String, Object> responseBody = new HashMap<>();
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
         String password = loginFormDTO.getPassword();
         if (theUser == null) {
@@ -105,8 +105,7 @@ public class UserAuthController {
         } else {
             setUserInSession(request.getSession(), theUser);
             responseBody.put("message", "User successfully logged in.");
-            responseBody.put("username", theUser.getUsername());
-            responseBody.put("userRole", theUser.getRole());
+            responseBody.put("user", theUser);
             response = ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(responseBody);
