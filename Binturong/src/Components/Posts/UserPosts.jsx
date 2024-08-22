@@ -1,4 +1,5 @@
 import { IndividualUserPost } from "./IndividualUserPost";
+import React from "react";
 
 export const UserPosts= ({posts,deletePost,updatePost}) => {
 return(

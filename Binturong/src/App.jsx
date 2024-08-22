@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
@@ -17,9 +17,15 @@ import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
 
 export default function App() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+  const [authenticated, setAuthenticated] = useState(() => {
+      return JSON.parse(localStorage.getItem("authenticated")) || false;
+    });
+    const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
+    useEffect(() => {
+        localStorage.setItem("authenticated", JSON.stringify(authenticated));
+      }, [authenticated]);
 
   return (
     <BrowserRouter>

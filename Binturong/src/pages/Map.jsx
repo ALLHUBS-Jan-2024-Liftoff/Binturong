@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GoogleMaps from '../Components/GoogleMaps.jsx';
+import GoogleMaps from '../Components/GoogleMap.jsx';
 import PostForm from  '../Components/PostForm.jsx';
 import "../App.css";
 
