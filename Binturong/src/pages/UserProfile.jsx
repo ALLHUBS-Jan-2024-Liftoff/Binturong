@@ -1,13 +1,14 @@
 //Start of the User Profile page
 import React from 'react';
 import LoyaltyScore from '../Components/LoyaltyScore.jsx';
+import "../App.css";
 
 const UserProfile = () => {
     const userId = 1;  // update this later
 
 
     return (
-        <div>
+        <div className = "homeText">
 
                     <h1>User Profile</h1>
                     <h3>Thank you for your contribution!</h3>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import "../App.css";
 
 function Login({ setAuthenticated }) {
   const [username, setUsername] = useState("");
@@ -30,7 +31,7 @@ function Login({ setAuthenticated }) {
   };
 
   return (
-    <div>
+    <div className = "homeText">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input

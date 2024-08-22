@@ -1,11 +1,14 @@
 //Page to register new users
 import React, {useState} from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import "../App.css";
 
-function Register() {
+function Register({ setAuthenticated }) {
     const [username, setUsername] = useState ("");
     const [password, setPassword] = useState ("");
     const [message, setMessage] = useState ("");
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -21,13 +24,14 @@ function Register() {
                 }
             );
             setMessage (response.data.message);
+            navigate('/login');
         } catch (error) {
             setMessage (error.response?.data?.message || "Registration failed");
         }
     };
 
     return (
-        <div>
+        <div className = "homeText">
            <div className = {'registerHeading'}>
                <h3>Register</h3>
            </div>

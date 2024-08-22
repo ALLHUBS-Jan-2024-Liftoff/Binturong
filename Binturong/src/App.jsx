@@ -46,6 +46,7 @@ export default function App() {
                              <Route path="userSettings" element={<UserSettings />} />
                              <Route path="userFeed" element={<UserFeed />} />
                              <Route path="userSavedFeed" element={<UserSavedFeed />} />
+                             <Route path="map" element={<Map />} />
                              <Route path="*" element={<Navigate to="/" replace />} />
                              </Route>
                              </>

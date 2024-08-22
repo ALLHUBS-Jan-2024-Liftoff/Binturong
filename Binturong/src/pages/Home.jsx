@@ -23,16 +23,16 @@ const Home = ({ authenticated }) => {
     return (
         <div className = "appTitle">
             <h1>Welcome to 2GETHER!</h1>
-            <SearchBar
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                handleSearch={handleSearch}
-            />
-            <SearchResults results={searchResults} />
 
             {authenticated ? (
                 <div className = "homeText">
                     <h2>Welcome Back!</h2>
+                    <SearchBar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    handleSearch={handleSearch}
+                    />
+                    <SearchResults results={searchResults} />
                     <p>Test Text Test Text Test Text</p>
                 </div>
             ) : (

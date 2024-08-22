@@ -1,7 +1,8 @@
 //Start of the Users Saved Feed page
+import "../App.css";
 
 const UserSavedFeed = () => {
-    return <h1>UserSavedFeed coming Soon</h1>;
+    return <h1 className = "homeText">UserSavedFeed coming Soon</h1>;
   };
   
   export default UserSavedFeed;
