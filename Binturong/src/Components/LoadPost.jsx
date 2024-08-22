@@ -23,7 +23,7 @@ useEffect(()=>{
 
 // Maps out Posts needs Reworking for formating later but functional
 return(
-<html>
+<>
 <head>
 <link rel="stylesheet" type="text/css" href="../../src/assets/css/userFeed.css" />
 </head>
@@ -59,7 +59,7 @@ return(
 
    
 
-</html>
+</>
 )  
 
 }

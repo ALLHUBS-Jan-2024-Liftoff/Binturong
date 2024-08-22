@@ -51,3 +51,15 @@ VALUES(6,'princedazzlevip@niceminute.com','$2a$10$OgSZTkMmaEP4RBgFhfRGfuQu8zDto2
 
 INSERT INTO user(id,email,pw_hash,username)
 VALUES(7,'liaoning@onlen.in','$2a$10$OgSZTkMmaEP4RBgFhfRGfuQu8zDto2j4OtFoqO3hpDNnqDOnnYS4S','liaoning');
+
+CREATE TABLE posts (
+id INT,
+user_id INT,
+title VARCHAR (45),
+post_text VARCHAR (255),
+created_at TIMESTAMP)
+
+CREATE TABLE likes (
+id INT,
+post_id INT,
+user_id INT)
