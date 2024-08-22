@@ -50,6 +50,17 @@ export const LoadPostUserFeed = () => {
         ViewComments(postId)
         .then(setComments)
     }
+    const handleAddComment= (postId) => {
+        const navigate = useNavigate();
+
+    }
+
+    const handleLikePost = (postId) => {
+
+    }
+    const handleSavePost = (postId) => {
+
+    }
 
                 return(
                     <div>
@@ -57,7 +68,7 @@ export const LoadPostUserFeed = () => {
                         {showPostForm ? "Close Post" : "Post+"}
                     </button>
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-                    <AllPosts posts={posts} deletePost ={handleDeletePost} comments={comments} viewComments={handleViewComments}/>
+                    <AllPosts posts={posts} deletePost ={handleDeletePost} comments={comments} viewComments={handleViewComments} addComment={handleAddComment} likePost={handleLikePost} savePost={handleSavePost}/>
 
                         </div>
                 )

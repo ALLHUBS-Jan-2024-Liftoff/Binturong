@@ -8,12 +8,14 @@ export const NewCommentForm = ({saveComment}) => {
         const [file, setFile] = useState('')
     
     
+        const user = localStorage.getItem("user")
+
         //Submits Posts to SQL Database
         const SaveComment =(e) => {
     if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
             e.preventDefault();
     
-            saveComment(text,file)
+            saveComment(user.id,user.username,text,file)
             setText('');
             setFile('');
             

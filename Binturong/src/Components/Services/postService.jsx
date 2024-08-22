@@ -1,13 +1,15 @@
 import axios from "axios";
 
 const BASEURL = "http://localhost:8080";
+const user = "";
+const userId =1;
 
 export const GetAllPostsFetch= async ()=> {
     
 //Calls from SQL and Backend for all posts by id
  //Calls from SQL and Backend for all posts by id
 try{
- const response = await axios.get(`${BASEURL}/userfeed/getAll`);
+ const response = await axios.get(`${BASEURL}/userFeed/getAll`);
  return response.data;
 
 }
@@ -19,8 +21,8 @@ try{
 
 export const addPost = async (title,text,geoTag,file) => {
     try{
-        const response = await axios.post(`${BASEURL}/userfeed/newpost` , null , {
-            params: {title,text,geoTag,file} ,
+        const response = await axios.post(`${BASEURL}/userFeed/newpost` , null , {
+            params: {userId,title,text,geoTag,file} ,
         });
         return response.data;
         
@@ -32,7 +34,10 @@ export const addPost = async (title,text,geoTag,file) => {
 
 export const GetUserPostsFetch = async () => {
     try{
-        const response = await axios.get(`${BASEURL}/userprofile/getAllUsersPosts`);
+        const response = await axios.get(`${BASEURL}/userProfile/getAllUsersPosts`, {
+            params: {userId}
+        });
+
         return response.data;
     }
     catch (error) {
@@ -43,7 +48,7 @@ export const GetUserPostsFetch = async () => {
 
 export const deletePost = async (postId) => {
     try {
-        await axios.post(`${BASEURL}/userprofile/delete`, null, {
+        await axios.post(`${BASEURL}/userProfile/delete`, null, {
             params: {postId} ,
         });
     } catch(error) {
@@ -53,7 +58,7 @@ export const deletePost = async (postId) => {
 
 export const updatePostFetch = async (postId,title,text,geoTag,file) => {
     try{
-        await axios.put(`${BASEURL}/userprofile/update`, null, {
+        await axios.put(`${BASEURL}/userProfile/update`, null, {
             params : {postId,title,text,geoTag,file} ,
         });
     } catch (error) {

@@ -2,6 +2,7 @@ import React from "react"
 import { AllComments } from "../Comments/AllComments";
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualUserPost } from "./IndividualUserPost";
+import React from "react";
 
 export const UserPosts= ({posts,deletePost,updatePost,viewComments}) => {
 
