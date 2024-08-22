@@ -11,9 +11,8 @@ function Map() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          const userLoc = { lat: latitude, lng: longitude };
-          setUserLocation(userLoc);
-          setLocation(userLoc); // Optionally, set the map's location to the user's current location
+           setUserLocation({ lat: latitude, lng: longitude });
+
         },
         (error) => {
           console.error('Error fetching location:', error);

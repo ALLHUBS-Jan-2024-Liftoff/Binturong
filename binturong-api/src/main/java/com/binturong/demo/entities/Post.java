@@ -1,8 +1,11 @@
 package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import javax.swing.text.StyledEditorKit;
 import java.util.Objects;
 
 @Entity
@@ -19,9 +22,10 @@ public class Post extends AbstractEntity {
 
     private String geoTag;
 
-    private String File;
+    private String file;
 
-
+    @ManyToOne
+    private User user;
 
     public String getTitle() {
         return title;
@@ -39,7 +43,7 @@ public class Post extends AbstractEntity {
         this.text = text;
     }
 
-    public String getGeoTag() {
+    public String  getGeoTag() {
         return geoTag;
     }
 
@@ -48,11 +52,19 @@ public class Post extends AbstractEntity {
     }
 
     public String getFile() {
-        return File;
+        return file;
     }
 
     public void setFile(String file) {
-        File = file;
+        file = file;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

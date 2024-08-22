@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 
 function PostForm({addPost}) {
 
@@ -9,7 +10,15 @@ function PostForm({addPost}) {
     const [geoTag, setGeoTag] = useState('')
     const [file, setFile] = useState('')
     const [title, setTitle] = useState('')
+    const [showForm, setShowForm] = useState(false)
 
+//Submits location from google API
+    useEffect(() => {
+            if (geoTag && location) {
+                const mapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=15&size=300x300&key=AIzaSyDUpnOnXkzomhYNXa6-L5shDEBH8642ino`;
+                setMapUrl(mapUrl);
+            }
+        }, [geoTag, location]);
 
     //Submits Posts to SQL Database
     const savePost =(e) => {
@@ -43,7 +52,7 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
 }
 
     //setting state of the form to be hidden when PostForm first loads.
-    const [showForm, setShowForm] = useState(false);
+    //const [showForm, setShowForm] = useState(false);
 
     function displayForm() {
         //Function sets form to visible
@@ -82,7 +91,7 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
                                 id="geotagging"
                                 name="geotagging"
                                 value={geoTag}
-                                onChange={(e) => { setGeoTag(e.target.value) }} />
+                                onChange={(e) => { setGeoTag(e.target.checked) }} />
 
                         </label>
                         <br />
