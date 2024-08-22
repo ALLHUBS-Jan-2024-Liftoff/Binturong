@@ -1,6 +1,7 @@
 package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -19,17 +20,12 @@ public class Post extends AbstractEntity {
     @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
 
-    private Boolean geoTag;
+    private String geoTag;
 
     private String file;
 
-    private int userId;
-
-    public void setUserId(User user){
-        this.userId= user.getId();
-    }
-
-
+    @ManyToOne
+    private User user;
 
     public String getTitle() {
         return title;
@@ -47,11 +43,11 @@ public class Post extends AbstractEntity {
         this.text = text;
     }
 
-    public Boolean getGeoTag() {
+    public String  getGeoTag() {
         return geoTag;
     }
 
-    public void setGeoTag(Boolean geoTag) {
+    public void setGeoTag(String geoTag) {
         this.geoTag = geoTag;
     }
 
@@ -61,6 +57,14 @@ public class Post extends AbstractEntity {
 
     public void setFile(String file) {
         file = file;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

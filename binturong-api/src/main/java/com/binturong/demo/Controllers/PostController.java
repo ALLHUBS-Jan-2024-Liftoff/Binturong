@@ -1,7 +1,9 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 
 
+import com.binturong.demo.entities.Comments;
+import com.binturong.demo.services.CommentService;
 import com.binturong.demo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,16 @@ public class PostController {
 
 
 
-    @PostMapping("")
-    public String submitPost(@RequestBody Post post){
-        postService.savePost(post);
+
+
+    @PostMapping("/newpost")
+    public String submitPost(@RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file){
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setText(text);
+        newPost.setGeoTag(geoTag);
+        newPost.setFile(file);
+        postService.savePost(newPost);
 
         return "Posted";
     }
@@ -30,6 +39,8 @@ public class PostController {
     public List<Post> postFeed(){
         return postService.getAllPosts();
     }
+
+
 
 
     }
