@@ -4,7 +4,10 @@ import React from 'react';
 import LoyaltyScore from '../Components/LoyaltyScore.jsx';
 import "../App.css";
 
+import { LoadUserPostUserProfile } from "../Components/Posts/LoadUserPostUserProfile";
+
 const UserProfile = () => {
+
     const userId = 1;  // update this later
 
 
