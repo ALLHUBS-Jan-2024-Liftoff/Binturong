@@ -4,7 +4,9 @@ import { UpdatePostForm } from './UpdatePostForm';
 import {useState} from 'react';
 import { updatePostFetch } from '../Services/postService';
 
+
 export const IndividualUserPost = ({post, deletePost,viewComments}) => {
+
 
   const handleUpdatePost = (postId, title, text, geoTag, file) => {
     updatePostFetch(postId,title,text,geoTag,file)
@@ -29,16 +31,20 @@ export const IndividualUserPost = ({post, deletePost,viewComments}) => {
          <td>File:{post.file} </td>
          <td>
          <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
+
         </td>
         <td>
+
           <button onClick={()=> setShowUpdateForm(!showUpdateForm)}>
                         {showUpdateForm ? "Close Post" : "Edit Post+"}
                     </button>
                     {showUpdateForm && <UpdatePostForm  updatePost={handleUpdatePost} />}
          </td>
+
          <td>
          <button onClick ={()=>viewComments(post.id)}>View Comments</button>
          </td>
          </tr>
-         
+  
+
    )}

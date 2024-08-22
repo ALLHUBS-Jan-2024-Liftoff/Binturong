@@ -1,8 +1,10 @@
+
 import { AllComments } from "../Comments/AllComments";
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualUserPost } from "./IndividualUserPost";
 
 export const UserPosts= ({posts,deletePost,updatePost,viewComments}) => {
+
 return(
 
     <table className="table table-hover">
@@ -20,6 +22,7 @@ return(
        <div>
         <IndividualUserPost key={post.id} post={post} deletePost={deletePost} updatePost={updatePost} viewComments={viewComments}/>
  </div>
+
       ))}
     </tbody>
   </table>

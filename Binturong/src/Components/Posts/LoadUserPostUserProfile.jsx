@@ -4,6 +4,7 @@ import { AddPostForm } from "./AddPostForm";
 import { UserPosts } from "./UserPosts";
 import { ViewComments } from "../Services/commentService";
 
+
 export const LoadUserPostUserProfile = () => {
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -55,6 +56,7 @@ export const LoadUserPostUserProfile = () => {
                     </button>
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
                     <UserPosts posts={posts} deletePost ={handleDeletePost} viewComments={handleViewComments}/>
+
                     
                         </div>
                 )

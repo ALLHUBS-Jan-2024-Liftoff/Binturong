@@ -1,3 +1,4 @@
+
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualPost } from "./IndividualPost";
 
@@ -35,4 +36,5 @@ export const AllPosts = ({ posts, viewComments, comments, deletePost }) => {
 
 
   );
+
 };

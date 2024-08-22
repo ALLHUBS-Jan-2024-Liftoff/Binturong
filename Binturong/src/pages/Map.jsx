@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import GoogleMaps from '../Components/GoogleMaps.jsx';
+import GoogleMaps from '../Components/GoogleMap.jsx';
 import PostForm from  '../Components/PostForm.jsx';
+import "../App.css";
 
 function Map() {
   const [location, setLocation] = useState(null);
@@ -11,9 +12,8 @@ function Map() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          const userLoc = { lat: latitude, lng: longitude };
-          setUserLocation(userLoc);
-          setLocation(userLoc); // Optionally, set the map's location to the user's current location
+           setUserLocation({ lat: latitude, lng: longitude });
+           console.log('User Location:', { lat: latitude, lng: longitude });
         },
         (error) => {
           console.error('Error fetching location:', error);
@@ -37,11 +37,17 @@ function Map() {
   };
 
   return (
-    <div>
-      <GoogleMaps initialLocation={userLocation} onLocationSelect={handleLocationSelect} />
-      <PostForm onPost={handlePost} location={location} />
-    </div>
-  );
-}
+    <div className="homeText">
+          {userLocation ? (
+              <div className ="map-container">
+                <GoogleMaps className = "google-maps" initialLocation={userLocation} onLocationSelect={handleLocationSelect} />
+              </div>
+          ) : (
+            <p>Loading map...</p>
+          )}
+          <PostForm onPost={handlePost} location={location} />
+        </div>
+      );
+    }
 
 export default Map;

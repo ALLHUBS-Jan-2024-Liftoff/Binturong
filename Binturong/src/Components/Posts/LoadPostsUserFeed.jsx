@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
 import { AllPosts } from "./AllPosts";
 import { ViewComments } from "../Services/commentService";
-
 import { AddPostForm } from "./AddPostForm";
 
 export const LoadPostUserFeed = () => {
@@ -13,7 +12,6 @@ export const LoadPostUserFeed = () => {
     useEffect(() => {
         //fetch all posts when component mounts
         GetAllPostsFetch()
-        
         .then(setPosts)
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);
@@ -60,6 +58,7 @@ export const LoadPostUserFeed = () => {
                     </button>
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
                     <AllPosts posts={posts} deletePost ={handleDeletePost} comments={comments} viewComments={handleViewComments}/>
+
                         </div>
                 )
     }

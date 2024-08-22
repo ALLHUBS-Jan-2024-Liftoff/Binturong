@@ -3,6 +3,8 @@ import {Dropdown} from "react-bootstrap"
 
 
 export const IndividualPost = ({post,deletePost,viewComments,savePost}) => {
+
+
  return(
 <tr key={post.id}>
 
@@ -12,6 +14,7 @@ export const IndividualPost = ({post,deletePost,viewComments,savePost}) => {
       <td> Geotag:{post.geoTag}  </td>
       <td>File:{post.file} </td>
       <td>
+
       <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
         Dropdown Button
@@ -24,6 +27,7 @@ export const IndividualPost = ({post,deletePost,viewComments,savePost}) => {
         <Dropdown.Item onClick ="" > Close x</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
+
       </td>
       </tr>
 )}

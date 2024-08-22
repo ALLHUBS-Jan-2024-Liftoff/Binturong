@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 
 import com.binturong.demo.entities.Post;
@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/userprofile")
+@CrossOrigin
 public class UserProfileController {
 
     @Autowired
@@ -25,10 +26,24 @@ public class UserProfileController {
         return "Posted";
     }
 
-//    @GetMapping("/getuserposts")
-//    public List<Post> LoadUsersPosts(){
-//        return ;
-//    }
+    @GetMapping("/getAllUsersPosts")
+    public List<Post> postFeed(){
+        return postService.getAllPosts();
+    }
+
+    @PostMapping("/delete")
+    public String deletePost(@RequestParam Integer postId){
+       if(!postRepository.existsById(postId)){
+           return "Error something went wrong";
+       }
+       postRepository.deleteById(postId);
+        return "Post Deleted";
+    }
+
+    @PutMapping("/update")
+    public String UpdatePost(@RequestParam Integer postId, @RequestBody Post post) {
+        return "test";
+    }
 
 
 }
