@@ -1,6 +1,7 @@
 //Start of the User Feed page
-import PostForm from "../Components/PostForm"
 import LoadPost from "../Components/LoadPost";
+import PostForm from "../Components/PostForm";
+import { LoadPostUserFeed } from "../Components/Posts/LoadPostsUserFeed";
 import "../App.css";
 
 const UserFeed = () => {
@@ -10,8 +11,9 @@ const UserFeed = () => {
   <div className = "homeText">
   <PostForm />
   <LoadPost />
-  </div>
-  </>
+  <LoadPostUserFeed/>
+ </div>
+ </>
 );
 
 }

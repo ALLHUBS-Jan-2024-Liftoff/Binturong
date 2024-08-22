@@ -14,8 +14,10 @@
     "@react-google-maps/api": "^2.19.3",
     "@types/google.maps": "^3.55.12",
     "axios": "^1.7.4",
+    "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
     "use-local-storage": "^3.0.0"
