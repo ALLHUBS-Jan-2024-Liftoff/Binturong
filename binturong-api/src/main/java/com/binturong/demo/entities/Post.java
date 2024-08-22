@@ -24,8 +24,21 @@ public class Post extends AbstractEntity {
 
     private String file;
 
+    private int likes = 0; // Initialize post with 0 likes
+    private int shares = 0; // Initialize post with 0 shares
+
+
+
     @ManyToOne
     private User user;
+
+    public int getLikes() { return likes; }
+
+    public void setLikes(int likes) { this.likes = likes; }
+
+    public int getShares() { return shares; }
+
+    public void setShares(int shares) { this.shares = shares; }
 
     public String getTitle() {
         return title;
