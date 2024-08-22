@@ -21,6 +21,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Autowired
     UserAuthController userAuthController;
 
+    //allows the request from login, register, and logout to proceed without authentication checks
     private static final List<String> whitelist = Arrays.asList("/user/login", "/user/register", "/user/logout");
 
     private static boolean isWhitelisted(String path) {

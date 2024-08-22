@@ -19,7 +19,7 @@ export default function App() {
       return JSON.parse(localStorage.getItem("authenticated")) || false;
     });
 
-    //For Dark Mode
+    //For Dark Mode Toggle
     const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 

@@ -9,6 +9,7 @@ const UserProfile = () => {
     const userId = 1;  // update this later
     const [user, setUser] = useState(null);
 
+    //Pulls user from local storage so you can call user database columns
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
         console.log("Stored User:", storedUser);
@@ -18,7 +19,7 @@ const UserProfile = () => {
                 console.log("Parsed User:", parsedUser);
                 setUser(parsedUser);
             } catch (error) {
-                console.error("Eror parsing user from local storage:", error);
+                console.error("Error parsing user from local storage:", error);
             }
         }
     }, []);

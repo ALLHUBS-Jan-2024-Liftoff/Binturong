@@ -42,6 +42,7 @@ public class PostController {
         return postService.getAllPosts();
     }
 
+    //handles the share button for posts and will put the shared post on the user's saved feed
     @PostMapping("/{id}/share")
     public ResponseEntity<?> sharePost(@PathVariable Integer id) {
         Optional<Post> postOptional = postService.getPostById(id);

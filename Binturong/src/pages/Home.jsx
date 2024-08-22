@@ -20,10 +20,13 @@ const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
         }
       };
 
+
     return (
         <div className = "appTitle">
             <h1>Welcome to 2GETHER!</h1>
 
+
+            {/* Displays either the Welcome back portion or the Please log in depending on the logged in state */}
             {authenticated ? (
                 <div className = "homeText">
                     <h2>Welcome Back!</h2>

@@ -8,6 +8,7 @@ function Register({ closeDialog, openLoginDialog }) {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    //Axios POST to check and see if Username and password don't already exist before passing to SQL database
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
@@ -29,6 +30,7 @@ function Register({ closeDialog, openLoginDialog }) {
         }
     };
 
+    //Register link opens to dialog box that changes to the login box when registering a new user
     return (
         <div className="dialog-overlay">
             <dialog open>

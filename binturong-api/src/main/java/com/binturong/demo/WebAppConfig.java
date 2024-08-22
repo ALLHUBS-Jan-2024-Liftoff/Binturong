@@ -26,6 +26,8 @@ public class WebAppConfig implements WebMvcConfigurer {
         registry.addInterceptor(authenticationFilter());
     }
 
+    //Security Filter for Login Authentication and allows
+    // communication between client and server
     @Bean
     public SecurityFilterChain
     securityFilterChain(HttpSecurity http) throws Exception {
