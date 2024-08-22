@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/userfeed")
+@RequestMapping("/userFeed")
 @CrossOrigin
 public class PostController {
 

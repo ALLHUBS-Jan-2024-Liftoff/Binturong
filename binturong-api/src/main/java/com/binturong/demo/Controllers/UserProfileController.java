@@ -3,6 +3,7 @@ package com.binturong.demo.Controllers;
 
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
+import com.binturong.demo.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.binturong.demo.services.PostService;
@@ -19,15 +20,24 @@ public class UserProfileController {
     @Autowired
     private PostRepository postRepository;
 
-    @PostMapping("")
-    public String submitPost(@RequestBody Post post){
-        postService.savePost(post);
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/newpost")
+    public String submitPost(@RequestParam Integer userId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
+        Post newPost = new Post();
+        newPost.setUser(userRepository.findById(userId).get());
+        newPost.setTitle(title);
+        newPost.setText(text);
+        newPost.setGeoTag(geoTag);
+        newPost.setFile(file);
+        postService.savePost(newPost);
 
         return "Posted";
     }
 
     @GetMapping("/getAllUsersPosts")
-    public List<Post> postFeed(){
+    public List<Post> postFeed(@RequestParam Integer userId){
         return postService.getAllPosts();
     }
 

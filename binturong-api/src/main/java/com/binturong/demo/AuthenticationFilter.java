@@ -1,6 +1,6 @@
 package com.binturong.demo;
 
-import com.binturong.demo.controllers.UserAuthController;
+import com.binturong.demo.Controllers.UserAuthController;
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;

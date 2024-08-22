@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.UserRepository;
