@@ -40,7 +40,7 @@ VALUES(2,'royaki2009@formula1forbusiness.com','$2a$10$OgSZTkMmaEP4RBgFhfRGfuQu8z
 INSERT INTO user(id,email,pw_hash,username)
 VALUES(3,'orennovosel@enloza.com','$2a$10$OgSZTkMmaEP4RBgFhfRGfuQu8zDto2j4OtFoqO3hpDNnqDOnnYS4S','orennovosel');
 
-INSERT INTO user(id,email,pw_hash,username)
+INSERT INTO user(id,email,pw_hash,username)**
 VALUES(4,'theroman92@sonophon.ru','$2a$10$OgSZTkMmaEP4RBgFhfRGfuQu8zDto2j4OtFoqO3hpDNnqDOnnYS4S','theroman92@sonophon.ru');
 
 INSERT INTO user(id,email,pw_hash,username)
