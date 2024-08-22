@@ -1,15 +1,13 @@
 //Start of the User Feed page
-
-
-import PostForm from "../Components/PostForm"
 import LoadPost from "../Components/LoadPost";
+import PostForm from "../Components/PostForm";
+import { LoadPostUserFeed } from "../Components/Posts/LoadPostsUserFeed";
 
 const UserFeed = () => {
 
  return(
   <>
-  <PostForm />
-  <LoadPost />
+ <LoadPostUserFeed/>
   </>
 );
 
@@ -17,3 +15,4 @@ const UserFeed = () => {
 
 
   export default UserFeed;
+
