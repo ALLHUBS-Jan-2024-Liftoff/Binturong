@@ -1,4 +1,4 @@
-
+import React from "react"
 import { AllComments } from "../Comments/AllComments";
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualUserPost } from "./IndividualUserPost";
