@@ -14,10 +14,10 @@ export const GetUserSaves = async (user) => {
     }
 }
 
-export const AddSave = async (postId) => {
+export const AddSave = async (userId,postId) => {
     try {
         await axios.post(`${BASEURL}/usersavedfeed/addsave`, null, {
-            params: {postId} ,
+            params: {userId,postId} ,
         });
     } catch(error) {
         console.error("ERROR: Save NOT added", error);

@@ -19,7 +19,7 @@ try{
     }
 };
 
-export const addPost = async (title,text,geoTag,file) => {
+export const addPost = async (userId,title,text,geoTag,file) => {
     try{
         const response = await axios.post(`${BASEURL}/userFeed/newpost` , null , {
             params: {userId,title,text,geoTag,file} ,
