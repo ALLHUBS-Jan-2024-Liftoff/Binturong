@@ -1,6 +1,7 @@
 package com.binturong.demo.Controllers;
 
 
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.Saves;
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.PostRepository;
@@ -26,17 +27,20 @@ public class SaveControllerUserFeed {
     private UserRepository userRepository;
 
     @PostMapping("/savepost")
-    private String addPostSave(@RequestParam Integer postId, @RequestParam User user) {
+    private String addPostSave(@RequestParam Integer postId, @RequestParam Integer userId) {
 
         Saves newSave = new Saves();
+        newSave.setUser(userRepository.findById(userId).get());
         newSave.setPost(postRepository.findAllById(postId));
         savesService.saveSaves(newSave);
         return "post Saved";
     }
 
     @GetMapping
-    private List<Saves> getUserSaves (@RequestParam User user) {
-        return savesService.getAllSaves(user);
+    private List<Saves> getUserSaves (@RequestParam Integer userid) {
+        return savesService.getAllSaves(userRepository.findById(userid).get());
 
     }
+
+
 }

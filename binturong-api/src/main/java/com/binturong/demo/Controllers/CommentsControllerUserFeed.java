@@ -22,14 +22,17 @@ public class CommentsControllerUserFeed {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired UserRepository userRepository;
+
     @GetMapping("/viewcomments")
     public List<Comments> viewComments(@RequestParam Integer postId) { return
         commentService.getPostComments(postRepository.findAllById(postId));
     }
 
     @PostMapping("/addcomment")
-    public String addComment(@RequestParam Post postId, @RequestParam String text, @RequestParam String file){
+    public String addComment(@RequestParam Integer userId,@RequestParam Post postId, @RequestParam String text, @RequestParam String file){
         Comments newComment = new Comments();
+        newComment.setUser(userRepository.findById(userId).get());
         newComment.setCommentText(text);
         newComment.setFile(file);
         newComment.setPost(postId);
