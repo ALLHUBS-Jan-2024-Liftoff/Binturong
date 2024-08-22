@@ -2,10 +2,12 @@ package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import javax.swing.text.StyledEditorKit;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +26,6 @@ public class Post extends AbstractEntity {
 
     private String file;
 
-    private int likes = 0; // Initialize post with 0 likes
     private int shares = 0; // Initialize post with 0 shares
 
 
@@ -32,9 +33,8 @@ public class Post extends AbstractEntity {
     @ManyToOne
     private User user;
 
-    public int getLikes() { return likes; }
-
-    public void setLikes(int likes) { this.likes = likes; }
+    @OneToMany(mappedBy = "post")
+    private List<Likes> likes;
 
     public int getShares() { return shares; }
 
@@ -79,6 +79,10 @@ public class Post extends AbstractEntity {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Likes> getLikes() { return likes; }
+
+    public void setLikes(List<Likes> likes) { this.likes = likes; }
 
     @Override
     public boolean equals(Object o) {

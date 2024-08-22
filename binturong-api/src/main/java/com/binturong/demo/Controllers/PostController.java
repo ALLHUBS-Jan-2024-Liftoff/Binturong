@@ -1,15 +1,15 @@
 package com.binturong.demo.controllers;
 
-
-
 import com.binturong.demo.entities.Comments;
 import com.binturong.demo.services.CommentService;
+
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.binturong.demo.entities.Post;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -42,20 +42,6 @@ public class PostController {
         return postService.getAllPosts();
     }
 
-
-    @PostMapping("/{id}/like")
-    public ResponseEntity<?> likePost(@PathVariable Integer id) {
-        Optional<Post> postOptional = postService.getPostById(id);
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            post.setLikes(post.getLikes() + 1);
-            postService.savePost(post);
-            return ResponseEntity.ok(post);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
-        }
-    }
-
     @PostMapping("/{id}/share")
     public ResponseEntity<?> sharePost(@PathVariable Integer id) {
         Optional<Post> postOptional = postService.getPostById(id);
@@ -68,9 +54,6 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
         }
     }
-
-
-
-    }
+}
 
 
