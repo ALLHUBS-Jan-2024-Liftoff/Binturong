@@ -9,6 +9,7 @@ function Login({ setAuthenticated, closeDialog }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         "http://localhost:8080/user/login",
@@ -20,14 +21,20 @@ function Login({ setAuthenticated, closeDialog }) {
           withCredentials: true,
         }
       );
+
       if (response.status === 200 || response.status === 201) {
+        const user = response.data.user;
+        console.log("User Object:", user);
         setAuthenticated(true);
         localStorage.setItem("authenticated", JSON.stringify(true));
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log("User saved to local storage:", localStorage.getItem("user"));
         setMessage(response.data.message);
         closeDialog();
       } else {
         setMessage("Login failed");
       }
+
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
     }
