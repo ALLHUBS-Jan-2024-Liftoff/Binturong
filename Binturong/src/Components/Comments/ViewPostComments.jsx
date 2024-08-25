@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetPostFetch } from '../Services/postService';
-import { ViewComments } from '../Services/commentService';
+import { deleteComment, ViewComments } from '../Services/commentService';
 import { AllComments } from './AllComments';
 import React from 'react';
 
@@ -11,6 +11,7 @@ export const ViewPostComments = () => {
         const [comments, setComments] = useState([]);
         let postId =Number(location.search.replace("?",""));
         console.log(postId)
+        console.log(comments)
 
         const Navigate = useNavigate();
 
@@ -33,12 +34,23 @@ export const ViewPostComments = () => {
             Navigate(`/newcomment/?${postId}`,{replace:true});
         }
 
-        const handleDelete = () => {
+ 
+            const handleDeleteComment = (commentId) => {
+                deleteComment(commentId)
+                    .then(() => {
+                        setComments(comments.filter((comment) => comment.id !== commentId));
+                    })
             
-        }
+                    .catch((error) => {
+                        console.error("ERROR HANDLEDELETEComment did not delete post", error);
+                    })
+        
+            }
+
+      
 
         return(
-            <div>
+        <>
           <tr key={post.id}>
 
 <td>  Id: {post.id} </td> 
@@ -48,10 +60,11 @@ export const ViewPostComments = () => {
 <td> Geotag:{post.geoTag}  </td>
 <td>Images:{post.file} </td>
     </tr>
-    <button onClick={handleComment}>Comment</button>
-             <AllComments comments={comments} deleteComment={handleDelete}/>
+    <button onClick={()=> handleComment(postId)}>Comment</button>
+             {comments.length === 0 ? <p>Be the first to comment!</p> : <AllComments comments={comments} deleteComment={handleDeleteComment}/>}
+            
     
-                </div>
+             </>
         )
 
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AddComment } from '../Services/commentService';
+import { useNavigate } from 'react-router-dom';
 
 
 export const NewCommentForm = () => {
@@ -8,7 +9,8 @@ export const NewCommentForm = () => {
         const [text, setText] = useState('')
         const [file, setFile] = useState('')
 
-        let postId =location.search.replace("?","");
+        let postId =Number(location.search.replace("?",""));
+        const Navigate = useNavigate();
     
     
     
@@ -20,12 +22,14 @@ export const NewCommentForm = () => {
             //Still need to add user
     
             AddComment(postId,text,file)
-            setText('');
-            setFile('');
+            
+            .then(
+                Navigate(`/comments/?${postId}`, {replace:true})
+            )
             
         }
         else{
-            alert("title must be between 3 and 50 characters and text 255 max.");
+            alert("Error: Text cant be blank and text is 255 characters max.");
         }
     }
     

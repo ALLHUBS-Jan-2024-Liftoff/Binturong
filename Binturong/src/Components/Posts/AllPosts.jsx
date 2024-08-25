@@ -1,4 +1,5 @@
 
+import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualPost } from "./IndividualPost";
 import React from 'react';
 
