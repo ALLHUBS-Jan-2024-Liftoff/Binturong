@@ -8,11 +8,12 @@ import Login from "./pages/Login.jsx";
 import Layout from "./pages/Layout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
-import NoPage from "./pages/NoPage.jsx";
+import { Comments } from "./pages/comments.jsx";
 import Map from "./pages/Map.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
 import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
+import { NewCommentPage } from "./pages/NewCommentPage.jsx";
 
 export default function App() {
     const [authenticated, setAuthenticated] = useState(() => {
@@ -63,6 +64,8 @@ export default function App() {
                              <Route path="userFeed" element={<UserFeed />} />
                              <Route path="userSavedFeed" element={<UserSavedFeed />} />
                              <Route path="map" element={<Map />} />
+                             <Route path= "newcomment" element={<NewCommentPage/>} />
+                             <Route path= "comments" element={<Comments/>} />
                              <Route path="*" element={<Navigate to="/" replace />} />
                              </Route>
                              </>

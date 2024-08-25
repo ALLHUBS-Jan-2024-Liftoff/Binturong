@@ -2,19 +2,20 @@ import React from "react"
 import {Dropdown} from "react-bootstrap"
 
 
-export const IndividualPost = ({post,deletePost,viewComments,savePost, addComment,likePost}) => {
 
-  
+export const IndividualPost = ({post,deletePost,savePost, addComment,viewComments,likePost}) => {
+
+  //User needs to be figured out
 
  return(
 <tr key={post.id}>
 
       <td>  Id: {post.id} </td> 
-      <td> User:{post.user.username}</td>
+      <td> User:</td>
       <td> Title: {post.title}  </td>
       <td>Text:{post.text}  </td>
       <td> Geotag:{post.geoTag}  </td>
-      <td>File:{post.file} </td>
+      <td>Images:{post.file} </td>
       <td>
 
       <Dropdown>

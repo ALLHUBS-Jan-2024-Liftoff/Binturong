@@ -1,10 +1,10 @@
 import axios from "axios";
 const BASEURL = "http://localhost:8080";
 
-export const GetUserSaves = async (user) => {
+export const GetUserSaves = async (userid) => {
     try{
         const response = await axios.get(`${BASEURL}/usersavedfeed/getsavedposts`, {
-            params: {user} ,
+            params: {userid} ,
     });
         return response.data;
     }

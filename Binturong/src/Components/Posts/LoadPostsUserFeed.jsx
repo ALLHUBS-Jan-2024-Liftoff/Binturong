@@ -2,17 +2,18 @@ import React, {useState, useEffect} from "react";
 import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
 import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
-import { ViewComments } from "../Services/commentService";
 import { AddPostForm } from "./AddPostForm";
+import { useNavigate } from "react-router-dom";
 
 export const LoadPostUserFeed = () => {
+    
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    const [comments,setComments] =useState([]);
-    // const [user, setUser] = useState(null);
-    // const userId=user.id;
+  
+    const Navigate = useNavigate();
 
     useEffect(() => {
+        //commenting out to work with broken auth
         // const storedUser = localStorage.getItem("user");
         // console.log("Stored User:", storedUser);
         // if (storedUser) {
@@ -31,9 +32,8 @@ export const LoadPostUserFeed = () => {
             console.error("ERROR: post fetching failed!", error);
         })
     },[]);
-
     const handleNewPost = (title,text,geoTag,file) => {
-        addPost(userId,title,text,geoTag,file)
+        addPost(title,text,geoTag,file)
         .then((newPost) => {
             setPosts([...posts, newPost]);
         })
@@ -59,14 +59,12 @@ export const LoadPostUserFeed = () => {
             })
 
     }
-
-    const handleViewComments= (postId) => {
-        ViewComments(postId)
-        .then(setComments)
-    }
     const handleAddComment= (postId) => {
-        const navigate = useNavigate();
-
+        Navigate(`/newcomment/?${postId}`,{replace:true});
+        
+    }
+    const handleViewComments = (postId) => {
+        Navigate(`/comments/?${postId}`, {replace:true});
     }
 
     const handleLikePost = (postId) => {
@@ -84,8 +82,14 @@ export const LoadPostUserFeed = () => {
                         {showPostForm ? "Close Post" : "Post+"}
                     </button>
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-                    <AllPosts posts={posts} deletePost ={handleDeletePost} comments={comments} viewComments={handleViewComments} addComment={handleAddComment} likePost={handleLikePost} savePost={handleSavePost}/>
-
+                    <AllPosts posts={posts} 
+                    deletePost ={handleDeletePost}
+                    addComment={handleAddComment}
+                    viewComments={handleViewComments}
+                     likePost={handleLikePost} 
+                     savePost={handleSavePost}
+                     />
+            
                         </div>
                 )
     }

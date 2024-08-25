@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const BASEURL = "http://localhost:8080";
-const user = "";
 const userId =1;
 
 export const GetAllPostsFetch= async ()=> {
@@ -9,7 +8,9 @@ export const GetAllPostsFetch= async ()=> {
 //Calls from SQL and Backend for all posts by id
  //Calls from SQL and Backend for all posts by id
 try{
- const response = await axios.get(`${BASEURL}/userFeed/getAll`);
+ const response = await axios.get(`${BASEURL}/userFeed/getAll`, {
+    
+ });
  return response.data;
 
 }
@@ -19,15 +20,34 @@ try{
     }
 };
 
-export const addPost = async (userId,title,text,geoTag,file) => {
+export const GetPostFetch = async (postId) => {
+
     try{
-        const response = await axios.post(`${BASEURL}/userFeed/newpost` , null , {
-            params: {userId,title,text,geoTag,file} ,
+        const response = await axios.get(`${BASEURL}/userFeed/getPost`, {
+            params: {postId},
+           
         });
+        return response.data;
+       
+       }
+       catch (error) {
+        console.error("Error GetPostFetch failed.", error);
+        throw error;
+        }
+
+}
+
+export const addPost = async (title,text,geoTag,file) => {
+    try{
+        const response = await axios.post(`${BASEURL}/userFeed/newpost`, null , 
+            {
+            params: {title,text,geoTag,file}
+              } 
+        );
         return response.data;
         
     } catch (error) {
-        console.error("there was an error when creating post",error);
+        console.error("Error addPost failed.",error);
         throw error;
     }
 }

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
+import { AddComment } from '../Services/commentService';
 
 
-export const NewCommentForm = ({saveComment}) => {
+export const NewCommentForm = () => {
     
         //sets states and gives starting variables
         const [text, setText] = useState('')
         const [file, setFile] = useState('')
+
+        let postId =location.search.replace("?","");
     
     
-        const user = localStorage.getItem("user")
+    
 
         //Submits Posts to SQL Database
         const SaveComment =(e) => {
-    if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
+    if (text !="" && text.length <= 255){
             e.preventDefault();
+            //Still need to add user
     
-            saveComment(user.id,user.username,text,file)
+            AddComment(postId,text,file)
             setText('');
             setFile('');
             
@@ -28,7 +32,7 @@ export const NewCommentForm = ({saveComment}) => {
         return (    
                     <div>
                         <form id="post-form"> 
-    
+                            <label>What would you like to say?</label> <br/>
                             <textarea id="posttextbox"
                                 name="posttext"
                                 value={text}
@@ -51,11 +55,3 @@ export const NewCommentForm = ({saveComment}) => {
                         </div>
         )
     }
-    
-
-
-
-
-
-
-}
