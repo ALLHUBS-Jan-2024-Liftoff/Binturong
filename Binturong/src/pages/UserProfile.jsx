@@ -6,7 +6,7 @@ import "../App.css";
 
 const UserProfile = () => {
 
-    const userId = 1;  // update this later
+    const userId = 53;  // update this later
     const [user, setUser] = useState(null);
 
     //Pulls user from local storage so you can call user database columns
@@ -24,6 +24,7 @@ const UserProfile = () => {
         }
     }, []);
 
+    console.log(user)
     return (
         <div className = "homeText">
             <h1>User Profile</h1>

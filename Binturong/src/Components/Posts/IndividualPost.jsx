@@ -6,11 +6,8 @@ import axios from "axios";
 export const IndividualPost = ({ post,deletePost,viewComments,savePost }) => {
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
-
-
-    const handleLike = async () => {
-
-        try {
+  
+   try {
             const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/like`);
             setLikes(response.data.likes);
             console.log("Post liked:", response.data);
@@ -19,8 +16,33 @@ export const IndividualPost = ({ post,deletePost,viewComments,savePost }) => {
             }
         };
 
+export const IndividualPost = ({post,deletePost,updatePost,savePost, addComment,viewComments,likePost}) => {
+
+  //User needs to be figured out
+
+    const handleLike = async () => {
+
+      <td>  Id: {post.id} </td> 
+      <td> User:</td>
+      <td> Title: {post.title}  </td>
+      <td>Text:{post.text}  </td>
+      <td> Geotag:{post.geoTag}  </td>
+      <td>Images:{post.file} </td>
+      <td>
+
+
     const handleShare = async () => {
 
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
+        <Dropdown.Item onClick={()=> updatePost(post.id)}>Update Post</Dropdown.Item>
+        <Dropdown.Item onClick ={() =>savePost(post.id)}>Save Post</Dropdown.Item>
+        <Dropdown.Item onClick ={()=> likePost(post.id)}>Like Post</Dropdown.Item>
+        <Dropdown.Item onClick ={()=>viewComments(post.id)}>View Comments</Dropdown.Item>
+        <Dropdown.Item onClick = {() => addComment(post.id)}>Post Comment</Dropdown.Item>
+        <Dropdown.Item onClick ="" > Close x</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
         try {
             const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/share`);
             setShares(response.data.shares);
