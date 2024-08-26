@@ -47,12 +47,12 @@ export const addPost = async (title,text,geoTag,file) => {
         return response.data;
         
     } catch (error) {
-        console.error("Error addPost failed.",error);
+        console.error("Error  failed.",error);
         throw error;
     }
 }
 
-export const GetUserPostsFetch = async () => {
+export const GetUserPostsFetch = async (userId) => {
     try{
         const response = await axios.get(`${BASEURL}/userProfile/getAllUsersPosts`, {
             params: {userId}

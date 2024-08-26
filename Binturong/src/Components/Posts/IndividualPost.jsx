@@ -3,7 +3,7 @@ import {Dropdown} from "react-bootstrap"
 
 
 
-export const IndividualPost = ({post,deletePost,savePost, addComment,viewComments,likePost}) => {
+export const IndividualPost = ({post,deletePost,updatePost,savePost, addComment,viewComments,likePost}) => {
 
   //User needs to be figured out
 
@@ -25,6 +25,7 @@ export const IndividualPost = ({post,deletePost,savePost, addComment,viewComment
 
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
+        <Dropdown.Item onClick={()=> updatePost(post.id)}>Update Post</Dropdown.Item>
         <Dropdown.Item onClick ={() =>savePost(post.id)}>Save Post</Dropdown.Item>
         <Dropdown.Item onClick ={()=> likePost(post.id)}>Like Post</Dropdown.Item>
         <Dropdown.Item onClick ={()=>viewComments(post.id)}>View Comments</Dropdown.Item>

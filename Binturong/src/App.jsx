@@ -14,6 +14,7 @@ import UserSettings from "./pages/UserSettings.jsx";
 import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
 import { NewCommentPage } from "./pages/NewCommentPage.jsx";
+import { UpdatePostPage } from "./pages/UpdatePostPage.jsx";
 
 export default function App() {
     const [authenticated, setAuthenticated] = useState(() => {
@@ -62,6 +63,7 @@ export default function App() {
                              <Route path="userProfile" element={<UserProfile />} />
                              <Route path="userSettings" element={<UserSettings />} />
                              <Route path="userFeed" element={<UserFeed />} />
+                             <Route path="updatePost" element={<UpdatePostPage/>} />
                              <Route path="userSavedFeed" element={<UserSavedFeed />} />
                              <Route path="map" element={<Map />} />
                              <Route path= "newcomment" element={<NewCommentPage/>} />

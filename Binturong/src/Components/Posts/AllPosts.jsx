@@ -4,7 +4,7 @@ import { IndividualPost } from "./IndividualPost";
 import React from 'react';
 
 
-export const AllPosts = ({ posts, viewComments, deletePost,addComment,likePost,savePost }) => {
+export const AllPosts = ({ posts,updatePost , deletePost,addComment,viewComments,likePost,savePost }) => {
   return (
 
     <table className="table table-hover">
@@ -21,17 +21,20 @@ export const AllPosts = ({ posts, viewComments, deletePost,addComment,likePost,s
       <tbody>
         {posts.map((post) => (
           <>
-            <IndividualPost key={post.id} post={post} viewComments={viewComments} deletePost={deletePost} addComment={addComment} likePost={likePost} savePost={savePost} />
+            <IndividualPost key={post.id}
+             post={post}
+              viewComments={viewComments} 
+              deletePost={deletePost} 
+              updatePost={updatePost} 
+              addComment={addComment} 
+              likePost={likePost}
+               savePost={savePost} />
         
           
 </>
         ))}
       </tbody>
     </table>
-
-
-
-
 
   );
 

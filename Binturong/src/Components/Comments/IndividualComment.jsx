@@ -1,7 +1,6 @@
 import React from "react"
 
 export const IndividualComment = ({comment,deleteComment}) => {
-  console.log(comment.id)
  return(
 <tr key={comment.id}>
 

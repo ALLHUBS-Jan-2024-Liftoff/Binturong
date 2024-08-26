@@ -9,6 +9,7 @@ export const LoadUserPostUserProfile = () => {
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
     // const [user, setUser] = useState(null);
+    const userId = 53;
    
 
     useEffect(() => {
@@ -25,7 +26,7 @@ export const LoadUserPostUserProfile = () => {
         // }
         //fetch all posts when component mounts
         
-        GetUserPostsFetch()
+        GetUserPostsFetch(userId)
         .then(setPosts)
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);

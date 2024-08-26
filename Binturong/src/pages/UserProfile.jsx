@@ -6,7 +6,7 @@ import "../App.css";
 
 const UserProfile = () => {
 
-    const userId = 1;  // update this later
+    const userId = 53;  // update this later
     const [user, setUser] = useState(null);
 
     useEffect(() => {

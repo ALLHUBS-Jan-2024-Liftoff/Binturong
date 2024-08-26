@@ -9,6 +9,7 @@ export const LoadPostUserFeed = () => {
     
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
+    const userId = 53;  // update this later
   
     const Navigate = useNavigate();
 
@@ -45,6 +46,10 @@ export const LoadPostUserFeed = () => {
         });
         
     };
+    const handleUpdatePost = (postId) =>{
+        Navigate(`/updatePost/?${postId}`,{replace:true});
+
+    }
 
     const handleDeletePost = (postId) => {
         deletePost(postId)
@@ -84,6 +89,7 @@ export const LoadPostUserFeed = () => {
                     {showPostForm && <AddPostForm  addPost={handleNewPost} />}
                     <AllPosts posts={posts} 
                     deletePost ={handleDeletePost}
+                    updatePost ={handleUpdatePost}
                     addComment={handleAddComment}
                     viewComments={handleViewComments}
                      likePost={handleLikePost} 
