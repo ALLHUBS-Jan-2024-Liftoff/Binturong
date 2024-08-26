@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
+import { AddComment } from '../Services/commentService';
+import { useNavigate } from 'react-router-dom';
 
 
-export const NewCommentForm = ({saveComment}) => {
+export const NewCommentForm = () => {
     
         //sets states and gives starting variables
         const [text, setText] = useState('')
         const [file, setFile] = useState('')
+
+        let postId =Number(location.search.replace("?",""));
+        const Navigate = useNavigate();
     
     
+    
+
         //Submits Posts to SQL Database
         const SaveComment =(e) => {
-    if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
+    if (text !="" && text.length <= 255){
             e.preventDefault();
+            //Still need to add user
     
-            saveComment(text,file)
-            setText('');
-            setFile('');
+            AddComment(postId,text,file)
+            
+            .then(
+                Navigate(`/comments/?${postId}`, {replace:true})
+            )
             
         }
         else{
-            alert("title must be between 3 and 50 characters and text 255 max.");
+            alert("Error: Text cant be blank and text is 255 characters max.");
         }
     }
     
         return (    
                     <div>
                         <form id="post-form"> 
-    
+                            <label>What would you like to say?</label> <br/>
                             <textarea id="posttextbox"
                                 name="posttext"
                                 value={text}
@@ -49,11 +59,3 @@ export const NewCommentForm = ({saveComment}) => {
                         </div>
         )
     }
-    
-
-
-
-
-
-
-}

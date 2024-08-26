@@ -1,4 +1,5 @@
 import { IndividualComment } from "./IndividualComment";
+import React from "react";
 
 
 export const AllComments = ({comments, deleteComment}) => {
@@ -14,7 +15,9 @@ export const AllComments = ({comments, deleteComment}) => {
         </thead>
         <tbody>
           {comments.map((comment) => (
+            <>
             <IndividualComment key={comment.id} comment={comment}  deleteComment={deleteComment}/>
+            </>
           ))}
         </tbody>
       </table>

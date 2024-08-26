@@ -10,6 +10,8 @@ function Login({ setAuthenticated, closeDialog }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+
+    //Axios POST to retrieve username and password from SQL database
     try {
       const response = await axios.post(
         "http://localhost:8080/user/login",
@@ -22,6 +24,7 @@ function Login({ setAuthenticated, closeDialog }) {
         }
       );
 
+      // Redundant Login Failed message could be condensed - If/else statement needed to allow for both 200/201 response
       if (response.status === 200 || response.status === 201) {
         const user = response.data.user;
         console.log("User Object:", user);
@@ -40,6 +43,7 @@ function Login({ setAuthenticated, closeDialog }) {
     }
   };
 
+    //Displays login screen as a dialog box that goes to updated home when logged in
   return (
     <div className="dialog-overlay">
       <dialog open>

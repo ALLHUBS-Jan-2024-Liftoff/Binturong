@@ -1,12 +1,13 @@
-
-
 import { UpdatePostForm } from './UpdatePostForm';
 import {useState} from 'react';
 import { updatePostFetch } from '../Services/postService';
+import axios from "axios";
 
 
-export const IndividualUserPost = ({post, deletePost,viewComments}) => {
-
+export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
+    const [likes, setLikes] = useState(post.likes);
+    const [shares, setShares] = useState(post.shares);
 
   const handleUpdatePost = (postId, title, text, geoTag, file) => {
     updatePostFetch(postId,title,text,geoTag,file)
@@ -15,9 +16,25 @@ export const IndividualUserPost = ({post, deletePost,viewComments}) => {
     })
 }
 
+    const handleLike = async () => {
+        try {
+          const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/like`);
+          setLikes(response.data.likes);
+          console.log("Post liked:", response.data);
+        } catch (error) {
+          console.error("Error liking post:", error);
+        }
+      };
 
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-
+      const handleShare = async () => {
+        try {
+          const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/share`);
+          setShares(response.data.shares);
+          console.log("Post shared:", response.data);
+        } catch (error) {
+          console.error("Error sharing post:", error);
+        }
+      };
 
     return(
    <tr key={post.id}>
@@ -44,7 +61,14 @@ export const IndividualUserPost = ({post, deletePost,viewComments}) => {
          <td>
          <button onClick ={()=>viewComments(post.id)}>View Comments</button>
          </td>
-         </tr>
-  
 
-   )}
+         <td>
+             <button onClick={handleLike}>Like</button>
+             <button onClick={handleShare}>Share</button>
+             <p>Likes: {likes}</p>
+             <p>Shares: {shares}</p>
+         </td>
+
+         </tr>
+  );
+};

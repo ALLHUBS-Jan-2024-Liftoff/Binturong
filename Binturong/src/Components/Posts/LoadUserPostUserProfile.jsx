@@ -8,11 +8,25 @@ import { ViewComments } from "../Services/commentService";
 export const LoadUserPostUserProfile = () => {
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
+    // const [user, setUser] = useState(null);
+    const userId = 53;
    
 
     useEffect(() => {
+        // const storedUser = localStorage.getItem("user");
+        // console.log("Stored User:", storedUser);
+        // if (storedUser) {
+        //     try {
+        //         const parsedUser = JSON.parse(storedUser);
+        //         console.log("Parsed User:", parsedUser);
+        //         setUser(parsedUser);
+        //     } catch (error) {
+        //         console.error("Eror parsing user from local storage:", error);
+        //     }
+        // }
         //fetch all posts when component mounts
-        GetUserPostsFetch()
+        
+        GetUserPostsFetch(userId)
         .then(setPosts)
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);

@@ -27,7 +27,7 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
 }
 
     return (    
-                <div>
+            
                     <form id="post-form"> 
                         <label for="title">Title</label>
                         <input type="text"
@@ -56,9 +56,10 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
                         </label>
                         <br />
 
-                        <label for="postfile">Upload files
+                        <label for="postfile">Upload Images
                             <input type="file"
-                                id="postfile"
+                                id="postimage"
+                                accept = "jpg, jpeg, .png, .gif"
                                 name="postfile"
                                 value={file}
                                 onChange={(e) => { setFile(e.target.value) }}>
@@ -67,6 +68,6 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
 
                         <button onClick={savePost}>Post</button>
                     </form>
-                    </div>
+                  
     )
 }

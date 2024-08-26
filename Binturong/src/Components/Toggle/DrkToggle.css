@@ -8,6 +8,7 @@
   visibility: hidden;
 }
 
+/* Set up to change theme of The Toggle it self from Light and Dark */
 .toggle + label {
   display: flex;
   align-items: center;
