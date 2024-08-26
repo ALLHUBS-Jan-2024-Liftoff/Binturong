@@ -1,4 +1,4 @@
-package com.binturong.demo.Controllers;
+package com.binturong.demo.controllers;
 
 
 import com.binturong.demo.entities.Post;

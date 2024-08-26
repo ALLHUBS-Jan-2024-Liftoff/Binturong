@@ -33,6 +33,7 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user")
     private final List<Comments> comments = new ArrayList<>();
 
+    //Encrypts the password when passing to SQL database
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}

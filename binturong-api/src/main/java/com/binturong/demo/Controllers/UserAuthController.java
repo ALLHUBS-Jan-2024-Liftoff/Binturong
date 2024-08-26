@@ -41,11 +41,12 @@ public class UserAuthController {
         return user.get();
     }
 
-    //handles user registration
+
     private static void setUserInSession(HttpSession session, User user) {
         session.setAttribute(userSessionKey, user.getId());
     }
 
+    //handles user registration
     @PostMapping(value= "/register")
     public ResponseEntity processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
         ResponseEntity response = null;
@@ -85,6 +86,7 @@ public class UserAuthController {
         return response;
     }
 
+    // handles login and makes sure it pulls username and password correctly
     @PostMapping("/login")
     public ResponseEntity processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
@@ -114,6 +116,7 @@ public class UserAuthController {
         return response;
     }
 
+    // handles the logout request and invalidates the session to return to false state
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
