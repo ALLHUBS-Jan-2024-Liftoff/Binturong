@@ -8,7 +8,7 @@ import Login from "./pages/Login.jsx";
 import Layout from "./pages/Layout.jsx";
 import Register from "./pages/Register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
-import { Comments } from "./pages/comments.jsx";
+import { Comments } from "./pages/Comments.jsx";
 import Map from "./pages/Map.jsx";
 import UserSettings from "./pages/UserSettings.jsx";
 import DrkToggle from "./Components/Toggle/DrkToggle.jsx";

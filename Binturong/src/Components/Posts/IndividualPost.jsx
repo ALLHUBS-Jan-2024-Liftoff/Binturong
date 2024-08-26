@@ -3,7 +3,7 @@ import {Dropdown} from "react-bootstrap";
 import axios from "axios";
 
 
-export const IndividualPost = ({ post,deletePost,viewComments,savePost }) => {
+export const IndividualPost = async ({ post,deletePost,viewComments,savePost, updatePost,addComment,likePost }) => {
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
   
@@ -16,23 +16,26 @@ export const IndividualPost = ({ post,deletePost,viewComments,savePost }) => {
             }
         };
 
-export const IndividualPost = ({post,deletePost,updatePost,savePost, addComment,viewComments,likePost}) => {
+//export const IndividualPost = ({post,deletePost,updatePost,savePost, addComment,viewComments,likePost}) => {
 
   //User needs to be figured out
 
     const handleLike = async () => {
 
-      <td>  Id: {post.id} </td> 
-      <td> User:</td>
-      <td> Title: {post.title}  </td>
-      <td>Text:{post.text}  </td>
-      <td> Geotag:{post.geoTag}  </td>
-      <td>Images:{post.file} </td>
-      <td>
+         <tr>
+                  <td>  Id: {post.id} </td>
+                  <td> User: {post.id}</td>
+                   <td> Title: {post.title}  </td>
+                  <td>Text:{post.text}  </td>
+                  <td> Geotag:{post.geoTag}  </td>
+                  <td>Images:{post.file} </td>
+
+          </tr>
+
 
 
     const handleShare = async () => {
-
+    <Dropdown>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
         <Dropdown.Item onClick={()=> updatePost(post.id)}>Update Post</Dropdown.Item>
