@@ -38,6 +38,9 @@ export const GetPostFetch = async (postId) => {
 }
 
 export const addPost = async (title,text,geoTag,file) => {
+
+    
+
     try{
         const response = await axios.post(`${BASEURL}/userFeed/newpost`, null , 
             {
@@ -78,8 +81,11 @@ export const deletePost = async (postId) => {
 
 export const updatePostFetch = async (postId,title,text,geoTag,file) => {
     try{
-        await axios.put(`${BASEURL}/userProfile/update`, null, {
-            params : {postId,title,text,geoTag,file} ,
+        await axios.put(`${BASEURL}/userProfile/update/${postId}`, {
+           "title":title,
+           "text":text,
+           "geoTag":geoTag,
+           "file": file
         });
     } catch (error) {
         console.error("there was an error when updating post", error);

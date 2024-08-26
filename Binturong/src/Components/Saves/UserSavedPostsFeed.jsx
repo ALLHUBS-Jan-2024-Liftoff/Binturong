@@ -5,12 +5,12 @@ import React from "react";
 
 export const UserSavedPostsFeed = () => {
     const [posts, setPosts] = useState([]);
-    const user = "";
+    const userId = 53;
 
 
     useEffect(() => {
         //fetch all posts when component mounts
-        GetUserSaves(user)
+        GetUserSaves(userId)
         
         .then(setPosts)
         .catch((error) => {
