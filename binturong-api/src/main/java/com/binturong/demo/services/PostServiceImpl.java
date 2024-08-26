@@ -3,7 +3,6 @@ package com.binturong.demo.services;
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.PostRepository;
-import com.binturong.demo.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +33,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getPost(Integer postId) {return postRepository.findAllById(postId);}
 
-
-
-
-
+//    @Override
+//    public Optional<Post> getPostById(Integer postId) {
+//        return postRepository.findById(postId);
+//    }
 }
 
 

@@ -36,6 +36,7 @@ public class User extends AbstractEntity {
     //Encrypts the password when passing to SQL database
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+
     public User() {}
 
     public User(String username,  String password, String email, String role) {

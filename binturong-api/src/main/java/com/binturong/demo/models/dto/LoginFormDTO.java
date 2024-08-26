@@ -1,6 +1,5 @@
 package com.binturong.demo.models.dto;
 
-
 public class LoginFormDTO {
 
     private String username;

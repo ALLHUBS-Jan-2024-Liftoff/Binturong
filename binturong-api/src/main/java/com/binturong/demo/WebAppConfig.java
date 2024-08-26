@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
 
-    // Allows app to access the filter by creating a spring-managed object.
+    // Allows app to access the authenticationFilter by creating a spring-managed object
     @Bean
     public AuthenticationFilter authenticationFilter() {
         return new AuthenticationFilter();

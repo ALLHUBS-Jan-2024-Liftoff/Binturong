@@ -1,9 +1,9 @@
-// Handles the Layout for the Navbar
 import React, { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Logout from "./Logout.jsx";
 import "../App.css";
 
+// Handles the Layout for the Navbar
 function Layout({ authenticated, setAuthenticated }) {
   return (
     <>
