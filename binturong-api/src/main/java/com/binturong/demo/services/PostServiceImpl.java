@@ -30,6 +30,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllUserPosts(User user) {return null;}
 
+    @Override
+    public Post getPost(Integer postId) {return postRepository.findAllById(postId);}
+
 
 
 

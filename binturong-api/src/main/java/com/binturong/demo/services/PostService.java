@@ -14,6 +14,8 @@ public interface PostService {
 
     public List<Post> getAllUserPosts(User user);
 
+    public Post getPost (Integer postId);
+
 
 
 

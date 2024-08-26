@@ -29,9 +29,10 @@ public class PostController {
 
 
     @PostMapping("/newpost")
-    public String submitPost(@RequestParam Integer userId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
+    public String submitPost(@RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
         Post newPost = new Post();
-        newPost.setUser(userRepository.findById(userId).get());
+        //removed user for auth issues
+//        newPost.setUser(userRepository.findById(userId).get());
         newPost.setTitle(title);
         newPost.setText(text);
         newPost.setGeoTag(geoTag);
@@ -45,6 +46,9 @@ public class PostController {
     public List<Post> postFeed() {
         return postService.getAllPosts();
     }
+
+    @GetMapping("getPost")
+    public Post getPost(@RequestParam Integer postId) {return postService.getPost(postId);}
 
     @PostMapping("/delete")
     public String deletePost(@RequestParam Integer postId){

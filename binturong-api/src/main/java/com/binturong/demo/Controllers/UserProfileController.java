@@ -10,7 +10,7 @@ import com.binturong.demo.services.PostService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userprofile")
+@RequestMapping("/userProfile")
 @CrossOrigin
 public class UserProfileController {
 
@@ -22,19 +22,6 @@ public class UserProfileController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @PostMapping("/newpost")
-    public String submitPost(@RequestParam Integer userId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
-        Post newPost = new Post();
-        newPost.setUser(userRepository.findById(userId).get());
-        newPost.setTitle(title);
-        newPost.setText(text);
-        newPost.setGeoTag(geoTag);
-        newPost.setFile(file);
-        postService.savePost(newPost);
-
-        return "Posted";
-    }
 
     @GetMapping("/getAllUsersPosts")
     public List<Post> postFeed(@RequestParam Integer userId){
@@ -52,14 +39,18 @@ public class UserProfileController {
 
     @PutMapping("/update")
     public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
-        Post updatePost = postRepository.findById(postId).get();
-        updatePost.setTitle(title);
-        updatePost.setText(text);
-        updatePost.setGeoTag(geoTag);
-        updatePost.setFile(file);
+       if(postRepository.existsById(postId)) {
 
-
-        return postRepository.save(updatePost);
+           Post updatePost = postRepository.findById(postId).get();
+           updatePost.setTitle(title);
+           updatePost.setText(text);
+           updatePost.setGeoTag(geoTag);
+           updatePost.setFile(file);
+           return postRepository.save(updatePost);
+       }
+       else{
+           return null;
+       }
     }
 
 }
