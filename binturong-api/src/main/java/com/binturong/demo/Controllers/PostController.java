@@ -1,6 +1,8 @@
 package com.binturong.demo.controllers;
 
 import com.binturong.demo.entities.Comments;
+import com.binturong.demo.repositorys.PostRepository;
+import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.CommentService;
 
 import com.binturong.demo.entities.Post;
@@ -15,19 +17,26 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/userfeed")
+@RequestMapping("/userFeed")
 @CrossOrigin
 public class PostController {
 
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
 
     @PostMapping("/newpost")
-    public String submitPost(@RequestParam String title, @RequestParam String text,
-                             @RequestParam String geoTag, @RequestParam String file)
-    {
+    public String submitPost(@RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
+
         Post newPost = new Post();
+        //removed user for auth issues
+//        newPost.setUser(userRepository.findById(userId).get());
         newPost.setTitle(title);
         newPost.setText(text);
         newPost.setGeoTag(geoTag);
@@ -38,23 +47,32 @@ public class PostController {
     }
 
     @GetMapping("/getAll")
-    public List<Post> postFeed(){
+    public List<Post> postFeed() {
         return postService.getAllPosts();
     }
 
-    //handles the share button for posts and will put the shared post on the user's saved feed
-    @PostMapping("/{id}/share")
-    public ResponseEntity<?> sharePost(@PathVariable Integer id) {
-        Optional<Post> postOptional = postService.getPostById(id);
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            post.setShares(post.getShares() + 1);
-            postService.savePost(post);
-            return ResponseEntity.ok(post);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+
+    @GetMapping("getPost")
+    public Post getPost(@RequestParam Integer postId) {return postService.getPost(postId);}
+
+    @PostMapping("/delete")
+    public String deletePost(@RequestParam Integer postId){
+        if(!postRepository.existsById(postId)){
+            return "Error something went wrong";
         }
+        postRepository.deleteById(postId);
+        return "Post Deleted";
+    }
+    @PutMapping("/update")
+    public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
+        Post updatePost = postRepository.findById(postId).get();
+        updatePost.setTitle(title);
+        updatePost.setText(text);
+        updatePost.setGeoTag(geoTag);
+        updatePost.setFile(file);
+
+
+        return postRepository.save(updatePost);
     }
 }
-
 

@@ -5,10 +5,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import javax.swing.text.StyledEditorKit;
 import java.util.List;
+
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class Post extends AbstractEntity {
