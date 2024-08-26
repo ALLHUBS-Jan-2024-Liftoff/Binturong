@@ -13,6 +13,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+	//CORS configuration to allows GET and POST to the server from client side
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
@@ -20,7 +21,7 @@ public class DemoApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins("http://localhost:5173")
-						.allowedMethods("GET","POST")
+						.allowedMethods("GET","POST","PUT")
 						.allowCredentials(true);
 			}
 		};
