@@ -47,12 +47,15 @@ public class UserAuthController {
     }
 
     @PostMapping(value= "/register")
-    public ResponseEntity processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO, HttpServletRequest request) {
+    public ResponseEntity<Map<String, String>> processRegistrationForm(@RequestBody RegisterFormDTO registerFormDTO,
+                                                                       HttpServletRequest request)
+    {
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
         try {
             User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
-            if (existingUser == null && !registerFormDTO.getUsername().isEmpty() && !registerFormDTO.getPassword().isEmpty()) {
+            if (existingUser == null && !registerFormDTO.getUsername().isEmpty() &&
+                    !registerFormDTO.getPassword().isEmpty()) {
                 responseBody.put("message", "User details successfully registered!");
                 response = ResponseEntity
                         .status(HttpStatus.CREATED)
@@ -86,7 +89,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
         Map<String, Object> responseBody = new HashMap<>();
@@ -115,8 +118,10 @@ public class UserAuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
         request.getSession().invalidate();
-        return "redirect:/login";
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "User successfully logged out.");
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
