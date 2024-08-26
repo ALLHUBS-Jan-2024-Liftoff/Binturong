@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -15,7 +16,7 @@ public class Comments extends AbstractEntity {
 
     @NotNull
     @Size(max = 500, message="Max comment size is 500")
-    private String commentText;
+    private String text;
 
     private String file;
 
@@ -46,11 +47,11 @@ public class Comments extends AbstractEntity {
     }
 
     public String getCommentText() {
-        return commentText;
+        return text;
     }
 
     public void setCommentText(String commentText) {
-        this.commentText = commentText;
+        this.text = commentText;
     }
 
     public String getFile() {

@@ -1,6 +1,8 @@
 import { useEffect ,useState} from "react";
 import { LoadSaves } from "./LoadSaves";
 import { GetUserSaves } from "../Services/savesService";
+import React from "react";
+import { IndividualPost } from "../Posts/IndividualPost";
 
 export const UserSavedPostsFeed = () => {
     const [posts, setPosts] = useState([]);
@@ -14,13 +16,21 @@ export const UserSavedPostsFeed = () => {
         .then(setPosts)
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);
-        })
-    },[]);
+        });
+    },[user]);
 
-    return(
+    return (
         <div>
-        <LoadSaves posts={posts}/>
-        
-            </div>
-    )
-}
+          {posts.map((post) => (
+            <IndividualPost
+              key={post.id}
+              post={post}
+              deletePost={() => {}}
+              viewComments={() => {}}
+              savePost={() => {}}
+            />
+          ))}
+          <LoadSaves posts={posts} />
+        </div>
+      );
+    };

@@ -14,6 +14,8 @@
   margin-bottom: 50px;
 }
 
+/* The Main change for when Dark mode is toggled
+- handles the switch between themes */
 .homeText {
   padding: 20px;
   border-radius: 10px;
@@ -33,6 +35,7 @@
     height: 100%;
 }
 
+/* Used for when dialog box is up for Login and Register */
 dialog {
   position: fixed;
   top: 50%;

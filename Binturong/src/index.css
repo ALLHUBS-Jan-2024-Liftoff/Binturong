@@ -5,6 +5,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Setting for when in light them and Dark Mode is Toggled off*/
 :root {
   --background-color: #f6f6f6;
   --foreground-color: #003cff;
@@ -14,6 +15,7 @@
   --toggle-fg: #ffd000;
 }
 
+/* CSS for Dark Mode toggle - Setting for when in dark theme*/
 [data-theme = "dark"] {
   --background-color: #0a0a0a;
   --foreground-color: #567aff;

@@ -15,19 +15,11 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
-    private Timestamp timeStamp;
 
     public int getId() {
         return id;
     }
 
-    public Timestamp getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
-    }
 
     @Override
     public boolean equals(Object o) {

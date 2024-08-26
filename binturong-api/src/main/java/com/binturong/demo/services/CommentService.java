@@ -10,5 +10,5 @@ public interface CommentService {
 
     public Comments saveComments(Comments comment);
 
-    public List<Comments> getPostComments(Post post);
+    public List<Comments> getCommentsByPostId(Integer postId);
 }

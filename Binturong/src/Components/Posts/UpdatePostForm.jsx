@@ -1,19 +1,18 @@
 
-import {useState} from "react"
+import React,{useState} from "react";
+import { updatePostFetch } from "../Services/postService";
 
 
-export const UpdatePostForm = (postId,originTitle,originText,originGeoTag,originFile, updatePostprops) =>{
+export const UpdatePostForm = () =>{
 
      //sets states and gives starting variables
      const [text, setText] = useState('')
      const [geoTag, setGeoTag] = useState('')
      const [file, setFile] = useState('')
      const [title, setTitle] = useState('')
+     let postId =Number(location.search.replace("?",""));
 
-     setTitle(originTitle);
-     setText(originText);
-     setGeoTag(originGeoTag);
-     setFile(originFile);
+     console.log(postId)
  
  
      //Submits Posts to SQL Database
@@ -21,12 +20,11 @@ export const UpdatePostForm = (postId,originTitle,originText,originGeoTag,origin
  if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
          e.preventDefault();
  
-         updatePostprops(postId,title,text,geoTag,file)
-         setTitle('');
-         setText('');
-         setGeoTag('');
-         setFile('');
-         
+         updatePostFetch(postId,title,text,geoTag,file)
+        
+         .then(
+            //set useNave
+         )
      }
      else{
          alert("title must be between 3 and 50 characters and text 255 max.");

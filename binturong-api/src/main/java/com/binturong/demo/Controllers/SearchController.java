@@ -1,2 +1,2 @@
-package com.binturong.demo.Controllers;public class SearchController {
+package com.binturong.demo.controllers;public class SearchController {
 }
