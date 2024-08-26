@@ -9,9 +9,12 @@ import com.binturong.demo.repositorys.SavesRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.SavesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usersavedfeed")
@@ -41,10 +44,25 @@ public class SaveControllerUserFeed {
     }
 
     @GetMapping("/getsavedposts")
-    private List<Saves> getUserSaves (@RequestParam Integer userId) {
-        return savesRepository.findAllByUserId(userId);
+    private List<Post> getUserSaves (@RequestParam Integer userId) {
+        List<Post> savedPosts = new ArrayList<>();
+        List<Saves> savesList =savesRepository.findAllByUserId(userId);
+        savedPosts =savesList.stream().map(save ->
+            save.getPost()
+        ).collect(Collectors.toList());
+        System.out.println(savesList);
 
+
+        return savedPosts;
     }
+
+
+
+
+
+
+
+
 
 
 }

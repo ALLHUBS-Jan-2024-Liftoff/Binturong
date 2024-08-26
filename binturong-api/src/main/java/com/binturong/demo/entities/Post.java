@@ -2,6 +2,7 @@ package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -26,6 +27,9 @@ public class Post extends AbstractEntity {
 
     @ManyToOne
     private User user;
+
+    @OneToOne
+    private Saves save;
 
     public String getTitle() {
         return title;
@@ -65,6 +69,14 @@ public class Post extends AbstractEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Saves getSave() {
+        return save;
+    }
+
+    public void setSave(Saves save) {
+        this.save = save;
     }
 
     @Override
