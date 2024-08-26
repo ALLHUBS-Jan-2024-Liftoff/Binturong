@@ -1,10 +1,12 @@
 package com.binturong.demo.Controllers;
 
 
+import com.binturong.demo.dto.PostDto;
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import com.binturong.demo.services.PostService;
 import java.util.List;
@@ -25,7 +27,7 @@ public class UserProfileController {
 
     @GetMapping("/getAllUsersPosts")
     public List<Post> postFeed(@RequestParam Integer userId){
-        return postService.getAllPosts();
+        return postRepository.findAllByUserId(userId);
     }
 
     @PostMapping("/delete")
@@ -37,20 +39,16 @@ public class UserProfileController {
         return "Post Deleted";
     }
 
-    @PutMapping("/update")
-    public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
-       if(postRepository.existsById(postId)) {
-
-           Post updatePost = postRepository.findById(postId).get();
-           updatePost.setTitle(title);
-           updatePost.setText(text);
-           updatePost.setGeoTag(geoTag);
-           updatePost.setFile(file);
-           return postRepository.save(updatePost);
-       }
-       else{
-           return null;
-       }
+    @PutMapping("/update/{postId}")
+    public Post UpdatePost(@RequestBody PostDto newPost, @PathVariable Integer postId) {
+      return postRepository.findById(postId)
+              .map(post -> {
+                  post.setTitle(newPost.getTitle());
+                  post.setText(newPost.getText());
+                  post.setGeoTag(newPost.getGeoTag());
+                  post.setFile(newPost.getFile());
+                  return postRepository.save(post);
+              }).orElse(null);
     }
 
 }

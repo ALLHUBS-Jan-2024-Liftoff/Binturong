@@ -58,16 +58,6 @@ public class PostController {
         postRepository.deleteById(postId);
         return "Post Deleted";
     }
-    @PutMapping("/update")
-    public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
-        Post updatePost = postRepository.findById(postId).get();
-        updatePost.setTitle(title);
-        updatePost.setText(text);
-        updatePost.setGeoTag(geoTag);
-        updatePost.setFile(file);
 
-
-        return postRepository.save(updatePost);
-    }
 }
 

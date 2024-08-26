@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService {
     public List<Post> getAllUserPosts(User user) {return null;}
 
     @Override
-    public Post getPost(Integer postId) {return postRepository.findAllById(postId);}
+    public Post getPost(Integer id) {return postRepository.findAllById(id);}
 
 
 

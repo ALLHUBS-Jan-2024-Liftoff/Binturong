@@ -5,6 +5,7 @@ import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.Saves;
 import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.PostRepository;
+import com.binturong.demo.repositorys.SavesRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.SavesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userFeed")
+@RequestMapping("/usersavedfeed")
 @CrossOrigin
 public class SaveControllerUserFeed {
 
     @Autowired
     private SavesService savesService;
+
+    @Autowired
+    private SavesRepository savesRepository;
 
     @Autowired
     private PostRepository postRepository;
@@ -36,9 +40,9 @@ public class SaveControllerUserFeed {
         return "post Saved";
     }
 
-    @GetMapping
-    private List<Saves> getUserSaves (@RequestParam Integer userid) {
-        return savesService.getAllSaves(userRepository.findById(userid).get());
+    @GetMapping("/getsavedposts")
+    private List<Saves> getUserSaves (@RequestParam Integer userId) {
+        return savesRepository.findAllByUserId(userId);
 
     }
 

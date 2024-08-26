@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface SavesRepository extends JpaRepository<Saves,Integer> {
 
-    List<Saves> findAllById(int id);
+    List<Saves> findAllById(Integer id);
+
+    List<Saves> findAllByUserId(Integer userId);
 }
