@@ -4,6 +4,7 @@ package com.binturong.demo.controllers;
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.binturong.demo.services.PostService;
@@ -38,21 +39,26 @@ public class UserProfileController {
     }
 
     @PutMapping("/update")
-    public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
-       if(postRepository.existsById(postId)) {
+    public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title,
+                           @RequestParam String text, @RequestParam String geoTag,
+                           @RequestParam String file) {
 
-           Post updatePost = postRepository.findById(postId).get();
-           updatePost.setTitle(title);
-           updatePost.setText(text);
-           updatePost.setGeoTag(geoTag);
-           updatePost.setFile(file);
-           return postRepository.save(updatePost);
+        Post updatePost = postRepository.findById(postId).orElse(null);
+        if (updatePost == null) {
+            throw new EntityNotFoundException("Post not found");
+        }
+
+        if (updatePost != null) {
+            updatePost.setTitle(title);
+            updatePost.setText(text);
+            updatePost.setGeoTag(geoTag);
+            updatePost.setFile(file);
+            return postRepository.save(updatePost);
        }
        else{
            return null;
        }
     }
-
 }
 
 

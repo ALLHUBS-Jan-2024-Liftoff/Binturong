@@ -4,7 +4,6 @@ import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.User;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface PostService {
@@ -17,13 +16,7 @@ public interface PostService {
 
     public Post getPost (Integer postId);
 
-//    Optional<Post> getPostById(Integer postId);
-
-
-
-
-
-
+    public Post getPostById(Integer postId);
 
 }
 

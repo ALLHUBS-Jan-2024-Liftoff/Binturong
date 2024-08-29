@@ -1,3 +1,5 @@
+// implements the LikesService interface
+
 package com.binturong.demo.services;
 
 import com.binturong.demo.entities.Likes;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LikesImpl implements LikesService {
@@ -25,13 +26,15 @@ public class LikesImpl implements LikesService {
 
     @Override
     public void deleteLikeByPostAndUser(Post post, User user) {
-        Optional<Likes> likeOptional = likeRepository.findByPostAndUser(post, user);
-        likeOptional.ifPresent(likeRepository::delete);
+        Likes like = likeRepository.findByPostAndUser(post, user);
+        if (like != null) {
+            likeRepository.delete(like);
+        }
     }
 
-    @Override
-    public Optional<Likes> findByPostAndUser(Post post, User user) {
-        return likeRepository.findByPostAndUser(post, user);
-    }
+        @Override
+        public Likes findByPostAndUser(Post post, User user) {
+            return likeRepository.findByPostAndUser(post, user);
+        }
 
 }

@@ -1,3 +1,4 @@
+// handles updating a post
 
 import React,{useState} from "react";
 import { updatePostFetch } from "../Services/postService";

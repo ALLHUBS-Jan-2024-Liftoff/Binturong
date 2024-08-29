@@ -1,8 +1,11 @@
+// fetches user's posts on their profile and displays them
+
 import React, {useState, useEffect} from "react";
 import { addPost, deletePost, GetUserPostsFetch, updatePostFetch } from "../Services/postService";
 import { AddPostForm } from "./AddPostForm";
 import { UserPosts } from "./UserPosts";
 import { ViewComments } from "../Services/commentService";
+import { SendLike } from "../Services/LikeService";
 
 
 export const LoadUserPostUserProfile = () => {
@@ -62,16 +65,42 @@ export const LoadUserPostUserProfile = () => {
         ViewComments(postId)
     }
 
-    
-                return(
-                    <div>
-                        <button onClick={()=> setShowPostForm(!showPostForm)}>
-                        {showPostForm ? "Close Post" : "Post+"}
-                    </button>
-                    {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-                    <UserPosts posts={posts} deletePost ={handleDeletePost} viewComments={handleViewComments}/>
 
-                    
-                        </div>
-                )
-    }
+    const handleLike = (postId) => {
+            SendLike(postId, userId)
+                .then(response => {
+                    console.log("Post liked successfully", response);
+                })
+                .catch(error => {
+                    console.error("Error liking post", error);
+                });
+        };
+
+
+    const handleShare = (postId) => {
+            const postUrl = 'http://localhost:5173/post/${postId}';
+            navigator.clipboard.writeText(postUrl)
+                .then(() => {
+                    alert("Post URL copied to clipboard");
+                })
+                .catch(error => {
+                    console.error("Error copying URL", error);
+                });
+        };
+    
+    return(
+        <div>
+            <button onClick={()=> setShowPostForm(!showPostForm)}>
+                {showPostForm ? "Close Post" : "Post+"}
+            </button>
+            {showPostForm && <AddPostForm  addPost={handleNewPost} />}
+            <UserPosts
+                posts={posts}
+                deletePost ={handleDeletePost}
+                viewComments={handleViewComments}
+                handleLike={handleLike}
+                handleShare={handleShare}
+            />
+        </div>
+    );
+};

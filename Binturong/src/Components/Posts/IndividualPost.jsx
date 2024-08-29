@@ -1,3 +1,5 @@
+// displays an individual post with options to delete, view comments, save, like, and share
+
 import React, { useState } from "react";
 import {Dropdown} from "react-bootstrap";
 import axios from "axios";
@@ -54,7 +56,6 @@ export const IndividualPost = async ({ post,deletePost,viewComments,savePost, up
 
     return (
         <tr key={post.id}>
-
             <td> Id: {post.id} </td>
             <td> Title: {post.title}  </td>
             <td> Text:  {post.text}  </td>

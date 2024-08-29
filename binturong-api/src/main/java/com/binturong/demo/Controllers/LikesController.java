@@ -9,13 +9,12 @@ import com.binturong.demo.entities.User;
 import com.binturong.demo.services.LikesService;
 import com.binturong.demo.services.PostService;
 import com.binturong.demo.repositorys.UserRepository;
-import org.apache.coyote.Response;
+import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.Response;  // what do?
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 @RestController
@@ -35,13 +34,14 @@ public class LikesController {
     // handles the like Response and checks for the post and user to match
     @PostMapping("/like")
     public ResponseEntity<?> likePost(@RequestParam Integer postId, @RequestParam Integer userId) {
-        Optional<Post> postOptional = postService.getPostById(postId);
-        Optional<User> userOptional = userRepository.findById(userId);
+        Post post = postService.getPostById(postId);
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found");
+        }
 
-        if (postOptional.isPresent() && userOptional.isPresent()) {
-            Post post = postOptional.get();
-            User user = userOptional.get();
 
+        if (post != null && user != null) {
             Likes like = new Likes();
             like.setPost(post);
             like.setUser(user);
@@ -58,13 +58,14 @@ public class LikesController {
     @PostMapping("/unlike")
     public ResponseEntity<?> unlikePost(@RequestParam Integer postId,
                                         @RequestParam Integer userId) {
-        Optional<Post> postOptional = postService.getPostById(postId);
-        Optional<User> userOptional = userRepository.findById((userId));
+        Post post = postService.getPostById(postId);
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found");
+        }
 
-        if (postOptional.isPresent() && userOptional.isPresent()) {
-            Post post = postOptional.get();
-            User user = userOptional.get();
 
+        if (post != null && user != null) {
             likesService.deleteLikeByPostAndUser(post, user);
 
             return ResponseEntity.ok("Post unliked successfully");

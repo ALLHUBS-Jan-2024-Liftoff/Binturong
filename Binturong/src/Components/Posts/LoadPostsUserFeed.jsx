@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from "react";
+// fetches all posts in the user's feed and displays them
+
+import React, { useState, useEffect } from "react";
 import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
 import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
@@ -33,6 +35,7 @@ export const LoadPostUserFeed = () => {
             console.error("ERROR: post fetching failed!", error);
         })
     },[]);
+
     const handleNewPost = (title,text,geoTag,file) => {
         addPost(title,text,geoTag,file)
         .then((newPost) => {
@@ -72,30 +75,56 @@ export const LoadPostUserFeed = () => {
         Navigate(`/comments/?${postId}`, {replace:true});
     }
 
+
+
+    const handleLikePost = (postId) => {
+        SendLike(postId, userId)
+            .then(response => {
+                console.log("Post liked successfully", response);
+            })
+            .catch(error => {
+                console.error("Error liking post", error);
+            });
+        };
+
     const handleLikePost = (postId) => {
         SendLike(postId,userId)
 
     }
+
+    const handleSharePost = (postId) => {
+        const postUrl = 'http://localhost:5173/post/${postId}';
+        navigator.clipboard.writeText(postUrl)
+            .then(() => {
+                alert("Post URL copied to clipboard");
+            })
+            .catch(error => {
+                console.error("Error copying URL", error);
+            });
+        };
+
     const handleSavePost = (postId) => {
         AddSave(userId,postId);
 
     }
 
-                return(
-                    <div>
-                        <button onClick={()=> setShowPostForm(!showPostForm)}>
-                        {showPostForm ? "Close Post" : "Post+"}
-                    </button>
-                    {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-                    <AllPosts posts={posts} 
-                    deletePost ={handleDeletePost}
-                    updatePost ={handleUpdatePost}
-                    addComment={handleAddComment}
-                    viewComments={handleViewComments}
-                     likePost={handleLikePost} 
-                     savePost={handleSavePost}
-                     />
-            
-                        </div>
-                )
-    }
+
+    return(
+        <div>
+            <button onClick={()=> setShowPostForm(!showPostForm)}>
+                {showPostForm ? "Close Post" : "Post+"}
+            </button>
+            {showPostForm && <AddPostForm  addPost={handleNewPost} />}
+            <AllPosts
+                posts={posts}
+                deletePost ={handleDeletePost}
+                updatePost ={handleUpdatePost}
+                addComment={handleAddComment}
+                viewComments={handleViewComments}
+                likePost={handleLikePost}
+                sharePost={handleSharePost}
+                savePost={handleSavePost}
+            />
+        </div>
+    );
+};

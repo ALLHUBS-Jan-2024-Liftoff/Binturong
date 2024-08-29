@@ -1,4 +1,4 @@
-package com.binturong.demo.Controllers;
+package com.binturong.demo.controllers;
 
 import com.binturong.demo.entities.Comments;
 import com.binturong.demo.entities.Post;
@@ -7,6 +7,7 @@ import com.binturong.demo.repositorys.CommentsRepository;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.CommentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,12 @@ public class CommentsControllerUserFeed {
 //        newComment.setUser(userRepository.findById(userId).get());
         newComment.setCommentText(text);
         newComment.setFile(file);
-        newComment.setPost(postRepository.findById(postId).get());
+        Post post = postRepository.findById(postId).orElse(null);
+        if (post == null) {
+            throw new EntityNotFoundException("Post not found");
+        }
+        newComment.setPost(post);
+
         commentService.saveComments(newComment);
 
         return "Comment Saved";

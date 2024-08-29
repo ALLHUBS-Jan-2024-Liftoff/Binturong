@@ -1,4 +1,7 @@
+// displays saved posts in a table format
+
 import React from "react";
+import { IndividualPost } from "../Posts/IndividualPost";
 
 export const LoadSaves = ({posts, viewComments, comments }) => {
     return (
@@ -21,16 +24,10 @@ export const LoadSaves = ({posts, viewComments, comments }) => {
                   {comments.map((comment) => (
                     <IndividualComment key={comment.id} comment={comment} />
                   ))}
-    
                 </div>
               </div>
             ))}
           </tbody>
         </table>
-    
-    
-    
-    
-    
       );
-}
+};

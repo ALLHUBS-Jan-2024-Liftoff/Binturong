@@ -4,6 +4,7 @@ import com.binturong.demo.entities.User;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.models.dto.LoginFormDTO;
 import com.binturong.demo.models.dto.RegisterFormDTO;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true", maxAge = 3600)
 @RestController
@@ -34,13 +34,11 @@ public class UserAuthController {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(userId);
-
-        if (user.isEmpty()) {
-            return null;
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found");
         }
-
-        return user.get();
+        return user;
     }
 
     private static void setUserInSession(HttpSession session, User user) {

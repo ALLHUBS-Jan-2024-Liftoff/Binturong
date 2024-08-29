@@ -5,10 +5,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.List;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 public class Post extends AbstractEntity {
@@ -28,17 +27,19 @@ public class Post extends AbstractEntity {
 
     private int shares = 0; // Initialize post with 0 shares
 
-
-
     @ManyToOne
     private User user;
 
     @OneToMany(mappedBy = "post")
     private List<Likes> likes;
 
-    public int getShares() { return shares; }
+    public int getShares() {
+        return shares;
+    }
 
-    public void setShares(int shares) { this.shares = shares; }
+    public void setShares(int shares) {
+        this.shares = shares;
+    }
 
     public String getTitle() {
         return title;
@@ -80,9 +81,13 @@ public class Post extends AbstractEntity {
         this.user = user;
     }
 
-    public List<Likes> getLikes() { return likes; }
+    public List<Likes> getLikes() {
+        return likes;
+    }
 
-    public void setLikes(List<Likes> likes) { this.likes = likes; }
+    public void setLikes(List<Likes> likes) {
+        this.likes = likes;
+    }
 
     @Override
     public boolean equals(Object o) {

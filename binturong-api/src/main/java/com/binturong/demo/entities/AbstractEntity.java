@@ -4,7 +4,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
-import java.sql.Timestamp;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -14,7 +13,6 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     private int id;
-
 
     public int getId() {
         return id;

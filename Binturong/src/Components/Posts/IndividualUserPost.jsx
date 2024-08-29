@@ -1,5 +1,7 @@
+// displays an individual post by a user with options to delete, edit, view comments, like, and share
+
 import { UpdatePostForm } from './UpdatePostForm';
-import {useState} from 'react';
+import { useState } from 'react';
 import { updatePostFetch } from '../Services/postService';
 import axios from "axios";
 
@@ -9,12 +11,12 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
 
-  const handleUpdatePost = (postId, title, text, geoTag, file) => {
-    updatePostFetch(postId,title,text,geoTag,file)
-    .then(() => {
-        window.location.reload();
-    })
-}
+    const handleUpdatePost = (postId, title, text, geoTag, file) => {
+        updatePostFetch(postId,title,text,geoTag,file)
+            .then(() => {
+                window.location.reload();
+            });
+    };
 
     // Handles liking a post - POST request to like and then add +1 like to the post
     const handleLike = async () => {
@@ -25,10 +27,10 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
         } catch (error) {
           console.error("Error liking post:", error);
         }
-      };
+    };
 
       // Handles sharing a post - POST request for shares and adds a +1 to shares on post - need to add to feed still
-      const handleShare = async () => {
+    const handleShare = async () => {
         try {
           const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/share`);
           setShares(response.data.shares);
@@ -36,41 +38,35 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
         } catch (error) {
           console.error("Error sharing post:", error);
         }
-      };
+    };
 
     return(
-   <tr key={post.id}>
+        <tr key={post.id}>
+            <td>  Id: {post.id} </td>
+            <td> Title: {post.title}  </td>
+            <td>Text:{post.text}  </td>
+            <td> Geotag:{post.geoTag}  </td>
+            <td>File:{post.file} </td>
+            <td>
+                <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
+            </td>
+            <td>
+                <button onClick={()=> setShowUpdateForm(!showUpdateForm)}>
+                    {showUpdateForm ? "Close Post" : "Edit Post+"}
+                </button>
+                {showUpdateForm && <UpdatePostForm  updatePost={handleUpdatePost} />}
+            </td>
 
-  
-   
-         <td>  Id: {post.id} </td> 
-         <td> Title: {post.title}  </td>
-         <td>Text:{post.text}  </td>
-         <td> Geotag:{post.geoTag}  </td>
-         <td>File:{post.file} </td>
-         <td>
-         <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
+            <td>
+                <button onClick ={() => viewComments(post.id)}>View Comments</button>
+            </td>
 
-        </td>
-        <td>
-
-          <button onClick={()=> setShowUpdateForm(!showUpdateForm)}>
-                        {showUpdateForm ? "Close Post" : "Edit Post+"}
-                    </button>
-                    {showUpdateForm && <UpdatePostForm  updatePost={handleUpdatePost} />}
-         </td>
-
-         <td>
-         <button onClick ={()=>viewComments(post.id)}>View Comments</button>
-         </td>
-
-         <td>
-             <button onClick={handleLike}>Like</button>
-             <button onClick={handleShare}>Share</button>
-             <p>Likes: {likes}</p>
-             <p>Shares: {shares}</p>
-         </td>
-
-         </tr>
-  );
+            <td>
+                <button onClick={handleLike}>Like</button>
+                <button onClick={handleShare}>Share</button>
+                <p>Likes: {likes}</p>
+                <p>Shares: {shares}</p>
+            </td>
+        </tr>
+    );
 };
