@@ -5,10 +5,10 @@ export const IndividualComment = ({comment,deleteComment}) => {
 <tr key={comment.id}>
 
       <td>  Id: {comment.id} </td> 
-      <td>Text:{comment.text}  </td>
+      <td>Text:{comment.commentText}  </td>
       <td>File:{comment.file} </td>
       <td>
-        <button className="btn btn-danger " onclick={deleteComment(comment.id)}>Delete Comment</button>
+        <button className="btn btn-danger " onClick={()=> deleteComment(comment.id)}>Delete Comment</button>
       </td>
       </tr>
 )}

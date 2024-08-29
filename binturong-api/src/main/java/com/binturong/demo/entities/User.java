@@ -33,9 +33,6 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user")
     private final List<Comments> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private final List<Saves> saves = new ArrayList<>();
-
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}

@@ -1,9 +1,10 @@
-package com.binturong.demo.Controllers;
+package com.binturong.demo.controllers;
 
 
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.Saves;
 import com.binturong.demo.entities.User;
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.SavesRepository;
 import com.binturong.demo.repositorys.UserRepository;

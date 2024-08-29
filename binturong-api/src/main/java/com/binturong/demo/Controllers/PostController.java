@@ -1,16 +1,19 @@
-package com.binturong.demo.Controllers;
-
-
+package com.binturong.demo.controllers;
 
 import com.binturong.demo.entities.Comments;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.CommentService;
+
+import com.binturong.demo.entities.Post;
 import com.binturong.demo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.binturong.demo.entities.Post;
+
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -30,6 +33,7 @@ public class PostController {
 
     @PostMapping("/newpost")
     public String submitPost(@RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
+
         Post newPost = new Post();
         //removed user for auth issues
 //        newPost.setUser(userRepository.findById(userId).get());
@@ -46,6 +50,7 @@ public class PostController {
     public List<Post> postFeed() {
         return postService.getAllPosts();
     }
+
 
     @GetMapping("getPost")
     public Post getPost(@RequestParam Integer postId) {return postService.getPost(postId);}
