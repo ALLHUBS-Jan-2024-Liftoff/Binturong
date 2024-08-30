@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Logout({ setAuthenticated }) {
   const navigate = useNavigate();
 
-  //Axios GET to retrieve user information and tell user side it's not authenticated and change to logout state
+  // Axios GET to retrieve user information and tell user side it's not authenticated and change to logout state
   const handleLogout = async () => {
     try {
       const response = await axios.get("http://localhost:8080/user/logout", {

@@ -17,6 +17,7 @@
   color: var(--primary-text-color);
 }
 
+/* Background of toggle switch */
 .toggle + label:before {
   content: "";
   height: 1em;
@@ -27,6 +28,7 @@
   transition: background-color 250ms ease-in-out;
 }
 
+/* Toggle switch foreground */
 .toggle + label:after {
   content: "";
   height: 0.8em;
@@ -38,6 +40,7 @@
   transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
 }
 
+/* moves the toggle circle when clicked based on here */
 .toggle:checked + label:after {
   transform: translateX(100%);
 }

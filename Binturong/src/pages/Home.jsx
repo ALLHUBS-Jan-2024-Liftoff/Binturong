@@ -1,10 +1,11 @@
-//Home page
 import React, {useState} from 'react';
 import Search from '../Components/Search.jsx';
 import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
 import "../App.css";
 
+// Home page - Main Page
+// openLoginDialog and openRegisterDialog will check to see if either of those dialog boxes are to be set to visible
 const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);

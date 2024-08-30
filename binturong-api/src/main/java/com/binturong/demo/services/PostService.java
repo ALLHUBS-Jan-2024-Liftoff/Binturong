@@ -17,6 +17,8 @@ public interface PostService {
 
     public Post getPost (Integer postId);
 
+//    Optional<Post> getPostById(Integer postId);
+
 
 
 
