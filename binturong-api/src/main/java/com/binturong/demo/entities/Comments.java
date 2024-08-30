@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Entity
@@ -46,11 +45,11 @@ public class Comments extends AbstractEntity {
         this.user = user;
     }
 
-    public String getCommentText() {
+    public String getText() {
         return text;
     }
 
-    public void setCommentText(String commentText) {
+    public void setText(String commentText) {
         this.text = commentText;
     }
 

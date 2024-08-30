@@ -8,19 +8,14 @@ public class PostDto {
 
 
 
-    private Long id;
+
     private String title;
     private String text;
-    private Timestamp timestamp;
+    private String geoTag;
+    private String file;
 
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public String getText() {
         return text;
@@ -38,11 +33,19 @@ public class PostDto {
         this.title = title;
     }
 
-    public Long getId() {
-        return id;
+    public String getGeoTag() {
+        return geoTag;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setGeoTag(String geoTag) {
+        this.geoTag = geoTag;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
