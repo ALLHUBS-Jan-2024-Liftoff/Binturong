@@ -15,6 +15,7 @@ import DrkToggle from "./Components/Toggle/DrkToggle.jsx";
 import "./App.css";
 import { NewCommentPage } from "./pages/NewCommentPage.jsx";
 import { UpdatePostPage } from "./pages/UpdatePostPage.jsx";
+import { UpdateCommentPage } from "./pages/UpdateCommentPage.jsx";
 
 export default function App() {
 
@@ -72,6 +73,7 @@ export default function App() {
                              <Route path="map" element={<Map />} />
                              <Route path= "newcomment" element={<NewCommentPage/>} />
                              <Route path= "comments" element={<Comments/>} />
+                             <Route path= "updatecomment" element={<UpdateCommentPage/>} />
                              <Route path="*" element={<Navigate to="/" replace />} />
                              </Route>
                              </>

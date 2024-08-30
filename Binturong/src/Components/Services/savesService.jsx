@@ -1,10 +1,13 @@
 import axios from "axios";
 const BASEURL = "http://localhost:8080";
 
-export const GetUserSaves = async (userid) => {
+
+
+//gets all saves for user
+export const GetUserSaves = async (userId) => {
     try{
         const response = await axios.get(`${BASEURL}/usersavedfeed/getsavedposts`, {
-            params: {userid} ,
+            params: {userId} ,
     });
         return response.data;
     }
@@ -14,9 +17,11 @@ export const GetUserSaves = async (userid) => {
     }
 }
 
+
+//Sends the post to the users save list in back end
 export const AddSave = async (userId,postId) => {
     try {
-        await axios.post(`${BASEURL}/usersavedfeed/addsave`, null, {
+        await axios.post(`${BASEURL}/usersavedfeed/savepost`, null, {
             params: {userId,postId} ,
         });
     } catch(error) {
@@ -24,6 +29,8 @@ export const AddSave = async (userId,postId) => {
     }
 }
 
+
+//This is unused for now might add implimentation later :)
 export const deleteSave = async (postId) => {
     try {
         await axios.post(`${BASEURL}/usersavedfeed/deletesave`, null, {

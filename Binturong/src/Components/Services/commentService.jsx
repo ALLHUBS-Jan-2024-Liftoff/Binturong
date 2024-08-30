@@ -42,3 +42,14 @@ export const deleteComment = async (commentId) => {
         console.error("ERROR: COMMENT NOT DELETED", error);
     }
 };
+
+export const updateComment = async (commentId,text,file) => {
+    try{
+        await axios.put(`${BASEURL}/userFeed/updateComment/${commentId}`, {
+           "text":text,
+           "file": file
+        });
+    } catch (error) {
+        console.error("there was an error when updating post", error);
+    }
+};

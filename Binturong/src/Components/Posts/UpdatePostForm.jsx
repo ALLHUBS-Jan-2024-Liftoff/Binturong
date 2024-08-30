@@ -11,6 +11,7 @@ export const UpdatePostForm = () =>{
      const [file, setFile] = useState('')
      const [title, setTitle] = useState('')
      let postId =Number(location.search.replace("?",""));
+     
 
      console.log(postId)
  
@@ -24,6 +25,7 @@ export const UpdatePostForm = () =>{
         
          .then(
             //set useNave
+
          )
      }
      else{

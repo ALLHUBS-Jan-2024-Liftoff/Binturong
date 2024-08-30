@@ -33,6 +33,9 @@ export const ViewPostComments = () => {
         const handleComment = (postId) => {
             Navigate(`/newcomment/?${postId}`,{replace:true});
         }
+        const handleUpdateComment = (commentId) => {
+            Navigate(`/updatecomment/?${commentId}`)
+        }
 
  
             const handleDeleteComment = (commentId) => {
@@ -61,7 +64,7 @@ export const ViewPostComments = () => {
 <td>Images:{post.file} </td>
     </tr>
     <button onClick={()=> handleComment(postId)}>Comment</button>
-             {comments.length === 0 ? <p>Be the first to comment!</p> : <AllComments comments={comments} deleteComment={handleDeleteComment}/>}
+             {comments.length === 0 ? <p>Be the first to comment!</p> : <AllComments comments={comments} updateComment ={handleUpdateComment}deleteComment={handleDeleteComment}/>}
             
     
              </>
