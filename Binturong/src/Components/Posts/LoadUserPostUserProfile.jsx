@@ -85,8 +85,7 @@ export const LoadUserPostUserProfile = () => {
     }
 
                 return(
-                    <head>
-                        <link rel= "stylesheet" type="text/css" href="../../assets/css/userProfilePosts.css" />
+                    
             
                     <div class="test">
                         <button onClick={()=> setShowPostForm(!showPostForm)}>
@@ -103,6 +102,6 @@ export const LoadUserPostUserProfile = () => {
                      />
             
                         </div>
-                        </head>
+                   
                 )
     }

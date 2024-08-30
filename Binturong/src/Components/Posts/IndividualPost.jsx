@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import {Dropdown} from "react-bootstrap";
+import Dropdown from 'react-bootstrap/Dropdown';
 import axios from "axios";
 
 
-export const IndividualPost = ({ post,deletePost,viewComments,savePost,addComment }) => {
+export const IndividualPost = ({ post,deletePost,viewComments,savePost,addComment,updatePost }) => {
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
   
@@ -57,6 +57,7 @@ export const IndividualPost = ({ post,deletePost,viewComments,savePost,addCommen
                             <Dropdown.Item onClick ={() => viewComments(post.id)}>View Comments</Dropdown.Item>
                             <Dropdown.Item onClick ={() => savePost(post.id)}>Save Post</Dropdown.Item>
                             <Dropdown.Item onClick = {() => addComment(post.id)}>Post Comment</Dropdown.Item>
+                            <Dropdown.Item onClick ={()=> updatePost(post.id)}>Update Post</Dropdown.Item>
                             <Dropdown.Item onClick={() => {}}>Close x</Dropdown.Item>
 
                     </Dropdown.Menu>
