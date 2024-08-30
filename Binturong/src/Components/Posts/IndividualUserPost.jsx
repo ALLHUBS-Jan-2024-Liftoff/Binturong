@@ -16,6 +16,7 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
     })
 }
 
+    // Handles liking a post - POST request to like and then add +1 like to the post
     const handleLike = async () => {
         try {
           const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/like`);
@@ -26,6 +27,7 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
         }
       };
 
+      // Handles sharing a post - POST request for shares and adds a +1 to shares on post - need to add to feed still
       const handleShare = async () => {
         try {
           const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/share`);

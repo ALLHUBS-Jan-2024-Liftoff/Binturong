@@ -18,24 +18,28 @@ import { UpdatePostPage } from "./pages/UpdatePostPage.jsx";
 import { UpdateCommentPage } from "./pages/UpdateCommentPage.jsx";
 
 export default function App() {
+
+    // Handles the state of the App depending on whether the user is logged in or not
+    // Checks localStorage to handle if the user's browser stored if they have logged in already or not
     const [authenticated, setAuthenticated] = useState(() => {
       return JSON.parse(localStorage.getItem("authenticated")) || false;
     });
 
-    //For Dark Mode Toggle
+    // For Dark Mode Toggle - Manages the Dark Mode state
     const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
-    //Login and Register Dialog Pop ups
+    // Manages the Login and Register Dialog Pop ups visibility states
     const [showLoginDialog, setShowLoginDialog] = useState(false);
     const [showRegisterDialog, setShowRegisterDialog] = useState(false);
 
+    // Opens/Closes Login and Register dialog boxes
     const openLoginDialog = () => setShowLoginDialog(true);
     const closeLoginDialog = () => setShowLoginDialog(false);
     const openRegisterDialog = () => setShowRegisterDialog(true);
     const closeRegisterDialog = () => setShowRegisterDialog(false);
 
-
+    // Will update the localStorage when authentication changes
     useEffect(() => {
         localStorage.setItem("authenticated", JSON.stringify(authenticated));
       }, [authenticated]);

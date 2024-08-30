@@ -1,5 +1,7 @@
 package com.binturong.demo.Controllers;
 
+import com.binturong.demo.dto.CommentDto;
+import com.binturong.demo.dto.PostDto;
 import com.binturong.demo.entities.Comments;
 import com.binturong.demo.entities.Post;
 import com.binturong.demo.entities.User;
@@ -10,6 +12,7 @@ import com.binturong.demo.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @RestController
@@ -38,7 +41,7 @@ public class CommentsControllerUserFeed {
 
         //User still needs to be worked on
 //        newComment.setUser(userRepository.findById(userId).get());
-        newComment.setCommentText(text);
+        newComment.setText(text);
         newComment.setFile(file);
         newComment.setPost(postRepository.findById(postId).get());
         commentService.saveComments(newComment);
@@ -54,6 +57,15 @@ public class CommentsControllerUserFeed {
         }
         commentsRepository.deleteById(commentId);
         return "Post Deleted";
+    }
+    @PutMapping("/updateComment/{commentId}")
+    public Comments UpdatePost(@RequestBody CommentDto newComment, @PathVariable Integer commentId) {
+        return commentsRepository.findById(commentId)
+                .map(comment -> {
+                    comment.setText(newComment.getText());
+                    comment.setFile(newComment.getFile());
+                    return commentsRepository.save(comment);
+                }).orElse(null);
     }
 
 }
