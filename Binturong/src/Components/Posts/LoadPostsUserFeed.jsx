@@ -9,7 +9,7 @@ export const LoadPostUserFeed = () => {
     
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    const userId = 53;  // update this later
+    const userId = 1;  // update this later
   
     const Navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export const LoadPostUserFeed = () => {
         //         console.log("Parsed User:", parsedUser);
         //         setUser(parsedUser);
         //     } catch (error) {
-        //         console.error("Eror parsing user from local storage:", error);
+        //         console.error("Error parsing user from local storage:", error);
         //     }
         // }
         //fetch all posts when component mounts

@@ -6,22 +6,22 @@ import "../App.css";
 
 const UserProfile = () => {
 
-    const userId = 53;  // update this later
+    const userId = 1;  // update this later
     const [user, setUser] = useState(null);
 
     //Pulls user from local storage so you can call user database columns
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        console.log("Stored User:", storedUser);
-        if (storedUser) {
-            try {
-                const parsedUser = JSON.parse(storedUser);
-                console.log("Parsed User:", parsedUser);
-                setUser(parsedUser);
-            } catch (error) {
-                console.error("Error parsing user from local storage:", error);
-            }
-        }
+//         const storedUser = localStorage.getItem("user");
+//         console.log("Stored User:", storedUser);
+//         if (storedUser) {
+//             try {
+//                 const parsedUser = JSON.parse(storedUser);
+//                 console.log("Parsed User:", parsedUser);
+//                 setUser(parsedUser);
+//             } catch (error) {
+//                 console.error("Error parsing user from local storage:", error);
+//             }
+//         }
     }, []);
 
     console.log(user)
