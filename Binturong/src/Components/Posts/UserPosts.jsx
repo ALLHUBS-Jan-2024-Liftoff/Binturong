@@ -19,9 +19,9 @@ return(
     </thead>
     <tbody>
       {posts.map((post) => (
-       <div>
+
         <IndividualUserPost key={post.id} post={post} deletePost={deletePost} updatePost={updatePost} viewComments={viewComments}/>
- </div>
+
 
       ))}
     </tbody>

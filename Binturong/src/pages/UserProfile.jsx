@@ -25,7 +25,7 @@ const UserProfile = () => {
 //         }
     }, []);
 
-    console.log(user)
+   // console.log(user)
     return (
         <div className = "homeText">
             <h1>User Profile</h1>
