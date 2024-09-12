@@ -4,6 +4,7 @@ import { UpdatePostForm } from './UpdatePostForm';
 import React, { useState } from 'react';
 import { updatePostFetch } from '../Services/postService';
 import axios from "axios";
+import React from "react";
 
 
 export const IndividualUserPost = ({ post, deletePost,viewComments }) => {

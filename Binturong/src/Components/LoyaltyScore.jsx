@@ -7,7 +7,7 @@ const LoyaltyScore = ({ userId }) => {
     useEffect(() => {
         const fetchLoyaltyScore = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/loyalty-score?user_id=${userId}`, {
+                const response = await fetch(`http://localhost:8080/loyalty/getLoyaltyScore/1`, {
                     credentials: 'include', // Include credentials for authentication
                 });
                 if (!response.ok) {
