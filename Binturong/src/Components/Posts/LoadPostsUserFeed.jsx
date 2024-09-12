@@ -87,21 +87,17 @@ export const LoadPostUserFeed = () => {
             });
         };
 
-    const handleLikePost = (postId) => {
-        SendLike(postId,userId)
-
-    }
 
     const handleSharePost = (postId) => {
-        const postUrl = 'http://localhost:5173/post/${postId}';
-        navigator.clipboard.writeText(postUrl)
-            .then(() => {
-                alert("Post URL copied to clipboard");
+        SendShare(postId, userId)
+            .then(response => {
+                console.log("Post shared successfully", response);
+                // Optionally refresh posts
             })
             .catch(error => {
-                console.error("Error copying URL", error);
+                console.error("Error sharing post", error);
             });
-        };
+    };
 
     const handleSavePost = (postId) => {
         AddSave(userId,postId);

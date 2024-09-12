@@ -48,6 +48,7 @@ export const LoadUserPostUserProfile = () => {
             console.error("ERROR HANDLENEWPOST didnt create new post", error);
         });
     };
+
     const handleDeletePost = (postId) => {
         deletePost(postId)
             .then(() => {

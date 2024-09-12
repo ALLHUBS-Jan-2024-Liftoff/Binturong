@@ -6,10 +6,11 @@ import React from "react";
 const UserFeed = () => {
 
  return(
-  <>
-
- <LoadPostUserFeed/>
-  </>
+    <>
+        <div className = "homeText">
+            <LoadPostUserFeed/>
+        </div>
+    </>
 );
 
 }

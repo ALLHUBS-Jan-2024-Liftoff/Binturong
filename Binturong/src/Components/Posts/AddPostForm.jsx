@@ -29,7 +29,7 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
     return (    
             
                     <form id="post-form"> 
-                        <label for="title">Title</label>
+                        <label htmlFor="title">Title</label>
                         <input type="text"
                             id="title"
                             name="title"

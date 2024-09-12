@@ -29,6 +29,7 @@ export const AllPosts = ({ posts,updatePost , deletePost,addComment,viewComments
                     addComment={addComment}
                     likePost={likePost}
                     savePost={savePost}
+                    sharePost={handleSharePost}
                 />
             ))}
         </tbody>

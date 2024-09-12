@@ -1,7 +1,7 @@
 // displays an individual post by a user with options to delete, edit, view comments, like, and share
 
 import { UpdatePostForm } from './UpdatePostForm';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { updatePostFetch } from '../Services/postService';
 import axios from "axios";
 
