@@ -5,22 +5,57 @@ import { LoadSaves } from "./LoadSaves";
 import { GetUserSaves } from "../Services/savesService";
 import React from "react";
 import { IndividualPost } from "../Posts/IndividualPost";
+import { AllPosts } from "../Posts/AllPosts"
 import { SendLike } from "../Services/LikeService";
 
 export const UserSavedPostsFeed = () => {
     const [posts, setPosts] = useState([]);
-    const user = "";
+    const userId = 53;
+    console.log(posts)
 
 
     useEffect(() => {
         //fetch all posts when component mounts
-        GetUserSaves(user)
+        GetUserSaves(userId)
         
         .then(setPosts)
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);
         });
-    },[user]);
+    },[]);
+    const handleDeletePost = (postId) => {
+      deletePost(postId)
+          .then(() => {
+              setPosts(posts.filter((post) => post.id !== postId));
+          })
+          .then(() => {
+              window.location.reload();
+          })
+          .catch((error) => {
+              console.error("ERROR HANDLEDELETEPOST did not delete post", error);
+          })
+
+  }
+  const handleAddComment= (postId) => {
+      Navigate(`/newcomment/?${postId}`,{replace:true});
+
+  }
+  const handleViewComments = (postId) => {
+      Navigate(`/comments/?${postId}`, {replace:true});
+  }
+
+  const handleLikePost = (postId) => {
+      SendLike(postId,userId)
+
+  }
+  const handleSavePost = (postId) => {
+      AddSave(userId,postId);
+
+  }
+  const handleUpdatePost = (postId) =>{
+    Navigate(`/updatePost/?${postId}`,{replace:true});
+
+}
 
     const handleLike = (postId) => {
         SendLike(postId, user)
@@ -45,19 +80,12 @@ export const UserSavedPostsFeed = () => {
     };
 
     return (
-        <div>
-          {posts.map((post) => (
-            <IndividualPost
-              key={post.id}
-              post={post}
-              deletePost={() => {}}
-              viewComments={() => {}}
-              savePost={() => {}}
-              handleLike={() => handleLike(post.id)}
-              handleShare={() => handleShare(post.id)}
-            />
-          ))}
-          <LoadSaves posts={posts} />
-        </div>
+        <AllPosts posts={posts}
+        deletePost ={handleDeletePost}
+        updatePost ={handleUpdatePost}
+        addComment={handleAddComment}
+        viewComments={handleViewComments}
+         likePost={handleLikePost}
+         savePost={handleSavePost}/>
       );
     };

@@ -6,12 +6,14 @@ import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
 import { AddPostForm } from "./AddPostForm";
 import { useNavigate } from "react-router-dom";
+import { AddSave } from "../Services/savesService";
 
 export const LoadPostUserFeed = () => {
     
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    const userId = 1;  // update this later
+    const userId = 53;  // update this later
+    console.log(posts)
   
     const Navigate = useNavigate();
 
@@ -31,6 +33,7 @@ export const LoadPostUserFeed = () => {
         //fetch all posts when component mounts
         GetAllPostsFetch()
         .then(setPosts)
+
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);
         })
@@ -101,6 +104,7 @@ export const LoadPostUserFeed = () => {
 
     const handleSavePost = (postId) => {
         AddSave(userId,postId);
+        alert("Post Saved!")
 
     }
 

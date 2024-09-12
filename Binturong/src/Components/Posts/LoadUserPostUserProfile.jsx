@@ -1,21 +1,23 @@
 // fetches user's posts on their profile and displays them
 
 import React, {useState, useEffect} from "react";
-import { addPost, deletePost, GetUserPostsFetch, updatePostFetch } from "../Services/postService";
-import { AddPostForm } from "./AddPostForm";
-import { UserPosts } from "./UserPosts";
-import { ViewComments } from "../Services/commentService";
+import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
 import { SendLike } from "../Services/LikeService";
-
+import { AllPosts } from "./AllPosts";
+import { AddPostForm } from "./AddPostForm";
+import { useNavigate } from "react-router-dom";
 
 export const LoadUserPostUserProfile = () => {
+
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    // const [user, setUser] = useState(null);
-    const userId = 53;
-   
+    const userId = 53;  // update this later
+    console.log(posts)
+
+    const Navigate = useNavigate();
 
     useEffect(() => {
+        //commenting out to work with broken auth
         // const storedUser = localStorage.getItem("user");
         // console.log("Stored User:", storedUser);
         // if (storedUser) {
@@ -28,14 +30,14 @@ export const LoadUserPostUserProfile = () => {
         //     }
         // }
         //fetch all posts when component mounts
-        
-        GetUserPostsFetch(userId)
+        // GetUserPostsFetch(userId)
+        GetAllPostsFetch()
         .then(setPosts)
+
         .catch((error) => {
             console.error("ERROR: post fetching failed!", error);
         })
     },[]);
-
     const handleNewPost = (title,text,geoTag,file) => {
         addPost(title,text,geoTag,file)
         .then((newPost) => {
@@ -47,7 +49,13 @@ export const LoadUserPostUserProfile = () => {
         .catch((error) =>{
             console.error("ERROR HANDLENEWPOST didnt create new post", error);
         });
+
     };
+
+    const handleUpdatePost = (postId) =>{
+        Navigate(`/updatePost/?${postId}`,{replace:true});
+
+    }
 
     const handleDeletePost = (postId) => {
         deletePost(postId)
@@ -62,12 +70,24 @@ export const LoadUserPostUserProfile = () => {
             })
 
     }
-    const handleViewComments= (postId) => {
-        ViewComments(postId)
+    const handleAddComment= (postId) => {
+        Navigate(`/newcomment/?${postId}`,{replace:true});
+
+    }
+    const handleViewComments = (postId) => {
+        Navigate(`/comments/?${postId}`, {replace:true});
     }
 
+    const handleLikePost = (postId) => {
+        SendLike(postId,userId)
 
-    const handleLike = (postId) => {
+    }
+    const handleSavePost = (postId) => {
+        AddSave(userId,postId);
+
+    }
+
+   const handleLike = (postId) => {
             SendLike(postId, userId)
                 .then(response => {
                     console.log("Post liked successfully", response);
@@ -88,20 +108,25 @@ export const LoadUserPostUserProfile = () => {
                     console.error("Error copying URL", error);
                 });
         };
-    
-    return(
-        <div>
-            <button onClick={()=> setShowPostForm(!showPostForm)}>
-                {showPostForm ? "Close Post" : "Post+"}
-            </button>
-            {showPostForm && <AddPostForm  addPost={handleNewPost} />}
-            <UserPosts
-                posts={posts}
-                deletePost ={handleDeletePost}
-                viewComments={handleViewComments}
-                handleLike={handleLike}
-                handleShare={handleShare}
-            />
-        </div>
-    );
-};
+
+                return(
+
+
+                    <div class="test">
+                        <button onClick={()=> setShowPostForm(!showPostForm)}>
+                        {showPostForm ? "Close Post" : "Post+"}
+                    </button>
+                    {showPostForm && <AddPostForm  addPost={handleNewPost} />}
+                    <AllPosts posts={posts}
+                    deletePost ={handleDeletePost}
+                    updatePost ={handleUpdatePost}
+                    addComment={handleAddComment}
+                    viewComments={handleViewComments}
+                     likePost={handleLikePost}
+                     savePost={handleSavePost}
+                     />
+
+                        </div>
+
+                )
+    }

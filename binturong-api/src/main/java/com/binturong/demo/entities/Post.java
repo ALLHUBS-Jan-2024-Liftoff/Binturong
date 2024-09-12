@@ -2,6 +2,7 @@ package com.binturong.demo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -31,6 +32,9 @@ public class Post extends AbstractEntity {
 
     @ManyToOne
     private User user;
+
+    @OneToOne
+    private Saves save;
 
     @OneToMany(mappedBy = "post")
     private List<Likes> likes;
@@ -87,8 +91,16 @@ public class Post extends AbstractEntity {
         return likes;
     }
 
+    public Saves getSave() {
+        return save;
+    }
+
     public void setLikes(List<Likes> likes) {
         this.likes = likes;
+    }
+
+    public void setSave(Saves save) {
+        this.save = save;
     }
 
     @Override

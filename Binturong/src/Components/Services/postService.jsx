@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const BASEURL = "http://localhost:8080";
-const userId =1;
 
 export const GetAllPostsFetch= async ()=> {
     
@@ -40,12 +39,16 @@ export const GetPostFetch = async (postId) => {
 }
 
 export const addPost = async (title,text,geoTag,file) => {
-    try {
-        const response = await axios.post(`${BASEURL}/userFeed/newpost`,
-        null , {
-            params: {title,text,geoTag,file},
-            withCredentials: true
-        });
+
+
+    
+
+    try{
+        const response = await axios.post(`${BASEURL}/userFeed/newpost`, null , 
+            {
+            params: {title,text,geoTag,file}
+              } 
+        );
 
         return response.data;
         
@@ -83,9 +86,12 @@ export const deletePost = async (postId) => {
 
 export const updatePostFetch = async (postId,title,text,geoTag,file) => {
     try{
-        await axios.put(`${BASEURL}/userProfile/update`, null, {
-            params : {postId,title,text,geoTag,file} ,
-            withCredentials: true
+        await axios.put(`${BASEURL}/userProfile/update/${postId}`, {
+           "title":title,
+           "text":text,
+           "geoTag":geoTag,
+           "file": file
+
         });
     } catch (error) {
         console.error("there was an error when updating post", error);

@@ -28,19 +28,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getAllUserPosts(User user) {
-        return postRepository.findByUserId(user.getId());
+    public List<Post> getAllUserPosts(User user) {return null;
     }
 
     @Override
-    public Post getPost(Integer postId) {
-        Post post = postRepository.findById(postId).orElse(null);
-        if (post == null) {
-            throw new EntityNotFoundException("Post not found");
-        }
-        return post;
-
-    }
+    public Post getPost(Integer id) {return postRepository.findAllById(id);}
 
     @Override
     public Post getPostById(Integer postId) {

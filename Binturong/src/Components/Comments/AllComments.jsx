@@ -2,7 +2,7 @@ import { IndividualComment } from "./IndividualComment";
 import React from "react";
 
 
-export const AllComments = ({comments, deleteComment}) => {
+export const AllComments = ({comments, updateComment,deleteComment}) => {
     return(
 
         <table className="table table-hover">
@@ -16,7 +16,7 @@ export const AllComments = ({comments, deleteComment}) => {
         <tbody>
           {comments.map((comment) => (
             <>
-            <IndividualComment key={comment.id} comment={comment}  deleteComment={deleteComment}/>
+            <IndividualComment key={comment.id} comment={comment}  updateComment={updateComment} deleteComment={deleteComment}/>
             </>
           ))}
         </tbody>

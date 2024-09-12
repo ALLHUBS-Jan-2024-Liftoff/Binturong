@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 import com.binturong.demo.entities.Comments;
 import com.binturong.demo.repositorys.PostRepository;
@@ -63,6 +63,7 @@ public class PostController {
         postRepository.deleteById(postId);
         return "Post Deleted";
     }
+
     @PutMapping("/update")
     public Post UpdatePost(@RequestParam Integer postId, @RequestParam String title, @RequestParam String text, @RequestParam String geoTag, @RequestParam String file) {
         Post updatePost = postRepository.findById(postId).orElse(null);
@@ -74,7 +75,6 @@ public class PostController {
         updatePost.setText(text);
         updatePost.setGeoTag(geoTag);
         updatePost.setFile(file);
-
 
         return postRepository.save(updatePost);
     }
