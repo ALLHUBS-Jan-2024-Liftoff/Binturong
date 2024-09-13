@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Search from '../Components/Search.jsx';
 import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
+import { SendLike } from '../Components/Services/LikeService';
 import "../App.css";
 
 // Home page - Main Page
@@ -9,7 +10,6 @@ import "../App.css";
 const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
 
     const handleSearch = async (keyword) => {
         try {
@@ -21,6 +21,19 @@ const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
         }
       };
 
+    const handleLike = (postId) => {
+        };
+
+    const handleShare = (postId) => {
+            const postUrl = `http://localhost:5173/post/${postId}`;
+            navigator.clipboard.writeText(postUrl)
+                .then(() => {
+                    alert("Post URL copied to clipboard");
+                })
+                .catch(error => {
+                    console.error("Error copying URL", error);
+                });
+        };
 
     return (
         <div className = "appTitle">
@@ -32,11 +45,15 @@ const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
                 <div className = "homeText">
                     <h2>Welcome Back!</h2>
                     <SearchBar
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    handleSearch={handleSearch}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        handleSearch={handleSearch}
                     />
-                    <SearchResults results={searchResults} />
+                    <SearchResults
+                        results={searchResults}
+                        handleLike={handleLike}
+                        handleShare={handleShare}
+                    />
                     <p>Test Text Test Text Test Text</p>
                 </div>
             ) : (
@@ -64,7 +81,7 @@ const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
     );
   };
 
-  const SearchResults = ({ results }) => {
+  const SearchResults = ({ results, handleLike, handleShare }) => {
     return (
       <div>
         {results.length > 0 ? (
@@ -72,6 +89,8 @@ const Home = ({ authenticated, openLoginDialog, openRegisterDialog }) => {
             <div key={result.id}>
               <h2>{result.title}</h2>
               <p>{result.post_text}</p>
+              <button onClick={() => handleLike(result.id)}>Like</button>
+              <button onClick={() => handleShare(result.id)}>Share</button>
             </div>
           ))
         ) : (

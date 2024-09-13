@@ -4,10 +4,8 @@ import { UpdatePostForm } from './UpdatePostForm';
 import React, { useState } from 'react';
 import { updatePostFetch } from '../Services/postService';
 import axios from "axios";
-import React from "react";
 
-
-export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
+export const IndividualUserPost = ({ post, deletePost, viewComments, currentUser }) => {
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
@@ -49,22 +47,26 @@ export const IndividualUserPost = ({ post, deletePost,viewComments }) => {
             <td> Geotag:{post.geoTag}  </td>
             <td>File:{post.file} </td>
             <td>
-                <button className ="btn btn-danger" onClick={() => deletePost(post.id)}>Delete Post</button>
-            </td>
-            <td>
-                <button onClick={()=> setShowUpdateForm(!showUpdateForm)}>
-                    {showUpdateForm ? "Close Post" : "Edit Post+"}
-                </button>
-                {showUpdateForm && <UpdatePostForm  updatePost={handleUpdatePost} />}
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Dropdown Button
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setShowUpdateForm(!showUpdateForm)}>
+                            {showUpdateForm ? "Close Post" : "Edit Post+"}
+                        </Dropdown.Item>
+                            {showUpdateForm && <UpdatePostForm updatePost={handleUpdatePost} />}
+                        <Dropdown.Item onClick={() => viewComments(post.id)}>View Comments</Dropdown.Item>
+                        <Dropdown.Item onClick={handleShare}>Share Post</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </td>
 
             <td>
-                <button onClick ={() => viewComments(post.id)}>View Comments</button>
-            </td>
-
-            <td>
-                <button onClick={handleLike}>Like</button>
-                <button onClick={handleShare}>Share</button>
+                {post.userId !== currentUser.id && (
+                    <button onClick={handleLike}>Like</button>
+                )}
                 <p>Likes: {likes}</p>
                 <p>Shares: {shares}</p>
             </td>

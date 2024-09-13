@@ -17,12 +17,12 @@ export const UserSavedPostsFeed = () => {
     useEffect(() => {
         //fetch all posts when component mounts
         GetUserSaves(userId)
-        
-        .then(setPosts)
-        .catch((error) => {
-            console.error("ERROR: post fetching failed!", error);
-        });
+            .then(setPosts)
+            .catch((error) => {
+                console.error("ERROR: post fetching failed!", error);
+            });
     },[]);
+
     const handleDeletePost = (postId) => {
       deletePost(postId)
           .then(() => {
@@ -35,27 +35,29 @@ export const UserSavedPostsFeed = () => {
               console.error("ERROR HANDLEDELETEPOST did not delete post", error);
           })
 
-  }
-  const handleAddComment= (postId) => {
+    }
+
+    const handleAddComment= (postId) => {
       Navigate(`/newcomment/?${postId}`,{replace:true});
 
-  }
-  const handleViewComments = (postId) => {
-      Navigate(`/comments/?${postId}`, {replace:true});
-  }
+    }
 
-  const handleLikePost = (postId) => {
+    const handleViewComments = (postId) => {
+      Navigate(`/comments/?${postId}`, {replace:true});
+    }
+
+    const handleLikePost = (postId) => {
       SendLike(postId,userId)
 
-  }
-  const handleSavePost = (postId) => {
+    }
+
+    const handleSavePost = (postId) => {
       AddSave(userId,postId);
+    }
 
-  }
-  const handleUpdatePost = (postId) =>{
-    Navigate(`/updatePost/?${postId}`,{replace:true});
-
-}
+    const handleUpdatePost = (postId) =>{
+        Navigate(`/updatePost/?${postId}`,{replace:true});
+    }
 
     const handleLike = (postId) => {
         SendLike(postId, user)
@@ -85,7 +87,7 @@ export const UserSavedPostsFeed = () => {
         updatePost ={handleUpdatePost}
         addComment={handleAddComment}
         viewComments={handleViewComments}
-         likePost={handleLikePost}
-         savePost={handleSavePost}/>
+        likePost={handleLikePost}
+        savePost={handleSavePost}/>
       );
     };

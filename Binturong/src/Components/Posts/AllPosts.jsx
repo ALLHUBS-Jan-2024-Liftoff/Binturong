@@ -5,7 +5,17 @@ import { IndividualPost } from "./IndividualPost";
 import React from 'react';
 
 
-export const AllPosts = ({ posts,updatePost , deletePost,addComment,viewComments,likePost,savePost }) => {
+export const AllPosts = ({ posts, updatePost, deletePost, addComment, viewComments, likePost, savePost }) => {
+
+  const handleSharePost = (postId) => {
+    const postUrl = `${window.location.origin}/post/${postId}`;
+        navigator.clipboard.writeText(postUrl).then(() => {
+          alert(`Post URL copied to clipboard: ${postUrl}`);
+        }).catch(err => {
+          console.error('Failed to copy post URL: ', err);
+        });
+  };
+
   return (
     <table className="table table-hover">
         <thead>

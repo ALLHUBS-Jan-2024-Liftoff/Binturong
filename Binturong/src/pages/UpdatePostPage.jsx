@@ -6,5 +6,5 @@ export const UpdatePostPage = () => {
         <>
         <UpdatePostForm/>
         </>
-    )
-}
+    );
+};

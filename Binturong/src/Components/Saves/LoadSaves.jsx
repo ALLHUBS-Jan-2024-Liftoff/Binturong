@@ -3,9 +3,9 @@
 import React from "react";
 import { IndividualPost } from "../Posts/IndividualPost";
 
-export const LoadSaves = ({posts, viewComments, comments }) => {
-    return (
+export const LoadSaves = ({ posts, viewComments, comments }) => {
 
+    return (
         <table className="table table-hover">
           <thead>
             <tr>
@@ -18,11 +18,17 @@ export const LoadSaves = ({posts, viewComments, comments }) => {
           </thead>
           <tbody>
             {posts.map((post) => (
-              <div>
-                <IndividualPost key={post.id} post={post} viewComments={viewComments} />
+              <div key={post.id}>
+                <IndividualPost
+                    post={post}
+                    viewComments={viewComments}
+                />
                 <div>
                   {comments.map((comment) => (
-                    <IndividualComment key={comment.id} comment={comment} />
+                      <IndividualComment
+                        key={comment.id}
+                        comment={comment}
+                      />
                   ))}
                 </div>
               </div>

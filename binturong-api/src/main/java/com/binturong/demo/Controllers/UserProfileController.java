@@ -49,7 +49,7 @@ public class UserProfileController {
                   post.setGeoTag(newPost.getGeoTag());
                   post.setFile(newPost.getFile());
                   return postRepository.save(post);
-              }).orElse(null);
+              }).orElseThrow(() -> new EntityNotFoundException("Post not found"));
     }
 }
 

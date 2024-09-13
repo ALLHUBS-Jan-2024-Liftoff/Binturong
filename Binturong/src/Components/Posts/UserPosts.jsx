@@ -5,10 +5,9 @@ import { AllComments } from "../Comments/AllComments";
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualUserPost } from "./IndividualUserPost";
 
-export const UserPosts= ({posts,deletePost,updatePost,viewComments}) => {
+export const UserPosts= ({ posts, deletePost, updatePost, viewComments} ) => {
 
     return(
-
         <table className="table table-hover">
             <thead>
                 <tr>
@@ -21,9 +20,8 @@ export const UserPosts= ({posts,deletePost,updatePost,viewComments}) => {
             </thead>
             <tbody>
                 {posts.map((post) => (
-                    <div>
+                    <div key={post.id}>
                         <IndividualUserPost
-                            key={post.id}
                             post={post}
                             deletePost={deletePost}
                             updatePost={updatePost}
@@ -32,7 +30,6 @@ export const UserPosts= ({posts,deletePost,updatePost,viewComments}) => {
                             handleShare={() => handleShare(post.id)}
                         />
                     </div>
-
                 ))}
             </tbody>
         </table>

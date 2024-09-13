@@ -5,17 +5,10 @@ import java.sql.Timestamp;
 
 public class PostDto {
 
-
-
-
-
     private String title;
     private String text;
     private String geoTag;
     private String file;
-
-
-
 
     public String getText() {
         return text;

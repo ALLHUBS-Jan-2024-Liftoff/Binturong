@@ -13,31 +13,18 @@ export const LoadPostUserFeed = () => {
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
     const userId = 53;  // update this later
+    const currentUser = { id: userId };  // Mock current user object
     console.log(posts)
   
     const Navigate = useNavigate();
 
     useEffect(() => {
-        //commenting out to work with broken auth
-        // const storedUser = localStorage.getItem("user");
-        // console.log("Stored User:", storedUser);
-        // if (storedUser) {
-        //     try {
-        //         const parsedUser = JSON.parse(storedUser);
-        //         console.log("Parsed User:", parsedUser);
-        //         setUser(parsedUser);
-        //     } catch (error) {
-        //         console.error("Error parsing user from local storage:", error);
-        //     }
-        // }
-        //fetch all posts when component mounts
-        GetAllPostsFetch()
-        .then(setPosts)
-
-        .catch((error) => {
-            console.error("ERROR: post fetching failed!", error);
-        })
-    },[]);
+            GetAllPostsFetch()
+                .then(setPosts)
+                .catch((error) => {
+                    console.error("ERROR: post fetching failed!", error);
+                });
+        }, []);
 
     const handleNewPost = (title,text,geoTag,file) => {
         addPost(title,text,geoTag,file)
@@ -52,6 +39,7 @@ export const LoadPostUserFeed = () => {
         });
         
     };
+
     const handleUpdatePost = (postId) =>{
         Navigate(`/updatePost/?${postId}`,{replace:true});
 
@@ -77,8 +65,6 @@ export const LoadPostUserFeed = () => {
     const handleViewComments = (postId) => {
         Navigate(`/comments/?${postId}`, {replace:true});
     }
-
-
 
     const handleLikePost = (postId) => {
         SendLike(postId, userId)
@@ -117,13 +103,14 @@ export const LoadPostUserFeed = () => {
             {showPostForm && <AddPostForm  addPost={handleNewPost} />}
             <AllPosts
                 posts={posts}
-                deletePost ={handleDeletePost}
-                updatePost ={handleUpdatePost}
+                deletePost={handleDeletePost}
+                updatePost={handleUpdatePost}
                 addComment={handleAddComment}
                 viewComments={handleViewComments}
                 likePost={handleLikePost}
                 sharePost={handleSharePost}
                 savePost={handleSavePost}
+                currentUser={currentUser}
             />
         </div>
     );

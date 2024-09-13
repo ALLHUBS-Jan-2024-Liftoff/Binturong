@@ -4,17 +4,13 @@ import "../App.css";
 import React from "react";
 
 const UserFeed = () => {
+    return(
+        <>
+            <div className = "homeText">
+                <LoadPostUserFeed />
+            </div>
+        </>
+    );
+};
 
- return(
-    <>
-        <div className = "homeText">
-            <LoadPostUserFeed/>
-        </div>
-    </>
-);
-
-}
-
-
-  export default UserFeed;
-
+export default UserFeed;

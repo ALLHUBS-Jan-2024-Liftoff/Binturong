@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 import com.binturong.demo.dto.CommentDto;
 import com.binturong.demo.dto.PostDto;

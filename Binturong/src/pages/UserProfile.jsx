@@ -2,7 +2,6 @@
 import { LoadUserPostUserProfile } from "../Components/Posts/LoadUserPostUserProfile";
 import React, { useEffect, useState } from 'react';
 import LoyaltyScore from '../Components/LoyaltyScore.jsx';
-
 import "../App.css";
 
 const UserProfile = () => {

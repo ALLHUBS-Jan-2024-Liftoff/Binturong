@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 
 import com.binturong.demo.entities.Post;
@@ -10,7 +10,6 @@ import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.SavesService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

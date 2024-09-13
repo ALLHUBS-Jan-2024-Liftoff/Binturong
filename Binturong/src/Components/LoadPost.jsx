@@ -5,7 +5,7 @@ import postDropDownMenu from './PostDropDownMenu';
 
 function LoadPost(){
     const [posts,setPosts] = useState([]);
-    const [userId, setUserId] = userState(null);
+    const [userId, setUserId] = useState(null);
 
 // Gets Array ready for posts
 

@@ -52,7 +52,7 @@ public class PostController {
     }
 
 
-    @GetMapping("getPost")
+    @GetMapping("/getPost")
     public Post getPost(@RequestParam Integer postId) {return postService.getPost(postId);}
 
     @PostMapping("/delete")

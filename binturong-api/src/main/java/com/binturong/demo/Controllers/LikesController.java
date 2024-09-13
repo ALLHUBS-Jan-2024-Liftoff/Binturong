@@ -1,7 +1,7 @@
 // handles the like feature on posts - toggles the post as
 // liked or unliking it and changing the state back
 
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 import com.binturong.demo.entities.Likes;
 import com.binturong.demo.entities.Post;
@@ -10,7 +10,6 @@ import com.binturong.demo.services.LikesService;
 import com.binturong.demo.services.PostService;
 import com.binturong.demo.repositorys.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.coyote.Response;  // what do?
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
