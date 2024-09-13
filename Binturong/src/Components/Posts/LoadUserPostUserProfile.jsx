@@ -1,7 +1,7 @@
 // fetches user's posts on their profile and displays them
 
 import React, {useState, useEffect} from "react";
-import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
+import { addPost, GetAllPostsFetch, deletePost, getToken } from "../Services/postService";
 import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
 import { AddPostForm } from "./AddPostForm";
@@ -69,6 +69,18 @@ export const LoadUserPostUserProfile = () => {
         SendLike(postId,userId)
 
     }
+
+    const handleSharePost = (postId) => { // Added handleSharePost function
+            const postUrl = `http://localhost:5173/post/${postId}`;
+            navigator.clipboard.writeText(postUrl)
+                .then(() => {
+                    alert("Post URL copied to clipboard");
+                })
+                .catch(error => {
+                    console.error("Error copying URL", error);
+                });
+        };
+
     const handleSavePost = (postId) => {
         AddSave(userId,postId);
 
@@ -76,7 +88,7 @@ export const LoadUserPostUserProfile = () => {
 
 
     return(
-        <div class="test">
+        <div className="test">
             <button onClick={()=> setShowPostForm(!showPostForm)}>
                 {showPostForm ? "Close Post" : "Post+"}
             </button>
@@ -93,6 +105,5 @@ export const LoadUserPostUserProfile = () => {
                 currentUser={currentUser}
             />
         </div>
-
     );
 };

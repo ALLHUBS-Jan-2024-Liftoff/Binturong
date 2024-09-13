@@ -1,28 +1,30 @@
 import axios from "axios";
+
 const BASEURL = "http://localhost:8080";
 
 //gets all saves for user
 export const GetUserSaves = async (userId) => {
-    try{
+    try {
         const response = await axios.get(`${BASEURL}/usersavedfeed/getsavedposts`, {
-            params: {userId} ,
-    });
+            params: { userId },
+            withCredentials: true,
+        });
         return response.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.error("Error GETUSERSAVES failed.", error);
-        throw error
+        throw error;
     }
 };
 
 
 //Sends the post to the users save list in back end
-export const AddSave = async (userId,postId) => {
+export const AddSave = async (userId, postId) => {
     try {
         await axios.post(`${BASEURL}/usersavedfeed/savepost`, null, {
-            params: {userId,postId} ,
+            params: { userId, postId },
+            withCredentials: true,
         });
-    } catch(error) {
+    } catch (error) {
         console.error("ERROR: Save NOT added", error);
     }
 };
@@ -32,9 +34,10 @@ export const AddSave = async (userId,postId) => {
 export const deleteSave = async (postId) => {
     try {
         await axios.post(`${BASEURL}/usersavedfeed/deletesave`, null, {
-            params: {postId} ,
+            params: { postId },
+            withCredentials: true,
         });
-    } catch(error) {
+    } catch (error) {
         console.error("ERROR: Save NOT DELETED", error);
     }
 };

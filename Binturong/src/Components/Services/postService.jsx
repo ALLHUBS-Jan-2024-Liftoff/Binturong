@@ -2,11 +2,17 @@ import axios from "axios";
 
 const BASEURL = "http://localhost:8080";
 
+export const getToken = () => localStorage.getItem("token");
+
 export const GetAllPostsFetch= async ()=> {
-    
+    const token = getToken();
+    console.log("Token:", token);
 //Calls from SQL and Backend for all posts by id
     try{
         const response = await axios.get(`${BASEURL}/userFeed/getAll`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             withCredentials: true,
         });
         return response.data;
@@ -21,6 +27,9 @@ export const GetPostFetch = async (postId) => {
     try{
         const response = await axios.get(`${BASEURL}/userFeed/getPost`, {
             params: {postId},
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             withCredentials: true,
         });
         return response.data;
@@ -33,13 +42,17 @@ export const GetPostFetch = async (postId) => {
 export const addPost = async (title,text,geoTag,file) => {
 
     try{
+        const token = localStorage.getItem("token");
         const response = await axios.post(`${BASEURL}/userFeed/newpost`, null , {
             params: {
                 title,
                 text,
                 geoTag,
                 file
-            }
+            },
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
         return response.data;
     } catch (error) {
@@ -52,6 +65,9 @@ export const GetUserPostsFetch = async (userId) => {
     try{
         const response = await axios.get(`${BASEURL}/userProfile/getAllUsersPosts`, {
             params: { userId },
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             withCredentials: true,
         });
         return response.data;
@@ -65,7 +81,10 @@ export const GetUserPostsFetch = async (userId) => {
 export const deletePost = async (postId) => {
     try {
         await axios.post(`${BASEURL}/userProfile/delete`, null, {
-            params: {postId} ,
+            params: {postId},
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             withCredentials: true,
         });
     } catch(error) {
@@ -76,11 +95,14 @@ export const deletePost = async (postId) => {
 export const updatePostFetch = async (postId,title,text,geoTag,file) => {
     try{
         await axios.put(`${BASEURL}/userProfile/update/${postId}`, {
-           "title":title,
-           "text":text,
-           "geoTag":geoTag,
-           "file": file
-
+           title,
+           text,
+           geoTag,
+           file,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
     } catch (error) {
         console.error("there was an error when updating post", error);

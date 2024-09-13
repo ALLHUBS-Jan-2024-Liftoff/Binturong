@@ -7,11 +7,14 @@ import React from "react";
 import { IndividualPost } from "../Posts/IndividualPost";
 import { AllPosts } from "../Posts/AllPosts"
 import { SendLike } from "../Services/LikeService";
+import { AddSave } from "../Services/savesService";
+import { useNavigate } from "react-router-dom";
 
 export const UserSavedPostsFeed = () => {
     const [posts, setPosts] = useState([]);
-    const userId = 53;
-    console.log(posts)
+    const userId = 1;
+    const navigate = useNavigate();
+    console.log(posts);
 
 
     useEffect(() => {
@@ -59,17 +62,6 @@ export const UserSavedPostsFeed = () => {
         Navigate(`/updatePost/?${postId}`,{replace:true});
     }
 
-    const handleLike = (postId) => {
-        SendLike(postId, user)
-            .then(response => {
-                console.log("post liked!", response);
-            })
-            .catch(error => {
-                console.error("ERROR - Not Liked", error);
-            });
-        };
-
-
     const handleShare = (postId) => {
         const postUrl = 'http://localhost:5173/post/${postId}';
         navigator.clipboard.writeText(postUrl)
@@ -82,12 +74,15 @@ export const UserSavedPostsFeed = () => {
     };
 
     return (
-        <AllPosts posts={posts}
-        deletePost ={handleDeletePost}
-        updatePost ={handleUpdatePost}
-        addComment={handleAddComment}
-        viewComments={handleViewComments}
-        likePost={handleLikePost}
-        savePost={handleSavePost}/>
+        <AllPosts
+            posts={posts}
+            deletePost={handleDeletePost}
+            updatePost={handleUpdatePost}
+            addComment={handleAddComment}
+            viewComments={handleViewComments}
+            likePost={handleLikePost}
+            savePost={handleSavePost}
+            sharePost={handleShare}
+        />
       );
     };

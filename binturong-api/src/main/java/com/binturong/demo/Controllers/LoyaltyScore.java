@@ -1,4 +1,4 @@
-package com.binturong.demo.controllers;
+package com.binturong.demo.Controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 

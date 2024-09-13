@@ -45,9 +45,9 @@ return(
       <p>Text:{post.text}  </p>
       <p> Geotag:{post.geoTag}  </p>
       <p>File:{post.file} </p>
-      <div class="dropdown">
-  <button class="dropbtn">...</button>
-  <div class="dropdown-content">
+      <div className="dropdown">
+  <button className="dropbtn">...</button>
+  <div className="dropdown-content">
     <div>
         <form id= "post-update-form">
             <button onClick={()=> UpdatePostForm(post.id)}>Edit Post</button>

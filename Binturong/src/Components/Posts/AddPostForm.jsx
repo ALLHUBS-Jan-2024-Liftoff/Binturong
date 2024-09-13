@@ -26,48 +26,21 @@ if (title.length >= 3 && title.length <= 50 && text !="" && text.length <= 255){
     }
 }
 
-    return (    
-            
-                    <form id="post-form"> 
-                        <label htmlFor="title">Title</label>
-                        <input type="text"
-                            id="title"
-                            name="title"
-                            value={title}
-                            onChange={(e) => { setTitle(e.target.value) }}
-                            required
-                        ></input><br />
+    return (
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="title">Title:</label>
+            <input type="text" id="title" name="title" required />
 
-                        <textarea id="posttextbox"
-                            name="posttext"
-                            value={text}
-                            rows="5" cols="50"
-                            onChange={(e) => { setText(e.target.value) }}>
-                            Text Goes here
-                        </textarea><br />
+            <label htmlFor="text">Text:</label>
+            <textarea id="text" name="text" required />
 
-                        <label for="geotagging">Turn on Geotagging?<br />
-                            <input type="checkbox"
-                                id="geotagging"
-                                name="geotagging"
-                                value={geoTag}
-                                onChange={(e) => { setGeoTag(e.target.value) }} />
+            <label htmlFor="geoTag">GeoTag:</label>
+            <input type="text" id="geoTag" name="geoTag" />
 
-                        </label>
-                        <br />
+            <label htmlFor="file">File:</label>
+            <input type="file" id="file" name="file" />
 
-                        <label for="postfile">Upload Images
-                            <input type="file"
-                                id="postimage"
-                                accept = "jpg, jpeg, .png, .gif"
-                                name="postfile"
-                                value={file}
-                                onChange={(e) => { setFile(e.target.value) }}>
-                            </input>
-                        </label>
-
-                        <button onClick={savePost}>Post</button>
-                    </form>
-                  
-    )
-}
+        <button type="submit">Add Post</button>
+    </form>
+    );
+};

@@ -78,5 +78,28 @@ public class PostController {
 
         return postRepository.save(updatePost);
     }
+
+//    @PostMapping("/{postId}/like")
+//    public ResponseEntity<String> likePost(@PathVariable Integer postId) {
+//        Post post = postRepository.findById(postId).orElse(null);
+//        if (post == null) {
+//            throw new EntityNotFoundException("Post not found");
+//        }
+//        post.setLikes(post.getLikes() + 1);
+//        postRepository.save(post);
+//        return ResponseEntity.ok("Post liked");
+//    }
+
+    @PostMapping("/{postId}/share")
+    public ResponseEntity<String> sharePost(@PathVariable Integer postId) {
+        Post post = postRepository.findById(postId).orElse(null);
+        if (post == null) {
+            throw new EntityNotFoundException("Post not found");
+        }
+        post.setShares(post.getShares() + 1);
+        postRepository.save(post);
+        return ResponseEntity.ok("Post shared");
+    }
+
 }
 
