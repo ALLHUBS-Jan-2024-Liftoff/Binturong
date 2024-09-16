@@ -5,7 +5,12 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import axios from "axios";
 
 
-export const IndividualPost = ({ post, deletePost, viewComments, savePost, addComment, updatePost, likePost, sharePost, currentUser }) => {
+export const IndividualPost = ({ post, deletePost, viewComments, savePost,
+                                addComment, updatePost, likePost, sharePost, currentUser }) => {
+   if (!post) {
+           return null;
+       }
+
     const [likes, setLikes] = useState(post.likes);
     const [shares, setShares] = useState(post.shares);
   

@@ -31,12 +31,11 @@ public class PostController {
 
 
     @PostMapping("/newpost")
-    public String submitPost(@RequestParam String title, @RequestParam String text,
+    public String submitPost(@RequestParam Integer userId, @RequestParam String title, @RequestParam String text,
                              @RequestParam String geoTag, @RequestParam String file) {
 
         Post newPost = new Post();
-        //removed user for auth issues
-//        newPost.setUser(userRepository.findById(userId).get());
+        newPost.setUser(userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found")));
         newPost.setTitle(title);
         newPost.setText(text);
         newPost.setGeoTag(geoTag);

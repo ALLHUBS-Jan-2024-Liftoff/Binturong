@@ -1,7 +1,7 @@
 // fetches user's posts on their profile and displays them
 
 import React, {useState, useEffect} from "react";
-import { addPost, GetAllPostsFetch, deletePost, getToken } from "../Services/postService";
+import { addPost, GetUserPostsFetch, deletePost, getToken } from "../Services/postService";
 import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
 import { AddPostForm } from "./AddPostForm";
@@ -11,22 +11,35 @@ export const LoadUserPostUserProfile = () => {
 
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    const userId = 53;  // update this later
-    const currentUser = { id: userId };  // Mock current user object
-    console.log(posts)
+    const [userId, setUserId] = useState(null);
+    const currentUser = { id: userId };
 
     const Navigate = useNavigate();
 
     useEffect(() => {
-            GetAllPostsFetch()
+            const storedUser = localStorage.getItem("user");
+            if (storedUser && storedUser !== "undefined") {
+                try {
+                    const parsedUser = JSON.parse(storedUser);
+                    setUserId(parsedUser.id);
+                } catch (error) {
+                    console.error("Error parsing user from local storage:", error);
+                }
+            }
+        }, []);
+
+    useEffect(() => {
+        if (userId) {
+            GetUserPostsFetch(userId)
                 .then(setPosts)
                 .catch((error) => {
                     console.error("ERROR: post fetching failed!", error);
                 });
-            }, []);
+            }
+        }, [userId]);
 
     const handleNewPost = (title,text,geoTag,file) => {
-        addPost(title,text,geoTag,file)
+        addPost(userId, title,text,geoTag,file)
         .then((newPost) => {
             setPosts([...posts, newPost]);
         })
@@ -42,7 +55,7 @@ export const LoadUserPostUserProfile = () => {
     const handleUpdatePost = (postId) =>{
         Navigate(`/updatePost/?${postId}`,{replace:true});
 
-    }
+    };
 
     const handleDeletePost = (postId) => {
         deletePost(postId)
@@ -54,21 +67,23 @@ export const LoadUserPostUserProfile = () => {
             })
             .catch((error) => {
                 console.error("ERROR HANDLEDELETEPOST did not delete post", error);
-            })
+            });
 
-    }
+    };
+
     const handleAddComment= (postId) => {
         Navigate(`/newcomment/?${postId}`,{replace:true});
 
-    }
+    };
+
     const handleViewComments = (postId) => {
         Navigate(`/comments/?${postId}`, {replace:true});
-    }
+    };
 
     const handleLikePost = (postId) => {
-        SendLike(postId,userId)
+        SendLike(postId,userId);
 
-    }
+    };
 
     const handleSharePost = (postId) => { // Added handleSharePost function
             const postUrl = `http://localhost:5173/post/${postId}`;
@@ -84,7 +99,7 @@ export const LoadUserPostUserProfile = () => {
     const handleSavePost = (postId) => {
         AddSave(userId,postId);
 
-    }
+    };
 
 
     return(

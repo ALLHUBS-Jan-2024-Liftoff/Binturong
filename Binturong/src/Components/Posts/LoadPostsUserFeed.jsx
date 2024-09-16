@@ -27,7 +27,7 @@ export const LoadPostUserFeed = () => {
         }, []);
 
     const handleNewPost = (title,text,geoTag,file) => {
-        addPost(title,text,geoTag,file)
+        addPost(userId, title,text,geoTag,file)
         .then((newPost) => {
             setPosts([...posts, newPost]);
         })

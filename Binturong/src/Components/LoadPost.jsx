@@ -2,6 +2,7 @@ import { SendLike } from '../Services/LikeService';
 import {useEffect, useState} from 'react';
 import postOptionsDropdown from './PostDropDownMenu';
 import postDropDownMenu from './PostDropDownMenu';
+import '../../src/assets/css/userFeed.css';
 
 function LoadPost(){
     const [posts,setPosts] = useState([]);
@@ -64,18 +65,14 @@ function LoadPost(){
 // Maps out Posts needs Reworking for formating later but functional
     return(
         <>
-            <head>
-                <link rel="stylesheet" type="text/css" href="../../src/assets/css/userFeed.css" />
-            </head>
-
             {posts.map(post=>(
                 <tr key={post.id}>
                     <div id="postbox" >
-                        <p>  Id: {post.id} </p>
+                        <p> Id: {post.id} </p>
                         <p> Title: {post.title}  </p>
-                        <p>Text:{post.text}  </p>
+                        <p> Text:{post.text}  </p>
                         <p> Geotag:{post.geoTag}  </p>
-                        <p>File:{post.file} </p>
+                        <p> File:{post.file} </p>
                         <button onClick={() => handleLike(post.id)}>Like</button>
                         <button onClick={() => handleShare(post.id)}>Share</button>
                     </div>

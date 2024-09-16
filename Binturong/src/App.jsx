@@ -17,6 +17,7 @@ import { NewCommentPage } from "./pages/NewCommentPage.jsx";
 import { UpdatePostPage } from "./pages/UpdatePostPage.jsx";
 import { UpdateCommentPage } from "./pages/UpdateCommentPage.jsx";
 
+
 export default function App() {
 
     // Handles the state of the App depending on whether the user is logged in or not

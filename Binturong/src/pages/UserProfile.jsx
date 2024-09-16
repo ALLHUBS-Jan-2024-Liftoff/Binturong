@@ -1,7 +1,7 @@
 //Start of the User Profile page
 import { LoadUserPostUserProfile } from "../Components/Posts/LoadUserPostUserProfile";
 import React, { useEffect, useState } from 'react';
-import LoyaltyScore from '../Components/LoyaltyScore.jsx';
+// import LoyaltyScore from '../Components/LoyaltyScore.jsx';
 import "../App.css";
 
 const UserProfile = () => {
@@ -30,7 +30,8 @@ const UserProfile = () => {
             <h1>User Profile</h1>
             <h3>Thank you for your contribution!</h3>
             <h3>Your Loyalty Score is:  </h3>
-            <LoyaltyScore userId={userId} />
+{/*             <LoyaltyScore userId={userId}  */}
+            />
             <div>
                 <LoadUserPostUserProfile />
             </div>
