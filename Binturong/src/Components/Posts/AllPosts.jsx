@@ -2,10 +2,12 @@
 
 import { IndividualComment } from "../Comments/IndividualComment";
 import { IndividualPost } from "./IndividualPost";
+import "../../assets/css/userFeed.css";
 import React from 'react';
 
 
-export const AllPosts = ({ posts, updatePost, deletePost, addComment, viewComments, likePost, savePost }) => {
+export const AllPosts = ({ posts, updatePost, deletePost, addComment,
+                            viewComments, likePost, savePost, refreshPosts }) => {
 
   const handleSharePost = (postId) => {
     const postUrl = `${window.location.origin}/post/${postId}`;
@@ -17,32 +19,21 @@ export const AllPosts = ({ posts, updatePost, deletePost, addComment, viewCommen
   };
 
   return (
-    <table className="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">User</th>
-                <th scope="col">Title</th>
-                <th scope="col">Text</th>
-                <th scope="col">GeoTag</th>
-                <th scope="col">File</th>
-            </tr>
-        </thead>
-        <tbody>
-            {posts.map((post) => (
-                <IndividualPost
-                    key={post.id}
-                    post={post}
-                    viewComments={viewComments}
-                    deletePost={deletePost}
-                    updatePost={updatePost}
-                    addComment={addComment}
-                    likePost={likePost}
-                    savePost={savePost}
-                    sharePost={handleSharePost}
-                />
-            ))}
-        </tbody>
-    </table>
+      <div className="posts-container">
+        {posts.map((post) => (
+          <IndividualPost
+            key={post.id}
+            post={post}
+            viewComments={viewComments}
+            deletePost={deletePost}
+            updatePost={updatePost}
+            addComment={addComment}
+            likePost={likePost}
+            savePost={savePost}
+            sharePost={handleSharePost}
+            refreshPosts={refreshPosts}
+          />
+        ))}
+      </div>
   );
 };

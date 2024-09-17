@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
+import "../../assets/css/userFeed.css";
 import axios from "axios";
 
 
@@ -36,35 +37,31 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
             };
 
 
-    return (
-        <tr key={post.id}>
-            <td>Id: {post.id}</td>
-            <td>Title: {post.title}</td>
-            <td>Text: {post.text}</td>
-            <td>Geotag: {post.geoTag}</td>
-            <td>File: {post.file}</td>
-            <td>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => deletePost(post.id)}>Delete Post</Dropdown.Item>
-                        <Dropdown.Item onClick={() => viewComments(post.id)}>View Comments</Dropdown.Item>
-                        <Dropdown.Item onClick={() => savePost(post.id)}>Save Post</Dropdown.Item>
-                        <Dropdown.Item onClick={() => addComment(post.id)}>Post Comment</Dropdown.Item>
-                        <Dropdown.Item onClick={() => updatePost(post.id)}>Update Post</Dropdown.Item>
-                        <Dropdown.Item onClick={() => likePost(post.id)}>Like</Dropdown.Item>
-                        <Dropdown.Item onClick={() => sharePost(post.id)}>Share Post</Dropdown.Item>
-                        <Dropdown.Item onClick={() => {}}>Close x</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </td>
-            <td>
-                <p>Likes: {likes}</p>
-                <p>Shares: {shares}</p>
-            </td>
-        </tr>
-    );
+  return (
+      <div className="post-card">
+          <div className="post-header">
+                    <span className="post-title">{post.title}</span>
+                    <span className="post-user">{post.user}</span>
+                </div>
+                <div className="post-content">
+                    <p>{post.text}</p>
+                    <p>GeoTag: {post.geoTag}</p>
+                    {post.file && <img src={post.file} alt="Post attachment" />}
+                </div>
+                <div className="post-actions">
+                    <button onClick={() => likePost(post.id)}>Like</button>
+                    <button onClick={() => addComment(post.id)}>Comment</button>
+                    <button onClick={() => viewComments(post.id)}>View Comments</button>
+                    <button onClick={() => updatePost(post.id)}>Edit</button>
+                    <button onClick={() => deletePost(post.id)}>Delete</button>
+                    <button onClick={() => savePost(post.id)}>Save</button>
+                    <button onClick={() => sharePost(post.id)}>Share</button>
+                </div>
+                <div className="post-stats">
+                    <p>Likes: {likes}</p>
+                    <p>Shares: {shares}</p>
+                </div>
+            </div>
+  );
 };
 

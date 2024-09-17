@@ -3,8 +3,7 @@ body {
 }
 
 #postbox {
-
-  width: auto px;
+  width: auto;
   border-radius: 30px;
   padding: 50px;
   border: 5px solid gray;
@@ -16,16 +15,65 @@ body {
 p {
   color:black
 }
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+/* For Posts */
+.post-card {
+  background-color: var(--foreground-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.post-user {
+  font-size: 1em;
+  color: var(--secondary-text-color);
+}
+
+.post-content {
+  font-size: 1em;
+  color: var(--primary-text-color);
+  margin-bottom: 10px;
+}
+
+post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-actions button {
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.post-actions button:hover {
+  background-color: var(--button-hover-color);
+}
+
  /* Dropdown Button */
  .dropbtn {
     background-color: #3498DB;

@@ -1,7 +1,7 @@
 .toggle-container {
   position: absolute;
-  top: 2em;
-  right: 2em;
+  top: 0em;
+  right: 1em;
 }
 
 .toggle {
@@ -12,7 +12,7 @@
 .toggle + label {
   display: flex;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.25em;
   cursor: pointer;
   color: var(--primary-text-color);
 }
@@ -20,9 +20,9 @@
 /* Background of toggle switch */
 .toggle + label:before {
   content: "";
-  height: 1em;
-  width: 2em;
-  border-radius: 1em;
+  height: 0.8em;
+  width: 1.6em;
+  border-radius: 0.8em;
   background-color: var(--toggle-bg);
   margin-right: 0.5em;
   transition: background-color 250ms ease-in-out;
@@ -31,9 +31,9 @@
 /* Toggle switch foreground */
 .toggle + label:after {
   content: "";
-  height: 0.8em;
-  width: 0.8em;
-  border-radius: 1em;
+  height: 0.6em;
+  width: 0.6em;
+  border-radius: 0.8em;
   background-color: var(--toggle-fg);
   position: absolute;
   left: 0.2em;

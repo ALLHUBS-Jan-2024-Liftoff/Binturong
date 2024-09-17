@@ -16,4 +16,18 @@ export const SendLike = async (postId, userId) => {
         console.error("There was an error when creating post", error);
         throw error;
     }
+
+// Function to remove a like from a post
+// export const RemoveLike = async (postId, userId) => {
+//     try {
+//         const response = await axios.post(`${BASEURL}/userFeed/${postId}/unlike`, {
+//             userId
+//         }, {
+//             withCredentials: true,
+//         });
+//         return response.data;
+//     } catch (error) {
+//         console.error("There was an error when unliking the post", error);
+//         throw error;
+//     }
 };

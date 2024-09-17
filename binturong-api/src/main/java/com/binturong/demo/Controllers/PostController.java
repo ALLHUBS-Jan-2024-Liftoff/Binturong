@@ -1,6 +1,7 @@
 package com.binturong.demo.Controllers;
 
 import com.binturong.demo.entities.Comments;
+import com.binturong.demo.repositorys.LikeRepository;
 import com.binturong.demo.repositorys.PostRepository;
 import com.binturong.demo.repositorys.UserRepository;
 import com.binturong.demo.services.CommentService;
@@ -29,6 +30,8 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private LikeRepository likeRepository;
 
     @PostMapping("/newpost")
     public String submitPost(@RequestParam Integer userId, @RequestParam String title, @RequestParam String text,
@@ -87,6 +90,17 @@ public class PostController {
         postRepository.save(post);
         return ResponseEntity.ok("Post liked");
     }
+
+//    @PostMapping("/{postId}/unlike")
+//    public ResponseEntity<String> unlikePost(@PathVariable Integer postId) {
+//        Post post = postRepository.findById(postId).orElse(null);
+//        if (post == null) {
+//            throw new EntityNotFoundException("Post not found");
+//        }
+//        post.setLikes(post.getLikes() - 1);
+//        postRepository.save(post);
+//        return ResponseEntity.ok("Post unliked");
+//    }
 
     @PostMapping("/{postId}/share")
     public ResponseEntity<String> sharePost(@PathVariable Integer postId) {

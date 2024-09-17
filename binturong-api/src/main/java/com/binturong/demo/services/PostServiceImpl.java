@@ -42,8 +42,24 @@ public class PostServiceImpl implements PostService {
             throw new EntityNotFoundException("Post not found");
         }
         return post;
-
     }
+
+    @Override
+    public Post likePost(Integer postId, Integer userId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        post.setLikes(post.getLikes() + 1);
+        postRepository.save(post);
+        return post;
+    }
+
+    @Override
+    public Post unlikePost(Integer postId, Integer userId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("Post not found"));
+        post.setLikes(post.getLikes() - 1);
+        postRepository.save(post);
+        return post;
+    }
+
 }
 
 

@@ -18,6 +18,10 @@ public interface PostService {
 
     public Post getPostById(Integer postId);
 
+    Post likePost(Integer postId, Integer userId);
+
+    Post unlikePost(Integer postId, Integer userId);
+
 }
 
 

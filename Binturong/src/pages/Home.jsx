@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import Search from '../Components/Search.jsx';
 import PostSearchResults from '../Components/PostSearchResults.jsx';
 import { Link } from 'react-router-dom';
-import { SendLike } from '../Components/Services/LikeService';
+import { SendLike }  from '../Components/Services/LikeService';
+// import { SendLike, RemoveLike } from "../Services/LikeService";
 import "../App.css";
 
 // Home page - Main Page
