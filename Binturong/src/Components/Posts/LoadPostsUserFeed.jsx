@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { addPost, GetAllPostsFetch, deletePost } from "../Services/postService";
+import { IndividualPost } from "./IndividualPost";
 import { SendLike } from "../Services/LikeService";
 import { AllPosts } from "./AllPosts";
 import { AddPostForm } from "./AddPostForm";
@@ -9,22 +10,24 @@ import { useNavigate } from "react-router-dom";
 import { AddSave } from "../Services/savesService";
 
 export const LoadPostUserFeed = () => {
-    
     const [showPostForm, setShowPostForm] = useState(false);
     const [posts, setPosts] = useState([]);
-    const userId = 53;  // update this later
+    const userId = 1;  // update this later
     const currentUser = { id: userId };  // Mock current user object
     console.log(posts)
   
     const Navigate = useNavigate();
 
     useEffect(() => {
-            GetAllPostsFetch()
-                .then(setPosts)
-                .catch((error) => {
-                    console.error("ERROR: post fetching failed!", error);
-                });
-        }, []);
+        GetAllPostsFetch()
+            .then((data) => {
+                console.log("Fetched posts:", data);
+                setPosts(data);
+            })
+            .catch((error) => {
+                console.error("ERROR: post fetching failed!", error);
+            });
+    }, []);
 
     const handleNewPost = (title,text,geoTag,file) => {
         addPost(userId, title,text,geoTag,file)
@@ -77,16 +80,16 @@ export const LoadPostUserFeed = () => {
         };
 
 
-    const handleSharePost = (postId) => {
-        SendShare(postId, userId)
-            .then(response => {
-                console.log("Post shared successfully", response);
-                // Optionally refresh posts
-            })
-            .catch(error => {
-                console.error("Error sharing post", error);
-            });
-    };
+   const handleSharePost = (postId) => {
+           const postUrl = `http://localhost:5173/post/${postId}`;
+           navigator.clipboard.writeText(postUrl)
+               .then(() => {
+                   alert("Post URL copied to clipboard");
+               })
+               .catch(error => {
+                   console.error("Error copying URL", error);
+               });
+       };
 
     const handleSavePost = (postId) => {
         AddSave(userId,postId);
@@ -95,12 +98,12 @@ export const LoadPostUserFeed = () => {
     }
 
 
-    return(
+    return (
         <div>
-            <button onClick={()=> setShowPostForm(!showPostForm)}>
+            <button onClick={() => setShowPostForm(!showPostForm)}>
                 {showPostForm ? "Close Post" : "Post+"}
             </button>
-            {showPostForm && <AddPostForm  addPost={handleNewPost} />}
+            {showPostForm && <AddPostForm addPost={handleNewPost} />}
             <AllPosts
                 posts={posts}
                 deletePost={handleDeletePost}

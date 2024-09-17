@@ -20,7 +20,6 @@ public class Post extends AbstractEntity {
     @Size(min=3,max=50, message="Title must be between 3 and 50 characters")
     private String title;
 
-
     @Size(max = 255, message= "Post Limit 255 characters.")
     private String text;
 
@@ -28,6 +27,7 @@ public class Post extends AbstractEntity {
 
     private String file;
 
+    private int likes = 0; // Initialize post with 0 likes
     private int shares = 0; // Initialize post with 0 shares
 
     @ManyToOne
@@ -37,7 +37,7 @@ public class Post extends AbstractEntity {
     private Saves save;
 
     @OneToMany(mappedBy = "post")
-    private List<Likes> likes;
+    private List<Likes> likesList;
 
     public int getShares() {
         return shares;
@@ -45,6 +45,14 @@ public class Post extends AbstractEntity {
 
     public void setShares(int shares) {
         this.shares = shares;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public String getTitle() {
@@ -87,16 +95,12 @@ public class Post extends AbstractEntity {
         this.user = user;
     }
 
-    public List<Likes> getLikes() {
-        return likes;
-    }
-
     public Saves getSave() {
         return save;
     }
 
-    public void setLikes(List<Likes> likes) {
-        this.likes = likes;
+    public void setLikesList(List<Likes> likesList) {
+        this.likesList = likesList;
     }
 
     public void setSave(Saves save) {

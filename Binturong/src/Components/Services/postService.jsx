@@ -16,17 +16,17 @@ export const getToken = () => {
     return null;
 };
 
-export const GetAllPostsFetch= async ()=> {
+export const GetAllPostsFetch = async () => {
     const token = getToken();
     console.log("Token:", token);
-//Calls from SQL and Backend for all posts by id
-    try{
+    try {
         const response = await axios.get(`${BASEURL}/userFeed/getAll`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
             withCredentials: true,
         });
+        console.log("Fetched posts:", response.data);
         return response.data;
     } catch (error) {
         console.error("Error AllPostFetch failed.", error);
@@ -51,7 +51,7 @@ export const GetPostFetch = async (postId) => {
     }
 };
 
-export const addPost = async (title,text,geoTag,file) => {
+export const addPost = async (userId, title,text,geoTag,file) => {
     const token = getToken();
     try{
         const response = await axios.post(`${BASEURL}/userFeed/newpost`, null , {
