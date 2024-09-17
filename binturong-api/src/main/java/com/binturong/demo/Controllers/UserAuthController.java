@@ -88,7 +88,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
+    public ResponseEntity processLoginForm(@RequestBody LoginFormDTO loginFormDTO, HttpServletRequest request) {
 
         ResponseEntity response = null;
         Map<String, Object> responseBody = new HashMap<>();

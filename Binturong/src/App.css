@@ -7,6 +7,7 @@
   align-items:center;
   background-color: var(--background-color);
   transition: background-color 0.25s ease-in-out;
+  gap: 20px;
 }
 
 .appTitle {
@@ -21,6 +22,17 @@
   border-radius: 10px;
   background-color: var(--foreground-color);
   color: var(--secondary-text-color);
+  margin-bottom: 20px;
+  display: flex; /* Add flex display */
+  gap: 20px; /* Add gap between links */
+}
+
+.homeText a {
+  margin-right: 20px; /* Add space between links */
+}
+
+.homeText a:last-child {
+  margin-right: 0; /* Remove margin from the last link */
 }
 
 .map-container {

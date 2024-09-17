@@ -7,20 +7,20 @@
 
 /* Setting for when in light them and Dark Mode is Toggled off*/
 :root {
-  --background-color: #f6f6f6;
-  --foreground-color: #003cff;
-  --primary-text-color: #0a0a0a;
-  --secondary-text-color: #ffffff;
-  --toggle-bg: #f0eb9d;
-  --toggle-fg: #ffd000;
+  --background-color: #ffffff;
+  --foreground-color: #007bff;
+  --primary-text-color: #212121;
+  --secondary-text-color: #424242;
+  --toggle-bg: #e0e0e0;
+  --toggle-fg: #4caf50;
 }
 
 /* CSS for Dark Mode toggle - Setting for when in dark theme*/
 [data-theme = "dark"] {
-  --background-color: #0a0a0a;
-  --foreground-color: #567aff;
-  --primary-text-color: #f6f6f6;
-  --secondary-text-color: #0a0a0a;
-  --toggle-bg: #283452;
-  --toggle-fg: #00a6ff;
+  --background-color: #121212;
+  --foreground-color: #1e88e5;
+  --primary-text-color: #e0e0e0;
+  --secondary-text-color: #b0b0b0;
+  --toggle-bg: #424242;
+  --toggle-fg: #76ff03;
 }
