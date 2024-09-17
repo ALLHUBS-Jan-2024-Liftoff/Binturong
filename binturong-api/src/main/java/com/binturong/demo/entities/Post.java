@@ -1,5 +1,6 @@
 package com.binturong.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -27,10 +28,11 @@ public class Post extends AbstractEntity {
 
     private String file;
 
-    private int likes = 0; // Initialize post with 0 likes
-    private int shares = 0; // Initialize post with 0 shares
+    private Integer likes = 0; // Initialize post with 0 likes
+    private Integer shares = 0; // Initialize post with 0 shares
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @OneToOne
@@ -39,19 +41,19 @@ public class Post extends AbstractEntity {
     @OneToMany(mappedBy = "post")
     private List<Likes> likesList;
 
-    public int getShares() {
+    public Integer getShares() {
         return shares;
     }
 
-    public void setShares(int shares) {
+    public void setShares(Integer shares) {
         this.shares = shares;
     }
 
-    public int getLikes() {
+    public Integer getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(Integer likes) {
         this.likes = likes;
     }
 

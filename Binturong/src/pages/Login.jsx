@@ -30,9 +30,7 @@ function Login({ setAuthenticated, closeDialog }) {
         console.log("User Object:", user);
         setAuthenticated(true);
         localStorage.setItem("authenticated", JSON.stringify(true));
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("token", token);
-        console.log("User saved to local storage:", localStorage.getItem("user"));
+//         localStorage.setItem("user", JSON.stringify(user));
         setMessage(response.data.message);
         closeDialog();
       } else {

@@ -47,9 +47,8 @@ public class PostController {
 
     @GetMapping("/getAll")
     public List<Post> postFeed() {
-        return postService.getAllPosts();
+        return postRepository.findAll();
     }
-
 
     @GetMapping("/getPost")
     public Post getPost(@RequestParam Integer postId) {return postService.getPost(postId);}

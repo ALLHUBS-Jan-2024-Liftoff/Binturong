@@ -54,15 +54,13 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                         <Dropdown.Item onClick={() => savePost(post.id)}>Save Post</Dropdown.Item>
                         <Dropdown.Item onClick={() => addComment(post.id)}>Post Comment</Dropdown.Item>
                         <Dropdown.Item onClick={() => updatePost(post.id)}>Update Post</Dropdown.Item>
-                        <Dropdown.Item onClick={handleShare}>Share Post</Dropdown.Item>
+                        <Dropdown.Item onClick={() => likePost(post.id)}>Like</Dropdown.Item>
+                        <Dropdown.Item onClick={() => sharePost(post.id)}>Share Post</Dropdown.Item>
                         <Dropdown.Item onClick={() => {}}>Close x</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </td>
             <td>
-                {post.userId !== currentUser.id && (
-                    <button onClick={handleLike}>Like</button>
-                )}
                 <p>Likes: {likes}</p>
                 <p>Shares: {shares}</p>
             </td>

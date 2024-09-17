@@ -31,7 +31,7 @@ const UserProfile = () => {
             <h3>Thank you for your contribution!</h3>
             <h3>Your Loyalty Score is:  </h3>
 {/*             <LoyaltyScore userId={userId}  */}
-            />
+{/*             /> */}
             <div>
                 <LoadUserPostUserProfile />
             </div>
