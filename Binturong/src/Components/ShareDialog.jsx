@@ -1,7 +1,10 @@
 import React from 'react';
-import "../App.css";
 
 const ShareDialog = ({ postUrl, closeDialog }) => {
+  const emailSubject = encodeURIComponent("Check out this post!");
+  const emailBody = encodeURIComponent(`Here's a post I wanted to share with you: ${postUrl}`);
+  const smsBody = encodeURIComponent(`Check out this post: ${postUrl}`);
+
   return (
     <div className="dialog-overlay">
       <dialog open>
@@ -14,6 +17,14 @@ const ShareDialog = ({ postUrl, closeDialog }) => {
             readOnly
             onFocus={(e) => e.target.select()}
           />
+          <div className="share-buttons">
+            <a href={`mailto:?subject=${emailSubject}&body=${emailBody}`}>
+              <button>Email</button>
+            </a>
+            <a href={`sms:?body=${smsBody}`}>
+              <button>SMS</button>
+            </a>
+          </div>
           <button onClick={closeDialog}>Close</button>
         </div>
       </dialog>
