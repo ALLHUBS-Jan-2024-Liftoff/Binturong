@@ -8,9 +8,11 @@ import { AllPosts } from "./AllPosts";
 import { AddPostForm } from "./AddPostForm";
 import { useNavigate } from "react-router-dom";
 import { AddSave } from "../Services/savesService";
+import ShareDialog from '../ShareDialog';
 
 export const LoadPostUserFeed = () => {
     const [showPostForm, setShowPostForm] = useState(false);
+    const [showShareDialog, setShowShareDialog] = useState(false);
     const [posts, setPosts] = useState([]);
     const userId = 1;  // update this later
     const currentUser = { id: userId };  // Mock current user object

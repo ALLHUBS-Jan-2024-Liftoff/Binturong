@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import "../../assets/css/userFeed.css";
 import axios from "axios";
+import ShareDialog from '../ShareDialog';
 
 
 export const IndividualPost = ({ post, deletePost, viewComments, savePost,
@@ -13,6 +14,8 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
 
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false); //tracks the state of the post being liked
+    const [showShareDialog, setShowShareDialog] = useState(false);
+    const [postUrl, setPostUrl] = useState('');
 
 // Previous handleLike function that didn't update.
         const handleLike = async () => {
@@ -33,13 +36,19 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
             };
 
         const handleShare = async () => {
-            try {
-                const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/share`);
-                setShares(response.data.shares);
-                console.log("Post shared:", response.data);
+                try {
+                    const url = `http://localhost:5173/post/${post.id}`;
+                    await navigator.clipboard.writeText(url);
+                    setPostUrl(url);
+                    setShowShareDialog(true);
+                    console.log("Post shared:", url);
                 } catch (error) {
                     console.error("Error sharing post:", error);
                 }
+            };
+
+            const closeDialog = () => {
+                setShowShareDialog(false);
             };
 
     const buttonText = isLiked ? 'Unlike' : 'Like';
@@ -64,11 +73,12 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                     <button onClick={() => updatePost(post.id)}>Edit</button>
                     <button onClick={() => deletePost(post.id)}>Delete</button>
                     <button onClick={() => savePost(post.id)}>Save</button>
-                    <button onClick={() => sharePost(post.id)}>Share</button>
+                    <button onClick={handleShare}>Share</button>
                 </div>
                 <div className="post-stats">
                     <p>Likes: {likes}</p>
                 </div>
+                {showShareDialog && <ShareDialog postUrl={postUrl} closeDialog={closeDialog} />}
             </div>
   );
 };
