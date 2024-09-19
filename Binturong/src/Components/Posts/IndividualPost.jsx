@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 export const IndividualPost = ({ post, deletePost, viewComments, savePost,
-                                addComment, updatePost, likePost, sharePost, currentUser }) => {
+                                addComment, updatePost, likePost, sharePost }) => {
    if (!post || !post.id) {
            return null;
        }
@@ -14,43 +14,23 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
     const [likes, setLikes] = useState(post.likes || 0);
     const [isLiked, setIsLiked] = useState(false); //tracks the state of the post being liked
 
-    const handleLike = async () => {
-            try {
-                // Update state immediately for live update
-                setLikes(prevLikes => isLiked ? prevLikes - 1 : prevLikes + 1);
-                setIsLiked(!isLiked);
-
-                // Send API request to like/unlike the post
-                const response = await axios.post(`http://localhost:8080/likes/like`,
-                    null,
-                    {
-                        params: {
-                            postId: post.id,
-                            userId: currentUser.id
-                        },
-                    withCredentials: true
-                    });
-
-                // Update state based on API response
-                setLikes(response.data.likes);
-                console.log("Post liked/unliked:", response.data);
-            } catch (error) {
-                console.error("Error liking/unliking post:", error);
-            }
-        };
-
 // Previous handleLike function that didn't update.
-//         const handleLike = async () => {
-//             try {
-//                 //Sends an API request to the back-end to like the post
-//             const response = await axios.post(
-//                   `http://localhost:8080/userfeed/${post.id}/like`);
-//             setLikes(response.data.likes);
-//             console.log("Post liked:", response.data);
-//             } catch (error) {
-//                 console.error("Error liking post:", error);
-//             }
-//         };
+        const handleLike = async () => {
+                try {
+                    // Update state immediately for live update
+                    setLikes(prevLikes => isLiked ? prevLikes - 1 : prevLikes + 1);
+                    setIsLiked(!isLiked);
+
+                    // Send API request to like/unlike the post
+                    const response = await axios.post(`http://localhost:8080/likes/like`);
+
+                    // Update state based on API response
+                    setLikes(response.data.likes);
+                    console.log("Post liked/unliked:", response.data);
+                } catch (error) {
+                    console.error("Error liking/unliking post:", error);
+                }
+            };
 
         const handleShare = async () => {
             try {
@@ -77,8 +57,8 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                 </div>
                 <div className="post-actions">
 {/*                     Original Like Button */}
-{/*                     <button onClick={() => likePost(post.id)}>Like</button> */}
-                    <button onClick={handleLike}>{buttonText}</button>
+                    <button onClick={() => likePost(post.id)}>Like</button>
+{/*                     <button onClick={handleLike}>{buttonText}</button> */}
                     <button onClick={() => addComment(post.id)}>Comment</button>
                     <button onClick={() => viewComments(post.id)}>View Comments</button>
                     <button onClick={() => updatePost(post.id)}>Edit</button>
