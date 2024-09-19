@@ -1,7 +1,6 @@
 // displays an individual post with options to delete, view comments, save, like, and share
 
 import React, { useState } from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
 import "../../assets/css/userFeed.css";
 import axios from "axios";
 
@@ -13,18 +12,45 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
        }
 
     const [likes, setLikes] = useState(post.likes || 0);
-    const [shares, setShares] = useState(post.shares || 0);
-  
+    const [isLiked, setIsLiked] = useState(false); //tracks the state of the post being liked
 
-        const handleLike = async () => {
+    const handleLike = async () => {
             try {
-            const response = await axios.post(`http://localhost:8080/userfeed/${post.id}/like`);
-            setLikes(response.data.likes);
-            console.log("Post liked:", response.data);
+                // Update state immediately for live update
+                setLikes(prevLikes => isLiked ? prevLikes - 1 : prevLikes + 1);
+                setIsLiked(!isLiked);
+
+                // Send API request to like/unlike the post
+                const response = await axios.post(`http://localhost:8080/likes/like`,
+                    null,
+                    {
+                        params: {
+                            postId: post.id,
+                            userId: currentUser.id
+                        },
+                    withCredentials: true
+                    });
+
+                // Update state based on API response
+                setLikes(response.data.likes);
+                console.log("Post liked/unliked:", response.data);
             } catch (error) {
-                console.error("Error liking post:", error);
+                console.error("Error liking/unliking post:", error);
             }
         };
+
+// Previous handleLike function that didn't update.
+//         const handleLike = async () => {
+//             try {
+//                 //Sends an API request to the back-end to like the post
+//             const response = await axios.post(
+//                   `http://localhost:8080/userfeed/${post.id}/like`);
+//             setLikes(response.data.likes);
+//             console.log("Post liked:", response.data);
+//             } catch (error) {
+//                 console.error("Error liking post:", error);
+//             }
+//         };
 
         const handleShare = async () => {
             try {
@@ -36,6 +62,7 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                 }
             };
 
+    const buttonText = isLiked ? 'Unlike' : 'Like';
 
   return (
       <div className="post-card">
@@ -49,7 +76,9 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                     {post.file && <img src={post.file} alt="Post attachment" />}
                 </div>
                 <div className="post-actions">
-                    <button onClick={() => likePost(post.id)}>Like</button>
+{/*                     Original Like Button */}
+{/*                     <button onClick={() => likePost(post.id)}>Like</button> */}
+                    <button onClick={handleLike}>{buttonText}</button>
                     <button onClick={() => addComment(post.id)}>Comment</button>
                     <button onClick={() => viewComments(post.id)}>View Comments</button>
                     <button onClick={() => updatePost(post.id)}>Edit</button>
@@ -59,9 +88,7 @@ export const IndividualPost = ({ post, deletePost, viewComments, savePost,
                 </div>
                 <div className="post-stats">
                     <p>Likes: {likes}</p>
-                    <p>Shares: {shares}</p>
                 </div>
             </div>
   );
 };
-

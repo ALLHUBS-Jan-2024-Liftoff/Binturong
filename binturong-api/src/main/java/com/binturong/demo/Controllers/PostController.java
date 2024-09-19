@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/userFeed")
-@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true", maxAge = 3600)
 public class PostController {
 
     @Autowired
